@@ -98,6 +98,8 @@
   }
 }
 
+:root {
+  --bg: #ffffff;
   --bg-alt: #f7f9fc;
   --text: #140c0c;
   --muted: #161618;
