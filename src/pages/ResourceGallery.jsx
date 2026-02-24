@@ -119,7 +119,7 @@ const ResourceGallery = () => {
       {/* Hero Section */}
       <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden">
         <img src={homepage} alt="Gallery" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-[color:var(--bg)]"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-[color:var(--bg)]"></div> */}
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4">
             {t.nav.gallery}

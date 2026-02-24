@@ -45,9 +45,9 @@ const Rules = () => {
         <img src={homepage} alt="School Rules" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight animate-fadeInUp">
+          {/* <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight animate-fadeInUp">
             {t.rules.hero}
-          </h1>
+          </h1> */}
         </div>
       </div>
 

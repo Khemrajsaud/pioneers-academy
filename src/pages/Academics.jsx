@@ -1,103 +1,175 @@
 import { useState } from "react";
 import { ChevronDown, BookOpen, Users, ClipboardList, Trophy, Globe } from "lucide-react";
 import homepage from "../assets/images/homepage.png";
-import { useLanguage } from "../contexts/LanguageContext";
 
 const Academics = () => {
-  const { t } = useLanguage();
-  const [activeLevel, setActiveLevel] = useState("primary");
+  const [activeLevel, setActiveLevel] = useState("preprimary");
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const academicLevels = {
-    primary: {
-      title: t.academics.primary.title,
-      subtitle: t.academics.primary.subtitle,
-      icon: "📚",
-      color: "from-blue-500 to-blue-600",
-      overview: t.academics.primary.description,
+    preprimary: {
+      title: "Pre-Primary (Early Childhood Education)",
+      subtitle: "Play-Based Learning",
+      icon: "🎨",
+      color: "from-pink-500 to-pink-600",
+      overview: "Our Pre-Primary program focuses on holistic early childhood development through play-based and Montessori-inspired learning. We nurture young minds in a safe, engaging environment that fosters creativity, social skills, and a love for learning.",
       features: [
         {
-          title: "Language Arts",
-          description: "English and Nepali language development with emphasis on communication skills, reading comprehension, and creative writing.",
+          title: "Theme-Based Learning",
+          description: "Integrated topics like seasons, animals, and community explored through stories, art, and music to make learning fun and meaningful.",
+          icon: <BookOpen className="text-pink-500" size={24} />,
+        },
+        {
+          title: "Montessori-Inspired Activities",
+          description: "Hands-on activities including sand play, puzzles, and building blocks to develop fine and gross motor skills.",
+          icon: <Users className="text-pink-500" size={24} />,
+        },
+        {
+          title: "Language Development",
+          description: "Phonics-based learning with bilingual exposure (English/Nepali) and engaging storytelling sessions.",
+          icon: <Globe className="text-pink-500" size={24} />,
+        },
+        {
+          title: "Social-Emotional Growth",
+          description: "Group activities designed to foster sharing, empathy, and teamwork among young learners.",
+          icon: <Trophy className="text-pink-500" size={24} />,
+        },
+      ],
+      facilities: [
+        {
+          title: "Child-Safe Classrooms",
+          description: "Colorful, interactive spaces with low-height furniture designed specifically for young children.",
+          icon: <ClipboardList className="text-pink-500" size={24} />,
+        },
+        {
+          title: "Outdoor Play Area",
+          description: "Sandpit, swings, and mini-gardening patches for physical activity and nature exploration.",
+          icon: <Globe className="text-pink-500" size={24} />,
+        },
+      ],
+      curriculum: [
+        "Phonics & Early Reading",
+        "Bilingual Exposure (English/Nepali)",
+        "Number Recognition & Counting",
+        "Arts & Crafts",
+        "Music & Movement",
+        "Story Time Sessions",
+        "Nature Exploration",
+        "Social Skills Development"
+      ],
+      specialPrograms: ["Little Explorers", "Annual Talent Show"],
+    },
+    primary: {
+      title: "Primary (Grades 1-5)",
+      subtitle: "Foundational Literacy & Numeracy",
+      icon: "📚",
+      color: "from-blue-500 to-blue-600",
+      overview: "Our Primary program builds strong foundational skills in literacy and numeracy while nurturing curiosity and creativity. We use activity-based learning and modern teaching tools to make education engaging and effective.",
+      features: [
+        {
+          title: "English",
+          description: "Comprehensive grammar instruction, creative writing workshops, and vibrant reading clubs to develop strong communication skills.",
           icon: <BookOpen className="text-blue-500" size={24} />,
         },
         {
           title: "Mathematics",
-          description: "Conceptual understanding of numbers, basic operations, geometry, and problem-solving through hands-on activities.",
+          description: "Practical applications like measuring and budgeting, with optional Abacus and Vedic Math programs for enhanced calculation skills.",
           icon: <ClipboardList className="text-blue-500" size={24} />,
         },
         {
-          title: "Science & Technology",
-          description: "Exploration of natural phenomena through experiments, observation, and practical demonstrations to spark curiosity.",
+          title: "Science",
+          description: "Hands-on experiments exploring concepts like plant growth and magnetism to spark scientific curiosity.",
           icon: <Globe className="text-blue-500" size={24} />,
         },
         {
-          title: "Co-curricular Activities",
-          description: "Sports, art, music, and clubs to develop well-rounded personalities and discover hidden talents.",
-          icon: <Trophy className="text-blue-500" size={24} />,
+          title: "Social Studies",
+          description: "Learning about local culture, map skills, and engaging in meaningful community projects.",
+          icon: <Users className="text-blue-500" size={24} />,
         },
       ],
-      curriculum: t.academics.primary.subjects,
+      teachingTools: [
+        {
+          title: "Smart Classrooms",
+          description: "Animated videos and interactive content for complex concepts like the water cycle.",
+          icon: <Globe className="text-blue-500" size={24} />,
+        },
+        {
+          title: "Activity-Based Learning",
+          description: "Math labs with manipulatives and Science Fair opportunities for young innovators.",
+          icon: <ClipboardList className="text-blue-500" size={24} />,
+        },
+      ],
+      coScholastic: [
+        {
+          title: "Arts",
+          description: "Drawing, clay modeling, and drama to develop creative expression.",
+          icon: <Trophy className="text-blue-500" size={24} />,
+        },
+        {
+          title: "Physical Education",
+          description: "Yoga, martial arts, and traditional games for physical fitness and cultural awareness.",
+          icon: <Users className="text-blue-500" size={24} />,
+        },
+      ],
+      curriculum: [
+        "English (Grammar & Creative Writing)",
+        "Mathematics (Abacus/Vedic Math)",
+        "Science (Experiments & Labs)",
+        "Social Studies (Culture & Geography)",
+        "Computer Basics",
+        "Art & Craft",
+        "Physical Education",
+        "Music & Dance"
+      ],
+      specialPrograms: ["Reading Club", "Science Fair", "Math Olympiad"],
     },
     secondary: {
-      title: t.academics.secondary.title,
-      subtitle: t.academics.secondary.subtitle,
+      title: "Secondary (Grades 6-10)",
+      subtitle: "Preparing for SEE & Beyond",
       icon: "🎓",
       color: "from-green-500 to-green-600",
-      overview: t.academics.secondary.description,
+      overview: "Our Secondary program provides rigorous academic preparation for the SEE examination while developing critical thinking and practical skills. Students can choose between Science and Management tracks based on their interests and career goals.",
       features: [
         {
-          title: "Subject Specialization",
-          description: "Dedicated teachers for each subject ensuring deep understanding of Science, Mathematics, Languages, and Social Studies.",
+          title: "Science Track",
+          description: "In-depth study of Physics, Chemistry, Biology, and Computer Science with practical laboratory work.",
           icon: <BookOpen className="text-green-500" size={24} />,
         },
         {
-          title: "STEAM Integration",
-          description: "Integrated approach combining Science, Technology, Engineering, Arts, and Mathematics for real-world problem solving.",
+          title: "Management Track",
+          description: "Comprehensive courses in Accountancy, Business Studies, and Economics for future business leaders.",
           icon: <ClipboardList className="text-green-500" size={24} />,
         },
         {
-          title: "Critical Thinking",
-          description: "Project-based learning, debates, research activities, and case studies to develop analytical skills.",
+          title: "Common Core Subjects",
+          description: "English, Nepali, Mathematics, and Social Studies ensuring well-rounded education for all students.",
           icon: <Globe className="text-green-500" size={24} />,
         },
         {
-          title: "Leadership Programs",
-          description: "Student councils, club leadership, and mentoring programs to develop confidence and responsibility.",
+          title: "SEE Preparation",
+          description: "Regular mock tests and intensive revision camps to ensure excellent board exam results.",
           icon: <Trophy className="text-green-500" size={24} />,
         },
       ],
-      curriculum: t.academics.secondary.subjects,
-    },
-    senior: {
-      title: t.academics.senior.title,
-      subtitle: t.academics.senior.subtitle,
-      icon: "🏆",
-      color: "from-purple-500 to-purple-600",
-      overview: t.academics.senior.description,
-      features: [
+      practicalLabs: [
         {
-          title: "Advanced Curriculum",
-          description: "Rigorous coursework aligned with national and international standards, preparing for board exams and university admissions.",
-          icon: <BookOpen className="text-purple-500" size={24} />,
-        },
-        {
-          title: "Specialized Labs",
-          description: "State-of-the-art Physics, Chemistry, and Biology laboratories for conducting advanced experiments and research.",
-          icon: <ClipboardList className="text-purple-500" size={24} />,
-        },
-        {
-          title: "Career Counseling",
-          description: "Professional guidance for university selection, scholarship opportunities, and career path planning.",
-          icon: <Globe className="text-purple-500" size={24} />,
-        },
-        {
-          title: "Competitive Exam Prep",
-          description: "Special coaching for entrance exams, competitive tests, and skill development for career advancement.",
-          icon: <Trophy className="text-purple-500" size={24} />,
+          title: "Fully Equipped Laboratories",
+          description: "Chemistry lab for titration experiments, Biology lab for microscopy, and IT lab for coding practice.",
+          icon: <ClipboardList className="text-green-500" size={24} />,
         },
       ],
-      curriculum: t.academics.senior.subjects,
+      curriculum: [
+        "English (Advanced)",
+        "Nepali",
+        "Mathematics",
+        "Science (Physics, Chemistry, Biology)",
+        "Social Studies",
+        "Computer Science/Coding",
+        "Accountancy (Management)",
+        "Business Studies (Management)",
+        "Economics (Management)"
+      ],
+      specialPrograms: ["SEE Mock Tests", "Revision Camps", "Career Counseling"],
     },
   };
 
@@ -119,9 +191,9 @@ const Academics = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50"></div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight animate-fadeInUp">
-            {t.academics.hero}
-          </h1>
+          {/* <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight animate-fadeInUp">
+            Academic Excellence
+          </h1> */}
         </div>
       </div>
 
@@ -180,10 +252,10 @@ const Academics = () => {
           </p>
         </div>
 
-        {/* Features Grid */}
+        {/* Core Subjects/Features Grid */}
         <div className="mb-8 sm:mb-12 animate-fadeInUp">
           <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-8">
-            Key Features & Programs
+            {activeLevel === 'preprimary' ? 'Curriculum & Approach' : 'Core Subjects'}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
             {currentLevel.features.map((feature, idx) => (
@@ -209,8 +281,132 @@ const Academics = () => {
           </div>
         </div>
 
+        {/* Facilities Section (Pre-Primary) */}
+        {currentLevel.facilities && (
+          <div className="mb-8 sm:mb-12 animate-fadeInUp">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-8">
+              Facilities & Activities
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+              {currentLevel.facilities.map((facility, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 p-3 rounded-lg bg-gradient-to-br from-[color:var(--primary)]/20 to-[color:var(--accent)]/20">
+                      {facility.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">
+                        {facility.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-[color:var(--muted)] leading-relaxed">
+                        {facility.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Teaching Tools Section (Primary) */}
+        {currentLevel.teachingTools && (
+          <div className="mb-8 sm:mb-12 animate-fadeInUp">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-8">
+              Teaching Tools
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+              {currentLevel.teachingTools.map((tool, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 p-3 rounded-lg bg-gradient-to-br from-[color:var(--primary)]/20 to-[color:var(--accent)]/20">
+                      {tool.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">
+                        {tool.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-[color:var(--muted)] leading-relaxed">
+                        {tool.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Co-Scholastic Section (Primary) */}
+        {currentLevel.coScholastic && (
+          <div className="mb-8 sm:mb-12 animate-fadeInUp">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-8">
+              Co-Scholastic Focus
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+              {currentLevel.coScholastic.map((activity, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 p-3 rounded-lg bg-gradient-to-br from-[color:var(--primary)]/20 to-[color:var(--accent)]/20">
+                      {activity.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">
+                        {activity.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-[color:var(--muted)] leading-relaxed">
+                        {activity.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Practical Labs Section (Secondary) */}
+        {currentLevel.practicalLabs && (
+          <div className="mb-8 sm:mb-12 animate-fadeInUp">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-8">
+              Academic Rigor
+            </h3>
+            <div className="grid grid-cols-1 gap-5 sm:gap-6">
+              {currentLevel.practicalLabs.map((lab, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 p-3 rounded-lg bg-gradient-to-br from-[color:var(--primary)]/20 to-[color:var(--accent)]/20">
+                      {lab.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">
+                        {lab.title}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-[color:var(--muted)] leading-relaxed">
+                        {lab.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Curriculum Highlights */}
-        <div className="rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--card)] p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 animate-fadeInUp">
+        <div className="rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--card)] p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 animate-fadeInUp mb-8 sm:mb-12">
           <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-8">
             Curriculum Highlights
           </h3>
@@ -228,6 +424,25 @@ const Academics = () => {
             ))}
           </div>
         </div>
+
+        {/* Special Programs */}
+        {currentLevel.specialPrograms && (
+          <div className="rounded-2xl border-2 border-[color:var(--border)] bg-gradient-to-br from-[color:var(--card)] to-[color:var(--bg-alt)] p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 animate-fadeInUp mb-8 sm:mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-6">
+              Special Programs
+            </h3>
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              {currentLevel.specialPrograms.map((program, idx) => (
+                <div
+                  key={idx}
+                  className="px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold text-xs sm:text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300"
+                >
+                  {program}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* CTA Section */}
         <div className="mt-12 sm:mt-16 rounded-2xl border-2 border-[color:var(--primary)] bg-gradient-to-r from-[color:var(--primary)]/10 to-[color:var(--accent)]/10 p-8 sm:p-12 text-center shadow-lg hover:shadow-xl transition duration-300 animate-fadeInUp">
@@ -247,3 +462,4 @@ const Academics = () => {
 };
 
 export default Academics;
+

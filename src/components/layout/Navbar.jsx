@@ -52,24 +52,24 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[color:var(--border)] bg-[color:var(--bg)]/90 backdrop-blur">
-      <div className="mx-auto flex items-center justify-between px-5 py-3">
+    <nav className="sticky top-0 z-50 border-b border-[color:var(--border)] bg-[color:var(--bg)]/95 backdrop-blur shadow-sm">
+      <div className="mx-auto flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3">
         {/* Logo */}
-        <div className="flex items-center space-x-3">
-          <Link to="/" onClick={handleLinkClick}>
-            <img className="lg:w-25 w-20" src={logo} alt="logo" />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link to="/" onClick={handleLinkClick} className="hover:scale-105 transition duration-300">
+            <img className="w-14 sm:w-16 md:w-20" src={logo} alt="logo" />
           </Link>
-          <h1 className="text-lg font-semibold text-[color:var(--text)]">
-            Pioneers Academy Kailali
+          <h1 className="hidden sm:block text-base sm:text-lg font-bold text-[color:var(--text)]">
+            Pioneers Academy
           </h1>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-6 text-[color:var(--text)]">
+        <div className="hidden md:flex items-center gap-8 text-[color:var(--text)]">
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
           >
             {t.nav.home}
           </Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
           <Link
             to="/about"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
           >
             {t.nav.about}
           </Link>
@@ -90,11 +90,11 @@ const Navbar = () => {
           >
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="hover:text-[color:var(--primary)]  flex items-center gap-1"
+              className="hover:text-[color:var(--primary)] transition duration-300 flex items-center gap-1 font-medium group-hover:scale-105"
               title="School Leadership"
             >
               {t.nav.leadership}{" "}
-              <ChevronDown className="w-4 h-4 text-[color:var(--text)]  group-hover:text-blue-800 " />
+              <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition duration-300" />
             </button>
 
             {dropdownOpen && (
@@ -114,7 +114,7 @@ const Navbar = () => {
                   {t.nav.board}
                 </Link>
                 <Link
-                  to="/achievements"
+                  to="/chairman-message"
                   onClick={handleLinkClick}
                   className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
                 >
@@ -127,37 +127,37 @@ const Navbar = () => {
           <Link
             to="/academic"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
           >
             {t.nav.academics}
           </Link>
           <Link
             to="/facilities"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
           >
             {t.nav.facilities}
           </Link>
           <Link
             to="/rules"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
           >
             {t.nav.rules}
           </Link>
           {/* Resources Dropdown */}
-          <div className="relative group  text-[color:var(--text)]" ref={resourcesRef}>
+          <div className="relative group text-[color:var(--text)]" ref={resourcesRef}>
             <button
               onClick={() => setResourcesOpen(!resourcesOpen)}
-              className="hover:text-[color:var(--primary)]  flex items-center gap-1"
+              className="hover:text-[color:var(--primary)] transition duration-300 flex items-center gap-1 font-medium group-hover:scale-105"
               title="Resources"
             >
               {t.nav.resources}{" "}
-              <ChevronDown className="w-4 h-4 text-[color:var(--text)]  group-hover:text-blue-800 " />
+              <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition duration-300" />
             </button>
 
             {resourcesOpen && (
-              <div className="absolute top-8 left-0 w-56 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] shadow-lg">
+              <div className="absolute top-8 left-0 w-56 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] shadow-lg animate-slideInDown">
                 {/* <Link
                   to="/resources"
                   onClick={handleLinkClick}
@@ -207,13 +207,13 @@ const Navbar = () => {
                 >
                   {t.nav.exams}
                 </Link>
-                <Link
+                {/* <Link
                   to="/resources/parents"
                   onClick={handleLinkClick}
                   className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
                 >
                   {t.nav.parents}
-                </Link>
+                </Link> */}
               </div>
             )}
           </div>
@@ -226,45 +226,71 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Language Toggle */}
-          <button
-            type="button"
-            onClick={toggleLanguage}
-            className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] px-3 py-2 text-[color:var(--text)] shadow-sm hover:text-[color:var(--primary)] font-semibold text-sm"
-            aria-label="Toggle language"
-          >
-            {language === "en" ? "NE" : "EN"}
-          </button>
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Desktop Language and Theme Toggle */}
+          <div className="hidden md:flex items-center gap-2">
+            {/* Language Toggle */}
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] px-3 py-1.5 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white font-semibold text-sm transition duration-300"
+              aria-label="Toggle language"
+            >
+              {language === "en" ? "NE" : "EN"}
+            </button>
 
-          {/* Theme Toggle */}
-          <button
-            type="button"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] p-2 text-[color:var(--text)] shadow-sm hover:text-[color:var(--primary)]"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+            {/* Theme Toggle */}
+            <button
+              type="button"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] p-1.5 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white transition duration-300"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-2xl text-[color:var(--text)]"
+            className="md:hidden text-2xl text-[color:var(--text)] hover:text-[color:var(--primary)] transition duration-300 p-1"
             aria-label="Toggle menu"
           >
             {isOpen ? <X /> : <Menu />}
           </button>
+
+          {/* Mobile Language and Theme Toggle (After Menu) */}
+          <div className="md:hidden flex items-center gap-1">
+            {/* Language Toggle */}
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] px-2.5 py-1 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white font-semibold text-xs transition duration-300"
+              aria-label="Toggle language"
+            >
+              {language === "en" ? "NE" : "EN"}
+            </button>
+
+            {/* Theme Toggle */}
+            <button
+              type="button"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] p-1 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white transition duration-300"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute left-0 top-full w-full border-b border-[color:var(--border)] bg-[color:var(--bg)] text-[color:var(--text)] flex flex-col space-y-3 px-5 py-4 shadow-lg">
+        <div className="md:hidden absolute left-0 top-full w-full border-b border-[color:var(--border)] bg-[color:var(--bg)] text-[color:var(--text)] flex flex-col space-y-1 px-4 py-3 shadow-lg animate-slideInDown">
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
           >
             {t.nav.home}
           </Link>
@@ -273,7 +299,7 @@ const Navbar = () => {
           <Link
             to="/about"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
           >
             {t.nav.about}
           </Link>
@@ -282,31 +308,32 @@ const Navbar = () => {
           <div>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-full text-left hover:text-[color:var(--primary)]"
+              className="w-full text-left hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300 flex items-center justify-between"
             >
-              {t.nav.leadership} ▼
+              {t.nav.leadership}
+              <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {dropdownOpen && (
-              <div className="ml-4 mt-2 flex flex-col space-y-2">
+              <div className="ml-4 mt-1 flex flex-col space-y-1 animate-slideInDown">
                 <Link
                   to="/history"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.principalMessage}
                 </Link>
                 <Link
                   to="/team"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.board}
                 </Link>
                 <Link
-                  to="/achievements"
+                  to="/chairman-message"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.chairman}
                 </Link>
@@ -317,21 +344,21 @@ const Navbar = () => {
           <Link
             to="/academic"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
           >
             {t.nav.academics}
           </Link>
           <Link
             to="/facilities"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
           >
             {t.nav.facilities}
           </Link>
           <Link
             to="/rules"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
           >
             {t.nav.rules}
           </Link>
@@ -339,68 +366,55 @@ const Navbar = () => {
           <div>
             <button
               onClick={() => setResourcesOpen(!resourcesOpen)}
-              className="w-full text-left hover:text-[color:var(--primary)]"
+              className="w-full text-left hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300 flex items-center justify-between"
             >
-              {t.nav.resources} ▼
+              {t.nav.resources}
+              <ChevronDown className={`w-4 h-4 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {resourcesOpen && (
-              <div className="ml-4 mt-2 flex flex-col space-y-2">
-                <Link
-                  to="/resources"
-                  onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
-                >
-                  {t.nav.overview}
-                </Link>
+              <div className="ml-4 mt-1 flex flex-col space-y-1 animate-slideInDown">
                 <Link
                   to="/resources/gallery"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.gallery}
                 </Link>
                 <Link
                   to="/resources/news"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.news}
                 </Link>
                 <Link
                   to="/resources/routine"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.routine}
                 </Link>
                 <Link
                   to="/resources/downloads"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.downloads}
                 </Link>
                 <Link
                   to="/resources/events"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.events}
                 </Link>
                 <Link
                   to="/resources/exams"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
+                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
                   {t.nav.exams}
-                </Link>
-                <Link
-                  to="/resources/parents"
-                  onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)]"
-                >
-                  {t.nav.parents}
                 </Link>
               </div>
             )}
@@ -408,7 +422,7 @@ const Navbar = () => {
           <Link
             to="/contact"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
           >
             {t.nav.contact}
           </Link>

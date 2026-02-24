@@ -13,8 +13,8 @@ import ResourceRoutine from "../../pages/ResourceRoutine";
 import ResourceDownloads from "../../pages/ResourceDownloads";
 import ResourceEvents from "../../pages/ResourceEvents";
 import ResourceExams from "../../pages/ResourceExams";
-import ResourceParents from "../../pages/ResourceParents";
 import PrincipleMessage from "../../pages/PrincipleMessage";
+import ChairmanMessage from "../../pages/ChairmanMessage";
 import BoardOfDirectors from "../../pages/BoardOfDirectors";
 
 const AppRoutes = () => {
@@ -33,8 +33,9 @@ const AppRoutes = () => {
       <Route path="/resources/downloads" element={<ResourceDownloads />} />
       <Route path="/resources/events" element={<ResourceEvents />} />
       <Route path="/resources/exams" element={<ResourceExams />} />
-      <Route path="/resources/parents" element={<ResourceParents />} />
+     
       <Route path="/history" element={<PrincipleMessage />} />
+      <Route path="/chairman-message" element={<ChairmanMessage />} />
       <Route path="/team" element={<BoardOfDirectors />} />
     </Routes>
   );
