@@ -7,7 +7,7 @@ import {
   Users,
   Lightbulb,
 } from "lucide-react";
-import homepage from "../assets/images/homepage.png";
+import homepage from "../assets/images/about.png";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const About = () => {

@@ -1,9 +1,11 @@
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send, ExternalLink } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import homepage from "../assets/images/homepage.png";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const Contact = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   
   return (
     <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
@@ -37,7 +39,7 @@ const Contact = () => {
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">{t.contact.info.visitTitle}</h3>
             <p className="text-xs sm:text-sm text-[color:var(--muted)]">
-              Balaju, Kathmandu Valley, Nepal
+            Lamkichuha-1, Lamki, Tambov Oblast, Russia, Kailali, Sudurpaschim Province, Nepal
             </p>
           </div>
 
@@ -46,8 +48,8 @@ const Contact = () => {
               <Phone size={24} />
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">{t.contact.info.callTitle}</h3>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">+977 01-XXXXXXX</p>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">+977 98-XXXXXXX</p>
+            <p className="text-xs sm:text-sm text-[color:var(--muted)]">+977-91-540488</p>
+            <p className="text-xs sm:text-sm text-[color:var(--muted)]">+977-9848420207</p>
           </div>
 
           <div className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300">
@@ -55,13 +57,14 @@ const Contact = () => {
               <Mail size={24} />
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">{t.contact.info.emailTitle}</h3>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">info@pioneersacademy.edu.np</p>
+            <p className="text-xs sm:text-sm text-[color:var(--muted)]">contact@pioneers.edu.np</p>
             <p className="text-xs sm:text-sm text-[color:var(--muted)]">admissions@pioneersacademy.edu.np</p>
           </div>
         </section>
 
         {/* Form + Map */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 animate-fadeInUp">
+          {/* Contact Form */}
           <div className="rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--card)] p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 animate-slideInLeft">
             <h3 className="text-lg sm:text-xl font-bold text-[color:var(--text)] mb-6">
               {t.contact.form.title}
@@ -109,23 +112,37 @@ const Contact = () => {
             </form>
           </div>
 
-          <div className="rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--bg-alt)] p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 animate-slideInRight">
-            <h3 className="text-lg sm:text-xl font-bold text-[color:var(--text)] mb-4">{t.contact.map.title}</h3>
-            <div className="h-64 sm:h-80 md:h-96 rounded-xl overflow-hidden border-2 border-[color:var(--border)] bg-[color:var(--card)] shadow-md">
-             
-
-             <div className="w-full h-full flex items-center justify-center text-[color:var(--muted)]">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.866398100724!2d85.35940557447294!3d27.721411024872793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1b005dbb5809%3A0x75fdd30a5b74bd0f!2sBoudha%20Stupa!5e0!3m2!1sen!2snp!4v1771745251355!5m2!1sen!2snp"
-    width="800"
-    height="600"
-    style={{ border: 0 }}
-    allowFullScreen
-    loading="lazy"
-    referrerPolicy="no-referrer-when-downgrade"
-    className="rounded-lg shadow-md"
-  ></iframe>
-</div>
+          {/* Map Preview */}
+          <div className="rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--card)] shadow-lg hover:shadow-xl transition duration-300 animate-slideInRight overflow-hidden">
+            <div className="relative h-96 w-full group">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5827.582081480715!2d81.1524!3d28.629128000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a2133aa9535d4b%3A0xf8be8139437934d3!2sFounder%2C%20Pioneers%E2%80%99%20Academy%20Kailali%20Lamki!5e1!3m2!1sen!2snp!4v1772005905418!5m2!1sen!2snp"
+                className="w-full h-full border-0 rounded-t-xl"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+              
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 rounded-t-xl"></div>
+            </div>
+            
+            {/* Map Footer */}
+            <div className="p-4 sm:p-6 bg-[color:var(--card)] border-t border-[color:var(--border)]">
+              <h3 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-3">
+                📍 Our Location
+              </h3>
+              <p className="text-xs sm:text-sm text-[color:var(--muted)] mb-4 leading-relaxed">
+Located in Lamkichuha-1, Lamki, Kailali, Sudurpaschim Province, Nepal – easily accessible from surrounding areas with convenient transport facilities.
+              </p>
+              <button
+                onClick={() => navigate("/map")}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300 w-full sm:w-auto justify-center"
+              >
+                <ExternalLink size={18} />
+                View Full Map
+              </button>
             </div>
           </div>
         </section>

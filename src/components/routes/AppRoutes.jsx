@@ -4,6 +4,7 @@ import Home from "../../pages/Home";
 import About from "../../pages/About";
 import Academics from "../../pages/Academics";
 import Contact from "../../pages/Contact";
+import Map from "../../pages/Map";
 import Facilities from "../../pages/Facilities";
 import Rules from "../../pages/Rules";
 import Resources from "../../pages/Resources";
@@ -24,6 +25,7 @@ const AppRoutes = () => {
       <Route path="/about" element={<About />} />
       <Route path="/academic" element={<Academics />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/map" element={<Map />} />
       <Route path="/facilities" element={<Facilities />} />
       <Route path="/rules" element={<Rules />} />
       <Route path="/resources" element={<Resources />} />

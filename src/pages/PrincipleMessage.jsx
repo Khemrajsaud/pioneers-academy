@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Share2, Facebook, Twitter, Linkedin, Mail, MessageCircle } from "lucide-react";
 import principle from "../assets/images/principle.jpg";
-import homepage from "../assets/images/homepage.png";
+import homepage from "../assets/images/about.png";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const PrincipleMessage = () => {
@@ -108,7 +108,7 @@ const PrincipleMessage = () => {
 
         {/* Stats and Share Section */}
         <div className="mb-6 sm:mb-8 flex flex-col gap-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--bg-alt)] p-4 sm:p-6">
-          <div className="flex justify-center sm:justify-start gap-6 sm:gap-8">
+          {/* <div className="flex justify-center sm:justify-start gap-6 sm:gap-8">
             <div className="text-center">
               <p className="text-xl sm:text-2xl md:text-3xl font-bold text-[color:var(--primary)]">
                 {views}
@@ -121,7 +121,7 @@ const PrincipleMessage = () => {
               </p>
               <p className="text-xs text-[color:var(--muted)] mt-1">{t.principal.share}</p>
             </div>
-          </div>
+          </div> */}
 
           {/* Share Buttons */}
           <div className="flex flex-wrap justify-center sm:justify-start gap-2">

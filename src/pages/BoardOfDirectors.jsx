@@ -257,7 +257,7 @@
 
 import { useState } from "react";
 import { Mail, Phone, Linkedin, MapPin } from "lucide-react";
-import homepage from "../assets/images/homepage.png";
+import homepage from "../assets/images/about.png";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const BoardOfDirectors = () => {
@@ -348,10 +348,12 @@ const BoardOfDirectors = () => {
           alt="Board of Directors"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-[color:var(--bg)]"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-[color:var(--bg)]"></div> */}
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4">
             {t.board.hero}
+
+    
           </h1>
         </div>
       </div>
