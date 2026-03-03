@@ -23,7 +23,7 @@ function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <main className="px-10">
+      <main className="lg:px-10">
         {children || <Outlet />}
       </main>
       <Footer />
