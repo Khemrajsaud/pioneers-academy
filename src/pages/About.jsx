@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import homepage from "../assets/images/about.png";
 import { useLanguage } from "../contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const About = () => {
   const { t } = useLanguage();
@@ -82,6 +83,7 @@ const About = () => {
     { number: "95%", label: t.about.stats.success, color: "accent" },
   ];
 
+
   return (
     <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
       {/* Hero Section */}
@@ -119,28 +121,36 @@ const About = () => {
                   className="text-[color:var(--primary)] shrink-0 mt-1"
                   size={20}
                 />
-                <span className="text-sm sm:text-base text-[color:var(--muted)]">K-12 Education</span>
+                <span className="text-sm sm:text-base text-[color:var(--muted)]">
+                  K-12 Education
+                </span>
               </div>
               <div className="flex items-start gap-3 p-3 rounded-lg bg-[color:var(--bg-alt)] hover:bg-[color:var(--card)] transition">
                 <CheckCircle
                   className="text-[color:var(--primary)] shrink-0 mt-1"
                   size={20}
                 />
-                <span className="text-sm sm:text-base text-[color:var(--muted)]">Modern Facilities</span>
+                <span className="text-sm sm:text-base text-[color:var(--muted)]">
+                  Modern Facilities
+                </span>
               </div>
               <div className="flex items-start gap-3 p-3 rounded-lg bg-[color:var(--bg-alt)] hover:bg-[color:var(--card)] transition">
                 <CheckCircle
                   className="text-[color:var(--primary)] shrink-0 mt-1"
                   size={20}
                 />
-                <span className="text-sm sm:text-base text-[color:var(--muted)]">International Standards</span>
+                <span className="text-sm sm:text-base text-[color:var(--muted)]">
+                  International Standards
+                </span>
               </div>
               <div className="flex items-start gap-3 p-3 rounded-lg bg-[color:var(--bg-alt)] hover:bg-[color:var(--card)] transition">
                 <CheckCircle
                   className="text-[color:var(--primary)] shrink-0 mt-1"
                   size={20}
                 />
-                <span className="text-sm sm:text-base text-[color:var(--muted)]">Experienced Faculty</span>
+                <span className="text-sm sm:text-base text-[color:var(--muted)]">
+                  Experienced Faculty
+                </span>
               </div>
             </div>
           </div>
@@ -253,7 +263,10 @@ const About = () => {
         <section className="gradient-border rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--bg-alt)] p-8 sm:p-10 shadow-lg hover:shadow-xl transition duration-300 animate-fadeInUp">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             {stats.map((stat, idx) => (
-              <div key={idx} className="text-center transform hover:scale-110 transition duration-300">
+              <div
+                key={idx}
+                className="text-center transform hover:scale-110 transition duration-300"
+              >
                 <p
                   className={`text-3xl sm:text-4xl md:text-5xl font-bold ${
                     stat.color === "primary"
@@ -278,7 +291,8 @@ const About = () => {
               {t.about.unique.title}
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-[color:var(--muted)] max-w-3xl mx-auto leading-relaxed">
-              Our distinctive approach to education sets us apart and creates exceptional learning experiences.
+              Our distinctive approach to education sets us apart and creates
+              exceptional learning experiences.
             </p>
           </div>
 
@@ -310,7 +324,8 @@ const About = () => {
               {t.about.commitments.title}
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-[color:var(--muted)] max-w-3xl mx-auto leading-relaxed">
-              We are dedicated to these core promises to our students and families.
+              We are dedicated to these core promises to our students and
+              families.
             </p>
           </div>
 
@@ -349,9 +364,13 @@ const About = () => {
           <p className="text-sm sm:text-base md:text-lg text-[color:var(--muted)] mb-8 max-w-2xl mx-auto leading-relaxed">
             {t.about.cta.description}
           </p>
-          <button className="px-6 sm:px-10 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300">
+         
+          <Link
+            to="/contact"
+            className="px-8 sm:px-10 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300"
+          >
             {t.about.cta.button}
-          </button>
+          </Link>
         </section>
       </div>
     </div>

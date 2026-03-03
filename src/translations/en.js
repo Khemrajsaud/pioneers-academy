@@ -202,7 +202,7 @@ const en = {
       title: "Join Our Community",
       description:
         "Discover how Pioneers Academy can help your child reach their full potential",
-      button: "Apply for Admission",
+      button: "Contact Us",
     },
   },
 
