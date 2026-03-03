@@ -1,6 +1,7 @@
 import { Mail, MapPin, Phone, Send, ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import homepage from "../assets/images/homepage.png";
+import contactImg from "../assets/images/contact.png";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const Contact = () => {
@@ -11,7 +12,7 @@ const Contact = () => {
     <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
       {/* Hero */}
       <div className="relative h-48 sm:h-64 md:h-96 w-full overflow-hidden group">
-        <img src={homepage} alt="Contact" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+        <img src={contactImg} alt="Contact" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50"></div>
         <div className="absolute inset-0 flex items-center justify-center">
           {/* <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight animate-fadeInUp">

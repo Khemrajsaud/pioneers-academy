@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ChevronDown, BookOpen, Users, ClipboardList, Trophy, Globe } from "lucide-react";
 import homepage from "../assets/images/homepage.png";
+import Academy from "../assets/images/academy.png";
+import { Link } from "react-router-dom";
 
 const Academics = () => {
   const [activeLevel, setActiveLevel] = useState("preprimary");
@@ -185,7 +187,7 @@ const Academics = () => {
       {/* Hero Section */}
       <div className="relative h-48 sm:h-64 md:h-96 w-full overflow-hidden group">
         <img
-          src={homepage}
+          src={Academy}
           alt="Academics"
           className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
         />
@@ -452,9 +454,10 @@ const Academics = () => {
           <p className="text-sm sm:text-base md:text-lg text-[color:var(--muted)] mb-8 max-w-2xl mx-auto leading-relaxed">
             Schedule a campus visit to see our academic facilities and meet our dedicated faculty members.
           </p>
-          <button className="px-8 sm:px-10 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300">
-            Request Demo Class
-          </button>
+          {/* <button className="px-8 sm:px-10 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300">
+          Contact Us
+          </button> */}
+          <Link to="/contact" className="px-8 sm:px-10 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300">  Contact Us</Link>
         </div>
       </div>
     </div>

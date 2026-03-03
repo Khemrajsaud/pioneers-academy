@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
-import { Menu, Moon, Sun, X, ChevronDown, Languages } from "lucide-react";
+import { Menu, Moon, Sun, X, ChevronDown, Megaphone } from "lucide-react";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 const Navbar = () => {
@@ -9,8 +9,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // mobile menu
   const [dropdownOpen, setDropdownOpen] = useState(false); // about dropdown
   const [resourcesOpen, setResourcesOpen] = useState(false); // resources dropdown
+  const [showAdmissionBar, setShowAdmissionBar] = useState(true);
   const dropdownRef = useRef(null);
   const resourcesRef = useRef(null);
+  const mobileDropdownRef = useRef(null);
+  const mobileResourcesRef = useRef(null);
   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") return "light";
     const stored = localStorage.getItem("theme");
@@ -23,13 +26,20 @@ const Navbar = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      const isInsideDesktopLeadership =
+        dropdownRef.current && dropdownRef.current.contains(event.target);
+      const isInsideDesktopResources =
+        resourcesRef.current && resourcesRef.current.contains(event.target);
+      const isInsideMobileLeadership =
+        mobileDropdownRef.current && mobileDropdownRef.current.contains(event.target);
+      const isInsideMobileResources =
+        mobileResourcesRef.current && mobileResourcesRef.current.contains(event.target);
+
+      if (!isInsideDesktopLeadership && !isInsideMobileLeadership) {
         setDropdownOpen(false);
       }
-      if (
-        resourcesRef.current &&
-        !resourcesRef.current.contains(event.target)
-      ) {
+
+      if (!isInsideDesktopResources && !isInsideMobileResources) {
         setResourcesOpen(false);
       }
     }
@@ -44,6 +54,19 @@ const Navbar = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleScroll = () => {
+      setShowAdmissionBar(window.scrollY < 40);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Close everything when clicking link (mobile)
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -53,13 +76,22 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[color:var(--border)] bg-[color:var(--bg)]/95 backdrop-blur shadow-sm">
+      {showAdmissionBar && (
+        <div className="border-b border-[color:var(--border)] bg-[color:var(--primary)] text-white">
+          <div className="mx-auto flex items-center justify-center gap-2 px-3 py-2 text-center text-xs font-semibold sm:text-sm">
+            <Megaphone size={16} className="shrink-0" />
+            <span>{language === "en" ? "School Admission Open for 8083" : "विद्यालय भर्ना ८०८३ का लागि खुला छ"}</span>
+          </div>
+        </div>
+      )}
+
       <div className="mx-auto flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3">
         {/* Logo */}
         <div className="flex items-center gap-2 sm:gap-3">
           <Link to="/" onClick={handleLinkClick} className="hover:scale-105 transition duration-300">
             <img className="w-14 sm:w-16 md:w-20" src={logo} alt="logo" />
           </Link>
-          <h1 className="hidden sm:block text-base sm:text-lg font-bold text-[color:var(--text)]">
+          <h1 className=" sm:block text-base sm:text-lg font-bold text-[color:var(--text)]">
             Pioneers Academy
           </h1>
         </div>
@@ -146,6 +178,8 @@ const Navbar = () => {
             {t.nav.rules}
           </Link>
           {/* Resources Dropdown */}
+
+          
           <div className="relative group text-[color:var(--text)]" ref={resourcesRef}>
             <button
               onClick={() => setResourcesOpen(!resourcesOpen)}
@@ -158,13 +192,7 @@ const Navbar = () => {
 
             {resourcesOpen && (
               <div className="absolute top-8 left-0 w-56 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] shadow-lg animate-slideInDown">
-                {/* <Link
-                  to="/resources"
-                  onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
-                >
-                  {t.nav.overview}
-                </Link> */}
+               
                 <Link
                   to="/resources/gallery"
                   onClick={handleLinkClick}
@@ -179,44 +207,50 @@ const Navbar = () => {
                 >
                   {t.nav.news}
                 </Link>
-                <Link
+                {/* <Link
                   to="/resources/routine"
                   onClick={handleLinkClick}
                   className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
                 >
                   {t.nav.routine}
-                </Link>
-                <Link
+                </Link> */}
+                {/* <Link
                   to="/resources/downloads"
                   onClick={handleLinkClick}
                   className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
                 >
                   {t.nav.downloads}
-                </Link>
-                <Link
+                </Link> */}
+                {/* <Link
                   to="/resources/events"
                   onClick={handleLinkClick}
                   className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
                 >
                   {t.nav.events}
                 </Link>
+                 */}
                 <Link
+                  to="/resources/notices"
+                  onClick={handleLinkClick}
+                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                >
+                  {t.nav.notices}
+                </Link>
+                {/* <Link
                   to="/resources/exams"
                   onClick={handleLinkClick}
                   className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
                 >
                   {t.nav.exams}
-                </Link>
-                {/* <Link
-                  to="/resources/parents"
-                  onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
-                >
-                  {t.nav.parents}
                 </Link> */}
               </div>
             )}
           </div>
+
+
+
+
+
           <Link
             to="/contact"
             onClick={handleLinkClick}
@@ -250,28 +284,8 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-2xl text-[color:var(--text)] hover:text-[color:var(--primary)] transition duration-300 p-1"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X /> : <Menu />}
-          </button>
-
-          {/* Mobile Language and Theme Toggle (After Menu) */}
+          {/* Mobile Theme and Menu (Theme First) */}
           <div className="md:hidden flex items-center gap-1">
-            {/* Language Toggle */}
-            <button
-              type="button"
-              onClick={toggleLanguage}
-              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] px-2.5 py-1 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white font-semibold text-xs transition duration-300"
-              aria-label="Toggle language"
-            >
-              {language === "en" ? "NE" : "EN"}
-            </button>
-
-            {/* Theme Toggle */}
             <button
               type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -279,6 +293,14 @@ const Navbar = () => {
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-2xl text-[color:var(--text)] hover:text-[color:var(--primary)] transition duration-300 p-1"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X /> : <Menu />}
             </button>
           </div>
         </div>
@@ -305,7 +327,7 @@ const Navbar = () => {
           </Link>
 
           {/* Mobile Leadership Dropdown */}
-          <div>
+          <div ref={mobileDropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="w-full text-left hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300 flex items-center justify-between"
@@ -363,7 +385,7 @@ const Navbar = () => {
             {t.nav.rules}
           </Link>
           {/* Mobile Resources Dropdown */}
-          <div>
+          <div ref={mobileResourcesRef}>
             <button
               onClick={() => setResourcesOpen(!resourcesOpen)}
               className="w-full text-left hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300 flex items-center justify-between"
@@ -389,32 +411,11 @@ const Navbar = () => {
                   {t.nav.news}
                 </Link>
                 <Link
-                  to="/resources/routine"
+                  to="/resources/notices"
                   onClick={handleLinkClick}
                   className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
                 >
-                  {t.nav.routine}
-                </Link>
-                <Link
-                  to="/resources/downloads"
-                  onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
-                >
-                  {t.nav.downloads}
-                </Link>
-                <Link
-                  to="/resources/events"
-                  onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
-                >
-                  {t.nav.events}
-                </Link>
-                <Link
-                  to="/resources/exams"
-                  onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
-                >
-                  {t.nav.exams}
+                  {t.nav.notices}
                 </Link>
               </div>
             )}
@@ -426,6 +427,17 @@ const Navbar = () => {
           >
             {t.nav.contact}
           </Link>
+
+          <div className="mt-2 border-t border-[color:var(--border)] pt-3">
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="w-full inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] px-3 py-2 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white font-semibold text-sm transition duration-300"
+              aria-label="Toggle language"
+            >
+              {language === "en" ? "Switch to Nepali (NE)" : "Switch to English (EN)"}
+            </button>
+          </div>
         </div>
       )}
     </nav>

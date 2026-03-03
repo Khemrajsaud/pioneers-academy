@@ -19,11 +19,13 @@ const ne = {
     downloads: 'डाउनलोड',
     events: 'कार्यक्रम र पात्रो',
     exams: 'परीक्षा तालिका',
+    notices: 'सूचना',
     parents: 'अभिभावकका लागि'
   },
 
   // Footer
   footer: {
+    intro: 'हामी शिक्षा, चरित्र र रचनात्मकतामा बलियो आधार निर्माण गर्छौं जसले गर्दा प्रत्येक विद्यार्थी परिवर्तनशील संसारमा फस्टाउन सक्छ।',
     quickLinks: 'द्रुत लिंकहरू',
     about: 'बारेमा',
     admission: 'भर्ना',
@@ -37,12 +39,15 @@ const ne = {
     resources: 'स्रोतहरू',
     gallery: 'ग्यालेरी',
     news: 'समाचार',
+    facilities: 'सुविधाहरू',
+    schoolrules: 'विद्यालय नियमहरू',
+    contactus: 'हामीलाई सम्पर्क गर्नुहोस्',
     events: 'कार्यक्रमहरू',
     downloads: 'डाउनलोड',
     contactInfo: 'सम्पर्क जानकारी',
-    address: 'काठमाडौं, नेपाल',
-    phone: '+९७७ ०१-XXXXXXX',
-    email: 'info@pioneersacademy.edu.np',
+    address: 'लम्कीचुहा-१, लम्की, टाम्बोभ अब्लेस्ट, रूस, कैलाली',
+    phone: '+977-91-540488',
+    email: 'contact@pioneers.edu.np',
     copyright: '© २०२४ पायोनियर्स एकेडेमी। सर्वाधिकार सुरक्षित।'
   },
 

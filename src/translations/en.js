@@ -19,11 +19,13 @@ const en = {
     downloads: "Downloads",
     events: "Events & Calendar",
     exams: "Exam Schedule",
+    notices: "notices",
     parents: "Parent Resources",
   },
 
   // Footer
   footer: {
+    intro: " We build strong foundations in academics, character, and creativity so every learner can thrive in a changing world.",
     quickLinks: "Quick Links",
     about: "About",
     admission: "Admission",
@@ -37,12 +39,15 @@ const en = {
     resources: "Resources",
     gallery: "Gallery",
     news: "News",
+    facilities: "facilities",
+    schoolrules: "School Rules",
+    contactus: "Contact Us",
     events: "Events",
     downloads: "Downloads",
     contactInfo: "Contact Info",
-    address: "Kathmandu, Nepal",
-    phone: "+977 01-XXXXXXX",
-    email: "info@pioneersacademy.edu.np",
+    address: "Lamkichuha-1, Lamki, Tambov Oblast, Russia, Kailali",
+    phone: "+977-91-540488",
+    email: "contact@pioneers.edu.np",
     copyright: "© 2024 Pioneers Academy. All rights reserved.",
   },
 
@@ -74,7 +79,7 @@ const en = {
       }
     },
     gallery: {
-      title: "Campus Gallery",
+      title: "School Gallery",
       subtitle: "Explore our vibrant campus life and facilities",
       viewMore: "View More Photos",
       images: {
@@ -102,7 +107,7 @@ const en = {
       explorePrograms: "Explore Academic Programs"
     },
     facilities: {
-      title: "World-Class Facilities",
+      title: "Class Facilities",
       subtitle: "Modern infrastructure designed for comprehensive student development",
       smartClassrooms: "Smart Classrooms",
       scienceLabs: "Science Labs",
@@ -125,26 +130,6 @@ const en = {
         "Develop strong moral values and social responsibility",
         "Prepare students for success in higher education and future careers",
       ],
-    },
-    values: {
-      title: "Core Values",
-      excellence: {
-        title: "Excellence",
-        description:
-          "Striving for the highest standards in academics and character",
-      },
-      integrity: {
-        title: "Integrity",
-        description: "Upholding honesty, ethics, and moral principles",
-      },
-      innovation: {
-        title: "Innovation",
-        description: "Embracing creativity and forward-thinking approaches",
-      },
-      respect: {
-        title: "Respect",
-        description: "Valuing diversity and treating everyone with dignity",
-      },
     },
   },
 

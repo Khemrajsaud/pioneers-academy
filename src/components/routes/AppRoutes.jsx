@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Layout from "../layout/Layout";
 import Home from "../../pages/Home";
 import About from "../../pages/About";
 import Academics from "../../pages/Academics";
@@ -7,38 +8,67 @@ import Contact from "../../pages/Contact";
 import Map from "../../pages/Map";
 import Facilities from "../../pages/Facilities";
 import Rules from "../../pages/Rules";
-import Resources from "../../pages/Resources";
 import ResourceGallery from "../../pages/ResourceGallery";
 import ResourceNews from "../../pages/ResourceNews";
-import ResourceRoutine from "../../pages/ResourceRoutine";
-import ResourceDownloads from "../../pages/ResourceDownloads";
-import ResourceEvents from "../../pages/ResourceEvents";
-import ResourceExams from "../../pages/ResourceExams";
+// import ResourceRoutine from "../../pages/ResourceRoutine";
+// import ResourceDownloads from "../../pages/ResourceDownloads";
+// import ResourceEvents from "../../pages/ResourceEvents";
+// import ResourceExams from "../../pages/ResourceExams";
 import PrincipleMessage from "../../pages/PrincipleMessage";
 import ChairmanMessage from "../../pages/ChairmanMessage";
 import BoardOfDirectors from "../../pages/BoardOfDirectors";
+import AdminDashboard from "../../pages/admin/AdminDashboard";
+import AdminLayout from "../layout/AdminLayout";
+import AdminGallery from "../../pages/admin/AdminGallery";
+import AdminNews from "../../pages/admin/AdminNews";
+import AdminNotices from "../../pages/admin/AdminNotices";
+import AdminEvents from "../../pages/admin/AdminEvents";
+import AdminDownloads from "../../pages/admin/AdminDownloads";
+import ResourcesNotice from "../../pages/ResourcesNotice";
+
+
+
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/academic" element={<Academics />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/map" element={<Map />} />
-      <Route path="/facilities" element={<Facilities />} />
-      <Route path="/rules" element={<Rules />} />
-      <Route path="/resources" element={<Resources />} />
-      <Route path="/resources/gallery" element={<ResourceGallery />} />
-      <Route path="/resources/news" element={<ResourceNews />} />
-      <Route path="/resources/routine" element={<ResourceRoutine />} />
-      <Route path="/resources/downloads" element={<ResourceDownloads />} />
-      <Route path="/resources/events" element={<ResourceEvents />} />
-      <Route path="/resources/exams" element={<ResourceExams />} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/academic" element={<Academics />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/map" element={<Map />} />
+        <Route path="/facilities" element={<Facilities />} />
+        <Route path="/rules" element={<Rules />} />
+        <Route path="/resources/gallery" element={<ResourceGallery />} />
+        <Route path="/resources/news" element={<ResourceNews />} />
+        {/* <Route path="/resources/routine" element={<ResourceRoutine />} />
+        <Route path="/resources/downloads" element={<ResourceDownloads />} />
+        <Route path="/resources/events" element={<ResourceEvents />} />
+        <Route path="/resources/exams" element={<ResourceExams />} /> */}
+        <Route path="/history" element={<PrincipleMessage />} />
+        <Route path="/chairman-message" element={<ChairmanMessage />} />
+        <Route path="/team" element={<BoardOfDirectors />} />
+        <Route path="/resources/notices" element={<ResourcesNotice/>} />
+      </Route>
+
      
-      <Route path="/history" element={<PrincipleMessage />} />
-      <Route path="/chairman-message" element={<ChairmanMessage />} />
-      <Route path="/team" element={<BoardOfDirectors />} />
+      <Route 
+        path="/admin" 
+        element={
+         
+            <AdminLayout />
+        
+        }
+      >
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="gallery" element={<AdminGallery/>} />
+        <Route path="news" element={<AdminNews />} />
+        <Route path="notices" element={<AdminNotices/>}/>
+        <Route path="events" element={<AdminEvents/>}/>
+        <Route path="uploads" element={<AdminDownloads/>}/>
+      </Route>
+     
     </Routes>
   );
 };

@@ -1,15 +1,12 @@
 import React from "react";
 import AppRoutes from "./components/routes/AppRoutes";
-import Layout from "./components/layout/Layout";
+import { AdminThemeProvider } from "./contexts/AdminThemeContext";
 
 const App = () => {
   return (
-    <Layout>
-     
-   
-        <AppRoutes />
-     
-    </Layout>
+    <AdminThemeProvider>
+      <AppRoutes />
+    </AdminThemeProvider>
   );
 };
 

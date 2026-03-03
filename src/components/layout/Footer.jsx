@@ -23,8 +23,7 @@ const Footer = () => {
               </div> */}
             </div>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-[color:var(--muted)]">
-              We build strong foundations in academics, character, and creativity so
-              every learner can thrive in a changing world.
+             {t.footer.intro}
             </p>
 
              <div className="mt-5 flex items-center gap-3">
@@ -41,8 +40,11 @@ const Footer = () => {
             <ul className="mt-4 space-y-4 text-sm text-[color:var(--muted)]">
               <li><Link className="hover:text-[color:var(--primary)]" to="/about">{t.footer.about}</Link></li>
               <li><Link className="hover:text-[color:var(--primary)]" to="/academic">{t.footer.academics}</Link></li>
-              <li><Link className="hover:text-[color:var(--primary)]" to="/facilities">{t.footer.facilities ||  'Facilities'}</Link></li>
-              <li><Link className="hover:text-[color:var(--primary)]" to="/resources">{t.footer.resources}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)]" to="/facilities">{t.footer.facilities}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)]" to="/resources/notices">{t.footer.resources}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)]" to="/rules">{t.footer.schoolrules}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)]" to="/contact">{t.footer.contactus}</Link></li>
+
             </ul>
           </div>
 
@@ -55,17 +57,13 @@ const Footer = () => {
               <li>{t.footer.phone}</li>
               <li>{t.footer.email}</li>
             </ul>
-            {/* <div className="mt-5 flex items-center gap-3">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--primary)]">F</span>
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--primary)]">I</span>
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--primary)]">Y</span>
-            </div> */}
+            
           </div>
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-[color:var(--border)] pt-6 text-xs text-[color:var(--muted)] md:flex-row">
           <span>{t.footer.copyright}</span>
-          <span>Designed with Niijo Tech.</span>
+          <span className=" mr-20">Designed with Niijo Tech.</span>
         </div>
       </div>
     </footer>

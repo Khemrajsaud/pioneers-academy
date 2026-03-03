@@ -6,7 +6,7 @@ import mision from "../assets/images/mision.png";
 import school from "../assets/images/school.png";
 import about from "../assets/images/about1.jpeg";
 import homepage from "../assets/images/homepage.png";
-import school2 from "../assets/images/school.jpeg";
+import school2 from "../assets/images/school.png";
 import about1 from "../assets/images/about1.jpeg";
 
 import {
@@ -49,7 +49,6 @@ const Home = () => {
         muted
         playsInline
       />
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-[color:var(--bg)]"></div> */}
       </div>
 
       {/* Introduction Section */}
