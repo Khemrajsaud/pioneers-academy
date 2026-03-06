@@ -11,8 +11,10 @@ import {
   User,
   Tag,
   Image as ImageIcon,
+  Eye,
 } from "lucide-react";
 import { useAdminTheme } from "../../contexts/AdminThemeContext";
+import RichTextEditor from "../../components/admin/RichTextEditor";
 
 const API_URL = "http://localhost:5000/api/news";
 
@@ -144,8 +146,6 @@ const AdminNews = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this news article?")) return;
-
     try {
       setDeletingId(id);
       await axios.delete(`${API_URL}/${id}`);
@@ -264,17 +264,10 @@ const AdminNews = () => {
               <label className={`block text-sm mb-2 font-medium ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>
                 Description *
               </label>
-              <textarea
-                name="description"
+              <RichTextEditor
                 value={formData.description}
-                onChange={handleChange}
-                rows={6}
-                className={`w-full rounded-lg px-4 py-2 border text-sm outline-none transition-colors resize-y ${
-                  isDarkMode
-                    ? "bg-slate-800 border-slate-700 text-white focus:border-[#1f4e79]"
-                    : "bg-white border-slate-300 text-slate-900 focus:border-[#1f4e79]"
-                }`}
-                placeholder="Write full article content"
+                onChange={(html) => setFormData((prev) => ({ ...prev, description: html }))}
+                isDarkMode={isDarkMode}
               />
             </div>
 
@@ -393,9 +386,13 @@ const AdminNews = () => {
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
-                      <h3 className={`text-lg font-bold mb-3 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+                      <h3 className={`text-lg font-bold mb-2 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
                         {item.title}
                       </h3>
+                      <div className={`flex items-center gap-1 mb-3 text-xs ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                        <Eye size={14} />
+                        <span>{item.view_count || 0} views</span>
+                      </div>
 
                       {item.image_url && (
                         <img
@@ -405,9 +402,14 @@ const AdminNews = () => {
                         />
                       )}
 
-                      <p className={`text-sm leading-6 mb-4 ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>
-                        {item.description}
-                      </p>
+                      <div
+                        className={`text-sm leading-6 mb-4 news-content prose prose-sm max-w-none ${
+                          isDarkMode
+                            ? "text-slate-300 prose-invert"
+                            : "text-slate-700"
+                        }`}
+                        dangerouslySetInnerHTML={{ __html: item.description }}
+                      />
 
                       <div className={`grid md:grid-cols-3 gap-2 text-xs ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
                         <div className="flex items-center gap-2">
@@ -467,6 +469,28 @@ const AdminNews = () => {
       </div>
 
       <style>{`
+        .news-content ul {
+          list-style-type: disc;
+          margin-left: 1.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .news-content ol {
+          list-style-type: decimal;
+          margin-left: 1.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .news-content li {
+          margin-bottom: 0.25rem;
+        }
+        .news-content strong {
+          font-weight: 700;
+        }
+        .news-content em {
+          font-style: italic;
+        }
+        .news-content u {
+          text-decoration: underline;
+        }
         @keyframes slideIn {
           from {
             transform: translateX(20px);

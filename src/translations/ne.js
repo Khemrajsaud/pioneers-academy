@@ -14,13 +14,14 @@ const ne = {
     resources: 'स्रोतहरू',
     overview: 'सिंहावलोकन',
     gallery: 'ग्यालेरी',
-    news: 'समाचार र अपडेट',
+    news: 'समाचार र लेखहरू',
     routine: 'कक्षा तालिका',
     downloads: 'डाउनलोड',
     events: 'कार्यक्रम र पात्रो',
     exams: 'परीक्षा तालिका',
     notices: 'सूचना',
-    parents: 'अभिभावकका लागि'
+    parents: 'अभिभावकका लागि',
+    download: 'डाउनलोड'
   },
 
   // Footer

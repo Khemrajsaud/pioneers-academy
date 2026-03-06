@@ -7,7 +7,6 @@ import {
   Bell, 
   ChevronRight,
   GraduationCap,
-  Calendar,
   Download
 } from 'lucide-react';
 import { useAdminTheme } from '../../contexts/AdminThemeContext';
@@ -68,16 +67,9 @@ const Sidebar = () => {
           isDarkMode={isDarkMode}
         />
         <SidebarLink 
-          to="/admin/events" 
-          icon={<Calendar size={18} />} 
-          label="Events" 
-          active={isActive('/admin/events')}
-          isDarkMode={isDarkMode}
-        />
-        <SidebarLink 
           to="/admin/uploads" 
           icon={<Download size={18} />} 
-          label="uploads" 
+          label="Uploads" 
           active={isActive('/admin/uploads')}
           isDarkMode={isDarkMode}
         />

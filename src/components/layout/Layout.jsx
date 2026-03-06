@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import AdmissionPopup from "../ui/AdmissionPopup";
 
 function Layout({ children }) {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -22,6 +23,7 @@ function Layout({ children }) {
 
   return (
     <>
+      <AdmissionPopup />
       <Navbar />
       <main className="lg:px-10">
         {children || <Outlet />}

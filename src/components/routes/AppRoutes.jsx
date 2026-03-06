@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Home from "../../pages/Home";
 import About from "../../pages/About";
@@ -10,10 +10,6 @@ import Facilities from "../../pages/Facilities";
 import Rules from "../../pages/Rules";
 import ResourceGallery from "../../pages/ResourceGallery";
 import ResourceNews from "../../pages/ResourceNews";
-// import ResourceRoutine from "../../pages/ResourceRoutine";
-// import ResourceDownloads from "../../pages/ResourceDownloads";
-// import ResourceEvents from "../../pages/ResourceEvents";
-// import ResourceExams from "../../pages/ResourceExams";
 import PrincipleMessage from "../../pages/PrincipleMessage";
 import ChairmanMessage from "../../pages/ChairmanMessage";
 import BoardOfDirectors from "../../pages/BoardOfDirectors";
@@ -22,9 +18,11 @@ import AdminLayout from "../layout/AdminLayout";
 import AdminGallery from "../../pages/admin/AdminGallery";
 import AdminNews from "../../pages/admin/AdminNews";
 import AdminNotices from "../../pages/admin/AdminNotices";
-import AdminEvents from "../../pages/admin/AdminEvents";
-import AdminDownloads from "../../pages/admin/AdminDownloads";
 import ResourcesNotice from "../../pages/ResourcesNotice";
+import DetailedNews from "../../pages/DetailedNews";
+import AdminResources from "../../pages/admin/AdminResources";
+import ResourceDownloads from "../../pages/ResourceDownloads";
+import NotFound from "../../pages/NotFound";
 
 
 
@@ -50,6 +48,9 @@ const AppRoutes = () => {
         <Route path="/chairman-message" element={<ChairmanMessage />} />
         <Route path="/team" element={<BoardOfDirectors />} />
         <Route path="/resources/notices" element={<ResourcesNotice/>} />
+        <Route path="/news/:id" element={<DetailedNews />} />
+        <Route path="/resources/download" element={<ResourceDownloads/>} />
+        <Route path="*" element={<NotFound />} />
       </Route>
 
      
@@ -61,12 +62,13 @@ const AppRoutes = () => {
         
         }
       >
+        <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="gallery" element={<AdminGallery/>} />
         <Route path="news" element={<AdminNews />} />
         <Route path="notices" element={<AdminNotices/>}/>
-        <Route path="events" element={<AdminEvents/>}/>
-        <Route path="uploads" element={<AdminDownloads/>}/>
+      
+        <Route path="uploads" element={<AdminResources/>}/>
       </Route>
      
     </Routes>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Users, 
   GraduationCap, 
@@ -130,33 +131,32 @@ const AdminDashboard = () => {
         <div className={`rounded-2xl p-6 border transition-colors ${
           isDarkMode 
             ? 'bg-[#0f1729] border-slate-800' 
-            : 'bg-gradient-to-br from-[#1f4e79] to-[#143654]'
+            : 'bg-linear-to-br from-[#1f4e79] to-[#143654]'
         }`}>
           <h3 className="text-lg font-bold text-white mb-6">Quick Actions</h3>
           <div className="space-y-3">
             <QuickActionButton 
               label="Add New Image" 
               icon={<ImageIcon size={16} />}
+              to="/admin/gallery"
               isDarkMode={isDarkMode}
             />
             <QuickActionButton 
               label="Create News" 
               icon={<Newspaper size={16} />}
+              to="/admin/news"
               isDarkMode={isDarkMode}
             />
             <QuickActionButton 
               label="Post Notice" 
               icon={<Bell size={16} />}
-              isDarkMode={isDarkMode}
-            />
-            <QuickActionButton 
-              label="Add Event" 
-              icon={<Calendar size={16} />}
+              to="/admin/notices"
               isDarkMode={isDarkMode}
             />
             <QuickActionButton 
               label="Upload File" 
               icon={<Download size={16} />}
+              to="/admin/uploads"
               isDarkMode={isDarkMode}
             />
           </div>
@@ -274,15 +274,18 @@ const ActivityItem = ({ type, title, time, icon, isDarkMode }) => (
   </div>
 );
 
-const QuickActionButton = ({ label, icon, isDarkMode }) => (
-  <button className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
+const QuickActionButton = ({ label, icon, to, isDarkMode }) => (
+  <Link
+    to={to}
+    className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
     isDarkMode 
       ? 'bg-slate-800 hover:bg-slate-700 text-white' 
       : 'bg-white/20 hover:bg-white/30 text-white'
-  }`}>
+  }`}
+  >
     {icon}
     <span className="text-sm font-semibold">{label}</span>
-  </button>
+  </Link>
 );
 
 const ContentStat = ({ label, value, views, isDarkMode }) => (

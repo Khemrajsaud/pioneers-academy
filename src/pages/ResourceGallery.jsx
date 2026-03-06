@@ -135,12 +135,7 @@ function ResourceGallery() {
           marginBottom: '1rem'
         }}>
           <ImageIcon size={36} color={accentColor} />
-          <h1 style={{
-            fontSize: '2.5rem',
-            fontWeight: '700',
-            margin: 0,
-            color: accentColor
-          }}>
+          <h1  className={`text-4xl md:text-5xl font-bold ${isDarkMode ? "text-[#e0e0e0]" : "text-[#1a1a1a]"}`}>
             {language === 'ne' ? 'विद्यालय ग्यालेरी' : 'School Gallery'}
           </h1>
         </div>

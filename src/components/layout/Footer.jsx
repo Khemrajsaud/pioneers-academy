@@ -7,63 +7,71 @@ const Footer = () => {
   const { t } = useLanguage();
   
   return (
-    <footer className="mt-16 border-t border-[color:var(--border)] bg-[linear-gradient(135deg,rgba(31,78,121,0.08),rgba(242,92,92,0.06))]">
+    <footer className="mt-16 border-t border-[color:var(--border)] bg-[color:var(--bg-alt)]">
       <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3">
-              <img className="w-14" src={logo} alt="Pioneers Academy" />
-              {/* <div>
-                <h3 className="text-xl font-semibold text-[color:var(--text)]">
-                  Pioneers Academy Kailali
-                </h3>
-                <p className="text-sm text-[color:var(--muted)]">
-                  Shaping confident, compassionate learners.
-                </p>
-              </div> */}
-            </div>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-[color:var(--muted)]">
-             {t.footer.intro}
-            </p>
-
-             <div className="mt-5 flex items-center gap-3">
-              <Facebook className="h-5 w-5 text-[color:var(--primary)]" />
-              <Instagram className="h-5 w-5 text-[color:var(--primary)]" />
-              <Youtube className="h-5 w-5 text-[color:var(--primary)]" />
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-[color:var(--card)] rounded-lg p-2 border border-[color:var(--border)]">
+                <img className="w-14 h-14" src={logo} alt="Pioneers Academy" />
               </div>
+              <div>
+                <h3 className="text-2xl font-bold text-[color:var(--text)]">
+                  Pioneers Academy
+                </h3>
+                <p className="text-sm text-[color:var(--muted)] font-medium">
+                  Excellence in Education
+                </p>
+              </div>
+            </div>
+            <div className="p-4 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)]">
+              <p className="max-w-md text-sm leading-relaxed text-[color:var(--muted)] font-medium">
+                {t.footer.intro}
+              </p>
+            </div>
+
+            <div className="mt-5 flex items-center gap-3">
+              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
+                <Youtube className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-[color:var(--text)]">
+          <div className="p-6 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)]">
+            <h4 className="text-lg font-bold uppercase tracking-wider text-[color:var(--text)] mb-4">
               {t.footer.quickLinks}
             </h4>
-            <ul className="mt-4 space-y-4 text-sm text-[color:var(--muted)]">
-              <li><Link className="hover:text-[color:var(--primary)]" to="/about">{t.footer.about}</Link></li>
-              <li><Link className="hover:text-[color:var(--primary)]" to="/academic">{t.footer.academics}</Link></li>
-              <li><Link className="hover:text-[color:var(--primary)]" to="/facilities">{t.footer.facilities}</Link></li>
-              <li><Link className="hover:text-[color:var(--primary)]" to="/resources/notices">{t.footer.resources}</Link></li>
-              <li><Link className="hover:text-[color:var(--primary)]" to="/rules">{t.footer.schoolrules}</Link></li>
-              <li><Link className="hover:text-[color:var(--primary)]" to="/contact">{t.footer.contactus}</Link></li>
-
+            <ul className="space-y-3 text-sm text-[color:var(--muted)]">
+              <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/about">{t.footer.about}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/academic">{t.footer.academics}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/facilities">{t.footer.facilities}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/resources/notices">{t.footer.resources}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/rules">{t.footer.schoolrules}</Link></li>
+              <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/contact">{t.footer.contactus}</Link></li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-[color:var(--text)]">
+          <div className="p-6 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)]">
+            <h4 className="text-lg font-bold uppercase tracking-wider text-[color:var(--text)] mb-4">
               {t.footer.contactInfo}
             </h4>
-            <ul className="mt-4 space-y-4 text-sm text-[color:var(--muted)]">
+            <ul className="space-y-4 text-sm text-[color:var(--muted)] font-medium">
               <li>{t.footer.address}</li>
               <li>{t.footer.phone}</li>
               <li>{t.footer.email}</li>
             </ul>
-            
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-[color:var(--border)] pt-6 text-xs text-[color:var(--muted)] md:flex-row">
-          <span>{t.footer.copyright}</span>
-          <span className=" mr-20">Designed with Niijo Tech.</span>
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-[color:var(--border)] pt-6 text-sm text-[color:var(--muted)] md:flex-row">
+          <span className="font-semibold">© {t.footer.copyright}</span>
+          <span className="font-semibold">Designed by Niijo Tech.</span>
         </div>
       </div>
     </footer>

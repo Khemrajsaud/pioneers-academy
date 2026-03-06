@@ -7,7 +7,8 @@ import {
   Users,
   Lightbulb,
 } from "lucide-react";
-import homepage from "../assets/images/about.png";
+
+import  homepage from "../assets/images/contact.png";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Link } from "react-router-dom";
 

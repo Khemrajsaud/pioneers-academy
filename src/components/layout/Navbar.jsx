@@ -75,33 +75,38 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[color:var(--border)] bg-[color:var(--bg)]/95 backdrop-blur shadow-sm">
+    <nav className="sticky top-0 z-50 border-b border-[color:var(--border)] bg-[color:var(--bg)]/95 backdrop-blur-md shadow-sm">
       {showAdmissionBar && (
-        <div className="border-b border-[color:var(--border)] bg-[color:var(--primary)] text-white">
+        <div className="border-b border-[color:var(--border)] bg-gradient-to-r from-blue-600 to-blue-700 text-white">
           <div className="mx-auto flex items-center justify-center gap-2 px-3 py-2 text-center text-xs font-semibold sm:text-sm">
             <Megaphone size={16} className="shrink-0" />
-            <span>{language === "en" ? "School Admission Open for 8083" : "विद्यालय भर्ना ८०८३ का लागि खुला छ"}</span>
+            <span>
+              {language === "en" ? "School Admission Open for 2083" : "विद्यालय भर्ना २०८३ का लागि खुला छ"}
+            </span>
           </div>
         </div>
       )}
 
-      <div className="mx-auto flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3">
+      <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6 py-3">
         {/* Logo */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Link to="/" onClick={handleLinkClick} className="hover:scale-105 transition duration-300">
-            <img className="w-14 sm:w-16 md:w-20" src={logo} alt="logo" />
+        <div className="flex items-center gap-3">
+          <Link to="/" onClick={handleLinkClick} className="hover:opacity-80 transition-opacity duration-300">
+            <img className="w-12 sm:w-14 md:w-16" src={logo} alt="Pioneers Academy Logo" />
           </Link>
-          <h1 className=" sm:block text-base sm:text-lg font-bold text-[color:var(--text)]">
-            Pioneers Academy
-          </h1>
+          <div>
+            <h1 className="text-base sm:text-lg md:text-xl font-bold text-[color:var(--text)]">
+              Pioneers Academy
+            </h1>
+            <p className="hidden sm:block text-xs text-[color:var(--muted)] font-medium">Excellence in Education</p>
+          </div>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 text-[color:var(--text)]">
+        <div className="hidden md:flex items-center gap-1 lg:gap-2 text-[color:var(--text)]">
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
+            className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200"
           >
             {t.nav.home}
           </Link>
@@ -110,7 +115,7 @@ const Navbar = () => {
           <Link
             to="/about"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
+            className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200"
           >
             {t.nav.about}
           </Link>
@@ -122,33 +127,33 @@ const Navbar = () => {
           >
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="hover:text-[color:var(--primary)] transition duration-300 flex items-center gap-1 font-medium group-hover:scale-105"
+              className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200 flex items-center gap-1"
               title="School Leadership"
             >
-              {t.nav.leadership}{" "}
-              <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition duration-300" />
+              {t.nav.leadership}
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {dropdownOpen && (
-              <div className="absolute top-8 left-0 w-52 rounded-lg  border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] shadow-lg">
+              <div className="absolute top-full mt-1 left-0 w-56 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] shadow-lg overflow-hidden animate-fadeInDown">
                 <Link
                   to="/history"
                   onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                  className="block px-4 py-2.5 text-sm hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-colors duration-200"
                 >
                   {t.nav.principalMessage}
                 </Link>
                 <Link
                   to="/team"
                   onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                  className="block px-4 py-2.5 text-sm hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-colors duration-200"
                 >
                   {t.nav.board}
                 </Link>
                 <Link
                   to="/chairman-message"
                   onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                  className="block px-4 py-2.5 text-sm hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-colors duration-200"
                 >
                   {t.nav.chairman}
                 </Link>
@@ -159,102 +164,73 @@ const Navbar = () => {
           <Link
             to="/academic"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
+            className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200"
           >
             {t.nav.academics}
           </Link>
           <Link
             to="/facilities"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
+            className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200"
           >
             {t.nav.facilities}
           </Link>
           <Link
             to="/rules"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] transition duration-300 font-medium"
+            className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200"
           >
             {t.nav.rules}
           </Link>
           {/* Resources Dropdown */}
-
-          
           <div className="relative group text-[color:var(--text)]" ref={resourcesRef}>
             <button
               onClick={() => setResourcesOpen(!resourcesOpen)}
-              className="hover:text-[color:var(--primary)] transition duration-300 flex items-center gap-1 font-medium group-hover:scale-105"
+              className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200 flex items-center gap-1"
               title="Resources"
             >
-              {t.nav.resources}{" "}
-              <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition duration-300" />
+              {t.nav.resources}
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${resourcesOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {resourcesOpen && (
-              <div className="absolute top-8 left-0 w-56 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] shadow-lg animate-slideInDown">
-               
+              <div className="absolute top-full mt-1 left-0 w-56 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] shadow-lg overflow-hidden animate-fadeInDown">
                 <Link
                   to="/resources/gallery"
                   onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                  className="block px-4 py-2.5 text-sm hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-colors duration-200"
                 >
                   {t.nav.gallery}
                 </Link>
                 <Link
                   to="/resources/news"
                   onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                  className="block px-4 py-2.5 text-sm hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-colors duration-200"
                 >
                   {t.nav.news}
                 </Link>
-                {/* <Link
-                  to="/resources/routine"
-                  onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
-                >
-                  {t.nav.routine}
-                </Link> */}
-                {/* <Link
-                  to="/resources/downloads"
-                  onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
-                >
-                  {t.nav.downloads}
-                </Link> */}
-                {/* <Link
-                  to="/resources/events"
-                  onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
-                >
-                  {t.nav.events}
-                </Link>
-                 */}
                 <Link
                   to="/resources/notices"
                   onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                  className="block px-4 py-2.5 text-sm hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-colors duration-200"
                 >
                   {t.nav.notices}
                 </Link>
-                {/* <Link
-                  to="/resources/exams"
+                <Link
+                  to="/resources/download"
                   onClick={handleLinkClick}
-                  className="block px-4 py-2 hover:bg-[color:var(--bg-alt)]"
+                  className="block px-4 py-2.5 text-sm hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-colors duration-200"
                 >
-                  {t.nav.exams}
-                </Link> */}
+                  {t.nav.download}
+                </Link>
               </div>
             )}
           </div>
 
-
-
-
-
           <Link
             to="/contact"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)]"
+            className="px-3 py-2 text-sm font-medium hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] rounded-md transition-all duration-200"
           >
             {t.nav.contact}
           </Link>
@@ -267,7 +243,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] px-3 py-1.5 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white font-semibold text-sm transition duration-300"
+              className="inline-flex items-center justify-center rounded-md border border-[color:var(--border)] bg-[color:var(--card)] px-3 py-1.5 text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] font-semibold text-sm transition-all duration-200"
               aria-label="Toggle language"
             >
               {language === "en" ? "NE" : "EN"}
@@ -277,19 +253,19 @@ const Navbar = () => {
             <button
               type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] p-1.5 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white transition duration-300"
+              className="inline-flex items-center justify-center rounded-md border border-[color:var(--border)] bg-[color:var(--card)] p-1.5 text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
 
-          {/* Mobile Theme and Menu (Theme First) */}
-          <div className="md:hidden flex items-center gap-1">
+          {/* Mobile Theme and Menu */}
+          <div className="md:hidden flex items-center gap-2">
             <button
               type="button"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] p-1 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white transition duration-300"
+              className="inline-flex items-center justify-center rounded-md border border-[color:var(--border)] bg-[color:var(--card)] p-1.5 text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
@@ -297,7 +273,7 @@ const Navbar = () => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-2xl text-[color:var(--text)] hover:text-[color:var(--primary)] transition duration-300 p-1"
+              className="text-2xl text-[color:var(--text)] hover:text-[color:var(--primary)] transition-all duration-200 p-1"
               aria-label="Toggle menu"
             >
               {isOpen ? <X /> : <Menu />}
@@ -312,7 +288,7 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+            className="px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium"
           >
             {t.nav.home}
           </Link>
@@ -321,7 +297,7 @@ const Navbar = () => {
           <Link
             to="/about"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+            className="px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium"
           >
             {t.nav.about}
           </Link>
@@ -330,32 +306,32 @@ const Navbar = () => {
           <div ref={mobileDropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-full text-left hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300 flex items-center justify-between"
+              className="w-full px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium flex items-center justify-between"
             >
               {t.nav.leadership}
-              <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {dropdownOpen && (
-              <div className="ml-4 mt-1 flex flex-col space-y-1 animate-slideInDown">
+              <div className="ml-4 mt-1 flex flex-col space-y-1 animate-fadeInDown">
                 <Link
                   to="/history"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+                  className="px-4 py-2 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 text-sm"
                 >
                   {t.nav.principalMessage}
                 </Link>
                 <Link
                   to="/team"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+                  className="px-4 py-2 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 text-sm"
                 >
                   {t.nav.board}
                 </Link>
                 <Link
                   to="/chairman-message"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+                  className="px-4 py-2 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 text-sm"
                 >
                   {t.nav.chairman}
                 </Link>
@@ -366,21 +342,21 @@ const Navbar = () => {
           <Link
             to="/academic"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+            className="px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium"
           >
             {t.nav.academics}
           </Link>
           <Link
             to="/facilities"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+            className="px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium"
           >
             {t.nav.facilities}
           </Link>
           <Link
             to="/rules"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+            className="px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium"
           >
             {t.nav.rules}
           </Link>
@@ -388,32 +364,32 @@ const Navbar = () => {
           <div ref={mobileResourcesRef}>
             <button
               onClick={() => setResourcesOpen(!resourcesOpen)}
-              className="w-full text-left hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300 flex items-center justify-between"
+              className="w-full px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium flex items-center justify-between"
             >
               {t.nav.resources}
-              <ChevronDown className={`w-4 h-4 transition-transform ${resourcesOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${resourcesOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {resourcesOpen && (
-              <div className="ml-4 mt-1 flex flex-col space-y-1 animate-slideInDown">
+              <div className="ml-4 mt-1 flex flex-col space-y-1 animate-fadeInDown">
                 <Link
                   to="/resources/gallery"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+                  className="px-4 py-2 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 text-sm"
                 >
                   {t.nav.gallery}
                 </Link>
                 <Link
                   to="/resources/news"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+                  className="px-4 py-2 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 text-sm"
                 >
                   {t.nav.news}
                 </Link>
                 <Link
                   to="/resources/notices"
                   onClick={handleLinkClick}
-                  className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+                  className="px-4 py-2 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 text-sm"
                 >
                   {t.nav.notices}
                 </Link>
@@ -423,19 +399,19 @@ const Navbar = () => {
           <Link
             to="/contact"
             onClick={handleLinkClick}
-            className="hover:text-[color:var(--primary)] hover:bg-[color:var(--bg-alt)] px-3 py-2 rounded-lg transition duration-300"
+            className="px-4 py-2.5 rounded-md hover:bg-[color:var(--bg-alt)] hover:text-[color:var(--primary)] transition-all duration-200 font-medium"
           >
             {t.nav.contact}
           </Link>
 
-          <div className="mt-2 border-t border-[color:var(--border)] pt-3">
+          <div className="mt-2 pt-2 border-t border-[color:var(--border)]">
             <button
               type="button"
               onClick={toggleLanguage}
-              className="w-full inline-flex items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] px-3 py-2 text-[color:var(--text)] shadow-sm hover:bg-[color:var(--primary)] hover:text-white font-semibold text-sm transition duration-300"
+              className="w-full inline-flex items-center justify-center rounded-md border border-[color:var(--border)] bg-[color:var(--card)] px-4 py-2.5 text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] font-semibold text-sm transition-all duration-200"
               aria-label="Toggle language"
             >
-              {language === "en" ? "Switch to Nepali (NE)" : "Switch to English (EN)"}
+              {language === "en" ? "Switch to Nepali (नेपाली)" : "Switch to English (EN)"}
             </button>
           </div>
         </div>

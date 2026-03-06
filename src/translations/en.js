@@ -14,13 +14,14 @@ const en = {
     resources: "Resources",
     overview: "Overview",
     gallery: "Gallery",
-    news: "News & Updates",
+    news: "News & Articals",
     routine: "Class Routine",
     downloads: "Downloads",
     events: "Events & Calendar",
     exams: "Exam Schedule",
     notices: "notices",
     parents: "Parent Resources",
+    download: "downloads"
   },
 
   // Footer
