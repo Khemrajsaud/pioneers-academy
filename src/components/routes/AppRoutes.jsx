@@ -1,5 +1,6 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Layout from "../layout/Layout";
 import Home from "../../pages/Home";
 import About from "../../pages/About";
@@ -20,58 +21,45 @@ import AdminNews from "../../pages/admin/AdminNews";
 import AdminNotices from "../../pages/admin/AdminNotices";
 import ResourcesNotice from "../../pages/ResourcesNotice";
 import DetailedNews from "../../pages/DetailedNews";
-import AdminResources from "../../pages/admin/AdminResources";
-import ResourceDownloads from "../../pages/ResourceDownloads";
 import NotFound from "../../pages/NotFound";
-
-
-
+import AnimatedPage from "../ui/AnimatedPage";
 
 const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/academic" element={<Academics />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/map" element={<Map />} />
-        <Route path="/facilities" element={<Facilities />} />
-        <Route path="/rules" element={<Rules />} />
-        <Route path="/resources/gallery" element={<ResourceGallery />} />
-        <Route path="/resources/news" element={<ResourceNews />} />
-        {/* <Route path="/resources/routine" element={<ResourceRoutine />} />
-        <Route path="/resources/downloads" element={<ResourceDownloads />} />
-        <Route path="/resources/events" element={<ResourceEvents />} />
-        <Route path="/resources/exams" element={<ResourceExams />} /> */}
-        <Route path="/history" element={<PrincipleMessage />} />
-        <Route path="/chairman-message" element={<ChairmanMessage />} />
-        <Route path="/team" element={<BoardOfDirectors />} />
-        <Route path="/resources/notices" element={<ResourcesNotice/>} />
-        <Route path="/news/:id" element={<DetailedNews />} />
-        <Route path="/resources/download" element={<ResourceDownloads/>} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
+  const location = useLocation();
 
-     
-      <Route 
-        path="/admin" 
-        element={
-         
-            <AdminLayout />
-        
-        }
-      >
-        <Route index element={<Navigate to="dashboard" replace />} />
-        <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path="gallery" element={<AdminGallery/>} />
-        <Route path="news" element={<AdminNews />} />
-        <Route path="notices" element={<AdminNotices/>}/>
-      
-        <Route path="uploads" element={<AdminResources/>}/>
-      </Route>
-     
-    </Routes>
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route element={<Layout />}>
+          <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
+          <Route path="/about" element={<AnimatedPage><About /></AnimatedPage>} />
+          <Route path="/academic" element={<AnimatedPage><Academics /></AnimatedPage>} />
+          <Route path="/contact" element={<AnimatedPage><Contact /></AnimatedPage>} />
+          <Route path="/map" element={<AnimatedPage><Map /></AnimatedPage>} />
+          <Route path="/facilities" element={<AnimatedPage><Facilities /></AnimatedPage>} />
+          <Route path="/rules" element={<AnimatedPage><Rules /></AnimatedPage>} />
+          <Route path="/resources/gallery" element={<AnimatedPage><ResourceGallery /></AnimatedPage>} />
+          <Route path="/resources/news" element={<AnimatedPage><ResourceNews /></AnimatedPage>} />
+          <Route path="/history" element={<AnimatedPage><PrincipleMessage /></AnimatedPage>} />
+          <Route path="/chairman-message" element={<AnimatedPage><ChairmanMessage /></AnimatedPage>} />
+          <Route path="/team" element={<AnimatedPage><BoardOfDirectors /></AnimatedPage>} />
+          <Route path="/resources/notices" element={<AnimatedPage><ResourcesNotice /></AnimatedPage>} />
+          <Route path="/news/:id" element={<AnimatedPage><DetailedNews /></AnimatedPage>} />
+          <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
+        </Route>
+
+        <Route
+          path="/admin"
+          element={<AdminLayout />}
+        >
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="gallery" element={<AdminGallery />} />
+          <Route path="news" element={<AdminNews />} />
+          <Route path="notices" element={<AdminNotices />} />
+        </Route>
+      </Routes>
+    </AnimatePresence>
   );
 };
 

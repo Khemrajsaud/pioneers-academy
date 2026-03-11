@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { 
-  BellRing, 
-  Calendar, 
-  FileText, 
-  Download, 
-  Loader,
+import {
+  Calendar,
+  FileText,
+  Download,
+  Loader2,
   AlertCircle,
   ExternalLink,
   ChevronDown,
@@ -13,8 +12,9 @@ import {
   User
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { motion, AnimatePresence } from "framer-motion";
 
-const API_URL = "http://localhost:5000/api/notice";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/notice`;
 
 const ResourcesNotice = () => {
   const { t, language } = useLanguage();
@@ -22,44 +22,6 @@ const ResourcesNotice = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedNotices, setExpandedNotices] = useState({});
-
-  // Determine theme from body background or default to light
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme') || localStorage.getItem('adminTheme');
-      return saved === 'dark';
-    }
-    return false;
-  });
-
-  // Watch for theme changes - check localStorage periodically and on visibility change
-  useEffect(() => {
-    const checkTheme = () => {
-      const saved = localStorage.getItem('theme') || localStorage.getItem('adminTheme');
-      const newTheme = saved === 'dark';
-      if (newTheme !== isDarkMode) {
-        setIsDarkMode(newTheme);
-      }
-    };
-
-    // Check immediately
-    checkTheme();
-
-    // Check on storage event (for other tabs)
-    window.addEventListener('storage', checkTheme);
-    
-    // Check on visibility change (when tab becomes visible)
-    document.addEventListener('visibilitychange', checkTheme);
-    
-    // Poll for changes every 500ms (for same-window changes)
-    const interval = setInterval(checkTheme, 500);
-
-    return () => {
-      window.removeEventListener('storage', checkTheme);
-      document.removeEventListener('visibilitychange', checkTheme);
-      clearInterval(interval);
-    };
-  }, [isDarkMode]);
 
   useEffect(() => {
     const fetchNotices = async () => {
@@ -100,6 +62,7 @@ const ResourcesNotice = () => {
   };
 
   const truncateText = (text, maxLength = 200) => {
+    if (!text) return "";
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
   };
@@ -113,332 +76,186 @@ const ResourcesNotice = () => {
     return name.substring(0, 2).toUpperCase();
   };
 
-  const containerBg = isDarkMode ? '#0f0f0f' : '#f5f7fa';
-  const containerText = isDarkMode ? '#e0e0e0' : '#1a1a1a';
-  const cardBg = isDarkMode ? '#1e1e1e' : '#ffffff';
-  const cardBorder = isDarkMode ? '#2d2d2d' : '#e8eaed';
-  const hoverBg = isDarkMode ? '#252525' : '#fafbfc';
-  const accentColor = '#1a73e8';
-  const mutedText = isDarkMode ? '#9aa0a6' : '#5f6368';
-  const lightBlueBg = isDarkMode ? '#1a3a52' : '#e8f0fe';
-  const avatarBg = isDarkMode ? '#2d4a5f' : '#d2e3fc';
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" }
+    }
+  };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: containerBg,
-      color: containerText,
-      padding: '2rem 1rem',
-      transition: 'background 0.3s ease, color 0.3s ease'
-    }}>
-      {/* Header Section */}
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto 3rem',
-        textAlign: 'center'
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '12px',
-          marginBottom: '1rem'
-        }}>
-          <BellRing size={32} color={accentColor} />
-          <h1  className={`text-4xl md:text-5xl font-bold ${isDarkMode ? "text-[#e0e0e0]" : "text-[#1a1a1a]"}`}>
+    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-[color:var(--bg)] transition-colors">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          {/* Note: User specifically requested not to use an icon here */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[color:var(--text)] tracking-tight mb-4">
             {language === 'ne' ? 'नवीनतम सूचना' : 'Latest Notices'}
           </h1>
-        </div>
-        <p style={{
-          fontSize: '1rem',
-          color: mutedText,
-          margin: '0.5rem 0 0'
-        }}>
-          {language === 'ne' 
-            ? 'विद्यालयका महत्त्वपूर्ण सूचना र घोषणा' 
-            : 'Important school announcements and updates'}
-        </p>
+          <p className="text-lg md:text-xl text-[color:var(--muted)] max-w-2xl mx-auto leading-relaxed">
+            {language === 'ne'
+              ? 'विद्यालयका महत्त्वपूर्ण सूचना र घोषणा'
+              : 'Important school announcements and updates'}
+          </p>
+        </motion.div>
+
+        {/* Loading State */}
+        {loading && (
+          <div className="flex flex-col items-center justify-center min-h-[40vh] gap-4">
+            <Loader2 className="animate-spin text-[color:var(--primary)]" size={48} />
+            <p className="text-lg text-[color:var(--muted)] animate-pulse">
+              {language === 'ne' ? 'सूचना लोड हुँदैछ...' : 'Loading notices...'}
+            </p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && !loading && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="max-w-2xl mx-auto rounded-2xl p-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 flex items-center gap-4 text-red-600 dark:text-red-400"
+          >
+            <AlertCircle size={24} className="flex-shrink-0" />
+            <p className="text-base font-medium m-0">{error}</p>
+          </motion.div>
+        )}
+
+        {/* Empty State */}
+        {!loading && notices.length === 0 && !error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="max-w-2xl mx-auto text-center p-12 bg-[color:var(--card)] rounded-3xl border border-[color:var(--border)] shadow-sm"
+          >
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[color:var(--bg-alt)] flex items-center justify-center text-[color:var(--muted)]/50">
+              <FileText size={32} />
+            </div>
+            <h3 className="text-2xl font-bold mb-3 text-[color:var(--text)]">
+              {language === 'ne' ? 'कुनै सूचना उपलब्ध छैन' : 'No notices available'}
+            </h3>
+            <p className="text-[color:var(--muted)] text-lg h-auto">
+              {language === 'ne'
+                ? 'अहिले कुनै नवीन सूचना छैन। कृपया पछि फर्केर हेर्नुहोस्।'
+                : 'There are no notices available at the moment. Please check back later.'}
+            </p>
+          </motion.div>
+        )}
+
+        {/* Notices Grid */}
+        {!loading && notices.length > 0 && (
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {notices.map((notice) => {
+              const isExpanded = expandedNotices[notice.id];
+              const shouldShowToggle = notice.description && notice.description.length > 200;
+
+              return (
+                <motion.article
+                  key={notice.id}
+                  variants={itemVariants}
+                  className="flex flex-col bg-[color:var(--card)] border border-[color:var(--border)] rounded-3xl overflow-hidden hover:border-[color:var(--primary)]/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300"
+                >
+                  <div className="p-6 sm:p-8 flex flex-col flex-grow">
+                    {/* Title */}
+                    <h3 className="text-xl font-bold mb-4 text-[color:var(--text)] leading-snug line-clamp-2">
+                      {notice.title}
+                    </h3>
+
+                    {/* Author and Date Row */}
+                    <div className="flex items-center gap-3 mb-5 p-3 rounded-2xl bg-[color:var(--bg-alt)]/50 border border-[color:var(--border)]/50">
+                      {/* Avatar */}
+                      <div className="w-10 h-10 rounded-full bg-[color:var(--primary)]/10 flex items-center justify-center text-sm font-bold text-[color:var(--primary)] shrink-0">
+                        {notice.author ? getInitials(notice.author) : <User size={18} />}
+                      </div>
+
+                      {/* Author and Date Info */}
+                      <div className="flex flex-col min-w-0 flex-1">
+                        <span className="text-sm font-semibold text-[color:var(--text)] truncate">
+                          {notice.author || (language === 'ne' ? 'पायोनियर्स एकेडेमी' : 'Pioneers Academy')}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-xs text-[color:var(--primary)]">
+                          <Calendar size={12} />
+                          <span className="font-medium">{formatDate(notice.notice_date)}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <div className="text-[color:var(--muted)] leading-relaxed text-sm mb-6 flex-grow">
+                      {isExpanded || !shouldShowToggle
+                        ? notice.description
+                        : truncateText(notice.description, 200)
+                      }
+                    </div>
+
+                    {/* Footer Actions */}
+                    <div className="mt-auto pt-4 border-t border-[color:var(--border)] flex items-center justify-between flex-wrap gap-3">
+                      {/* See More/Less Button */}
+                      {shouldShowToggle ? (
+                        <button
+                          onClick={() => toggleExpanded(notice.id)}
+                          className="flex items-center gap-1 text-[color:var(--primary)] text-sm font-bold hover:opacity-80 transition-opacity p-1 -ml-1"
+                        >
+                          {isExpanded
+                            ? (
+                              <>
+                                {language === 'ne' ? 'कम देखाउनुहोस्' : 'Read Less'}
+                                <ChevronUp size={16} />
+                              </>
+                            )
+                            : (
+                              <>
+                                {language === 'ne' ? 'थप देखाउनुहोस्' : 'Read More'}
+                                <ChevronDown size={16} />
+                              </>
+                            )
+                          }
+                        </button>
+                      ) : (
+                        <div /> // Empty div for flex spacing if no button
+                      )}
+
+                      {/* Download Link */}
+                      {notice.document_url && (
+                        <a
+                          href={notice.document_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-[color:var(--primary)]/10 hover:bg-[color:var(--primary)]/20 text-[color:var(--primary)] rounded-xl text-sm font-bold transition-colors ml-auto"
+                        >
+                          <Download size={16} />
+                          {language === 'ne' ? 'डाउनलोड' : 'Download'}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        )}
       </div>
-
-      {/* Loading State */}
-      {loading && (
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '1rem',
-          minHeight: '400px'
-        }}>
-          <Loader size={48} color={accentColor} style={{ animation: 'spin 1s linear infinite' }} />
-          <p style={{ fontSize: '1.1rem', color: mutedText }}>
-            {language === 'ne' ? 'सूचना लोड हो रहेको छ...' : 'Loading notices...'}
-          </p>
-        </div>
-      )}
-
-      {/* Error State */}
-      {error && !loading && (
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '2rem',
-          background: isDarkMode ? '#3d2d2d' : '#ffe0e0',
-          border: `1px solid ${isDarkMode ? '#5d3d3d' : '#ffcccc'}`,
-          borderRadius: '12px',
-          display: 'flex',
-          gap: '1rem',
-          alignItems: 'center'
-        }}>
-          <AlertCircle size={24} color="#f44336" />
-          <p style={{ margin: 0, color: isDarkMode ? '#ffcccc' : '#d32f2f', fontSize: '1rem' }}>
-            {error}
-          </p>
-        </div>
-      )}
-
-      {/* Empty State */}
-      {!loading && notices.length === 0 && !error && (
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          textAlign: 'center',
-          padding: '3rem 2rem',
-          background: cardBg,
-          borderRadius: '12px',
-          border: `1px solid ${cardBorder}`
-        }}>
-          <FileText size={48} color={mutedText} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
-          <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem' }}>
-            {language === 'ne' ? 'कुनै सूचना उपलब्ध छैन' : 'No notices available'}
-          </h3>
-          <p style={{ color: mutedText }}>
-            {language === 'ne' 
-              ? 'अहिले कुनै नवीन सूचना छैन। कृपया पछि फर्केर हेर्नुहोस्।' 
-              : 'There are no notices available at the moment. Please check back later.'}
-          </p>
-        </div>
-      )}
-
-      {/* Notices Grid */}
-      {!loading && notices.length > 0 && (
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
-          gap: '1.5rem'
-        }}>
-          {notices.map((notice) => {
-            const isExpanded = expandedNotices[notice.id];
-            const shouldShowToggle = notice.description && notice.description.length > 200;
-            
-            return (
-              <div
-                key={notice.id}
-                style={{
-                  background: cardBg,
-                  border: `1px solid ${cardBorder}`,
-                  borderRadius: '16px',
-                  padding: '0',
-                  transition: 'all 0.3s ease',
-                  overflow: 'hidden',
-                  boxShadow: isDarkMode 
-                    ? '0 1px 3px rgba(0, 0, 0, 0.4)' 
-                    : '0 1px 3px rgba(60, 64, 67, 0.15)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = isDarkMode 
-                    ? '0 4px 12px rgba(0, 0, 0, 0.5)' 
-                    : '0 4px 12px rgba(60, 64, 67, 0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = isDarkMode 
-                    ? '0 1px 3px rgba(0, 0, 0, 0.4)' 
-                    : '0 1px 3px rgba(60, 64, 67, 0.15)';
-                }}
-              >
-                {/* Card Content */}
-                <div style={{ padding: '1.5rem' }}>
-                  {/* Title */}
-                  <h3 style={{
-                    fontSize: '1.125rem',
-                    fontWeight: '500',
-                    margin: '0 0 1rem',
-                    color: containerText,
-                    lineHeight: '1.5'
-                  }}>
-                    {notice.title}
-                  </h3>
-
-                  {/* Author and Date Row */}
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                    marginBottom: '1rem'
-                  }}>
-                    {/* Avatar */}
-                    <div style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%',
-                      background: avatarBg,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '0.875rem',
-                      fontWeight: '600',
-                      color: accentColor,
-                      flexShrink: 0
-                    }}>
-                      {notice.author ? getInitials(notice.author) : <User size={20} />}
-                    </div>
-
-                    {/* Author and Date Info */}
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{
-                        fontSize: '0.875rem',
-                        fontWeight: '500',
-                        color: containerText,
-                        marginBottom: '2px',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
-                      }}>
-                        {notice.author || (language === 'ne' ? 'पायोनियर्स एकेडेमी' : 'Pioneers Academy')}
-                      </div>
-                      <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.375rem',
-                        fontSize: '0.75rem',
-                        color: mutedText
-                      }}>
-                        <Calendar size={12} />
-                        <span>{formatDate(notice.notice_date)}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <div style={{
-                    color: containerText,
-                    lineHeight: '1.6',
-                    fontSize: '0.938rem',
-                    marginBottom: shouldShowToggle || notice.document_url ? '1rem' : '0'
-                  }}>
-                    {isExpanded || !shouldShowToggle 
-                      ? notice.description 
-                      : truncateText(notice.description, 200)
-                    }
-                  </div>
-
-                  {/* See More/Less and Download Section */}
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    gap: '0.75rem'
-                  }}>
-                    {/* See More/Less Button */}
-                    {shouldShowToggle && (
-                      <button
-                        onClick={() => toggleExpanded(notice.id)}
-                        style={{
-                          background: 'transparent',
-                          border: 'none',
-                          color: accentColor,
-                          fontSize: '0.875rem',
-                          fontWeight: '500',
-                          cursor: 'pointer',
-                          padding: '0.5rem 0',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.25rem',
-                          transition: 'opacity 0.2s ease'
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
-                        onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-                      >
-                        {isExpanded 
-                          ? (
-                            <>
-                              {language === 'ne' ? 'कम देखाउनुहोस्' : 'Read Less'}
-                              <ChevronUp size={16} />
-                            </>
-                          ) 
-                          : (
-                            <>
-                              {language === 'ne' ? 'थप देखाउनुहोस्' : 'Read More'}
-                              <ChevronDown size={16} />
-                            </>
-                          )
-                        }
-                      </button>
-                    )}
-
-                    {/* Download Link */}
-                    {notice.document_url && (
-                      <a 
-                        href={notice.document_url} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.375rem',
-                          padding: '0.5rem 1rem',
-                          background: lightBlueBg,
-                          color: accentColor,
-                          textDecoration: 'none',
-                          borderRadius: '8px',
-                          fontSize: '0.875rem',
-                          fontWeight: '500',
-                          transition: 'all 0.2s ease',
-                          border: 'none',
-                          cursor: 'pointer'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = isDarkMode ? '#234a66' : '#d2e3fc';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = lightBlueBg;
-                        }}
-                      >
-                        <Download size={14} />
-                        {language === 'ne' ? 'डाउनलोड' : 'Download'}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <style>{`
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @media (max-width: 768px) {
-          h1 {
-            font-size: 1.8rem !important;
-          }
-          
-          [style*="gridTemplateColumns"] {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </div>
   );
 };

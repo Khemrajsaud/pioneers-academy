@@ -1,52 +1,74 @@
-import { useState } from "react";
-import { ChevronDown, BookOpen, Users, ClipboardList, Trophy, Globe } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ChevronDown, BookOpen, Users, ClipboardList, Trophy, Globe, GraduationCap, Microscope, Briefcase, Scale } from "lucide-react";
 import homepage from "../assets/images/homepage.png";
 import Academy from "../assets/images/academy.png";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
 
 const Academics = () => {
   const [activeLevel, setActiveLevel] = useState("preprimary");
   const [openDropdown, setOpenDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const academicLevels = {
     preprimary: {
-      title: "Pre-Primary (Early Childhood Education)",
+      title: "Pre-Primary",
       subtitle: "Play-Based Learning",
       icon: "🎨",
-      color: "from-pink-500 to-pink-600",
+      color: "from-[var(--primary)] to-[var(--primary-strong)]",
       overview: "Our Pre-Primary program focuses on holistic early childhood development through play-based and Montessori-inspired learning. We nurture young minds in a safe, engaging environment that fosters creativity, social skills, and a love for learning.",
       features: [
         {
           title: "Theme-Based Learning",
           description: "Integrated topics like seasons, animals, and community explored through stories, art, and music to make learning fun and meaningful.",
-          icon: <BookOpen className="text-pink-500" size={24} />,
+          icon: <BookOpen className="text-[color:var(--primary)]" size={24} />,
         },
         {
           title: "Montessori-Inspired Activities",
           description: "Hands-on activities including sand play, puzzles, and building blocks to develop fine and gross motor skills.",
-          icon: <Users className="text-pink-500" size={24} />,
+          icon: <Users className="text-[color:var(--primary)]" size={24} />,
         },
         {
           title: "Language Development",
           description: "Phonics-based learning with bilingual exposure (English/Nepali) and engaging storytelling sessions.",
-          icon: <Globe className="text-pink-500" size={24} />,
+          icon: <Globe className="text-[color:var(--primary)]" size={24} />,
         },
         {
           title: "Social-Emotional Growth",
           description: "Group activities designed to foster sharing, empathy, and teamwork among young learners.",
-          icon: <Trophy className="text-pink-500" size={24} />,
+          icon: <Trophy className="text-[color:var(--primary)]" size={24} />,
         },
       ],
       facilities: [
         {
           title: "Child-Safe Classrooms",
           description: "Colorful, interactive spaces with low-height furniture designed specifically for young children.",
-          icon: <ClipboardList className="text-pink-500" size={24} />,
+          icon: <ClipboardList className="text-[color:var(--primary)]" size={24} />,
         },
         {
           title: "Outdoor Play Area",
           description: "Sandpit, swings, and mini-gardening patches for physical activity and nature exploration.",
-          icon: <Globe className="text-pink-500" size={24} />,
+          icon: <Globe className="text-[color:var(--primary)]" size={24} />,
         },
       ],
       curriculum: [
@@ -59,58 +81,57 @@ const Academics = () => {
         "Nature Exploration",
         "Social Skills Development"
       ],
-      specialPrograms: ["Little Explorers", "Annual Talent Show"],
     },
     primary: {
       title: "Primary (Grades 1-5)",
       subtitle: "Foundational Literacy & Numeracy",
       icon: "📚",
-      color: "from-blue-500 to-blue-600",
+      color: "from-[var(--accent)] to-[var(--accent)]",
       overview: "Our Primary program builds strong foundational skills in literacy and numeracy while nurturing curiosity and creativity. We use activity-based learning and modern teaching tools to make education engaging and effective.",
       features: [
         {
           title: "English",
           description: "Comprehensive grammar instruction, creative writing workshops, and vibrant reading clubs to develop strong communication skills.",
-          icon: <BookOpen className="text-blue-500" size={24} />,
+          icon: <BookOpen className="text-[var(--blue3)]" size={24} />,
         },
         {
           title: "Mathematics",
           description: "Practical applications like measuring and budgeting, with optional Abacus and Vedic Math programs for enhanced calculation skills.",
-          icon: <ClipboardList className="text-blue-500" size={24} />,
+          icon: <ClipboardList className="text-[var(--blue3)]" size={24} />,
         },
         {
           title: "Science",
           description: "Hands-on experiments exploring concepts like plant growth and magnetism to spark scientific curiosity.",
-          icon: <Globe className="text-blue-500" size={24} />,
+          icon: <Globe className="text-[var(--blue3)]" size={24} />,
         },
         {
           title: "Social Studies",
           description: "Learning about local culture, map skills, and engaging in meaningful community projects.",
-          icon: <Users className="text-blue-500" size={24} />,
+          icon: <Users className="text-[var(--blue3)]" size={24} />,
         },
       ],
       teachingTools: [
         {
           title: "Smart Classrooms",
           description: "Animated videos and interactive content for complex concepts like the water cycle.",
-          icon: <Globe className="text-blue-500" size={24} />,
+          icon: <Globe className="text-[var(--blue3)]" size={24} />,
         },
         {
           title: "Activity-Based Learning",
           description: "Math labs with manipulatives and Science Fair opportunities for young innovators.",
-          icon: <ClipboardList className="text-blue-500" size={24} />,
+          icon: <ClipboardList className="text-[var(--blue3)]" size={24} />,
         },
       ],
       coScholastic: [
         {
           title: "Arts",
           description: "Drawing, clay modeling, and drama to develop creative expression.",
-          icon: <Trophy className="text-blue-500" size={24} />,
+          icon: <Trophy className="text-[var(--blue3)]" size={24} />,
         },
         {
           title: "Physical Education",
           description: "Yoga, martial arts, and traditional games for physical fitness and cultural awareness.",
-          icon: <Users className="text-blue-500" size={24} />,
+          icon: <Users className="text-[var(--blue3)]" size={24} />,
         },
       ],
       curriculum: [
@@ -123,41 +144,40 @@ const Academics = () => {
         "Physical Education",
         "Music & Dance"
       ],
-      specialPrograms: ["Reading Club", "Science Fair", "Math Olympiad"],
     },
     secondary: {
       title: "Secondary (Grades 6-10)",
       subtitle: "Preparing for SEE & Beyond",
       icon: "🎓",
-      color: "from-green-500 to-green-600",
-      overview: "Our Secondary program provides rigorous academic preparation for the SEE examination while developing critical thinking and practical skills. Students can choose between Science and Management tracks based on their interests and career goals.",
+      color: "from-[var(--secondary)] to-[var(--secondary)]",
+      overview: "Our Secondary program provides rigorous academic preparation for the SEE examination while developing critical thinking and practical skills. Students are nurtured to become responsible and forward-thinking individuals.",
       features: [
         {
           title: "Science Track",
           description: "In-depth study of Physics, Chemistry, Biology, and Computer Science with practical laboratory work.",
-          icon: <BookOpen className="text-green-500" size={24} />,
+          icon: <BookOpen className="text-[color:var(--secondary)]" size={24} />,
         },
         {
-          title: "Management Track",
-          description: "Comprehensive courses in Accountancy, Business Studies, and Economics for future business leaders.",
-          icon: <ClipboardList className="text-green-500" size={24} />,
+          title: "Management/Social Track",
+          description: "Comprehensive courses providing foundational knowledge for future specialized studies.",
+          icon: <ClipboardList className="text-[color:var(--secondary)]" size={24} />,
         },
         {
           title: "Common Core Subjects",
           description: "English, Nepali, Mathematics, and Social Studies ensuring well-rounded education for all students.",
-          icon: <Globe className="text-green-500" size={24} />,
+          icon: <Globe className="text-[color:var(--secondary)]" size={24} />,
         },
         {
           title: "SEE Preparation",
           description: "Regular mock tests and intensive revision camps to ensure excellent board exam results.",
-          icon: <Trophy className="text-green-500" size={24} />,
+          icon: <Trophy className="text-[color:var(--secondary)]" size={24} />,
         },
       ],
       practicalLabs: [
         {
           title: "Fully Equipped Laboratories",
           description: "Chemistry lab for titration experiments, Biology lab for microscopy, and IT lab for coding practice.",
-          icon: <ClipboardList className="text-green-500" size={24} />,
+          icon: <ClipboardList className="text-[color:var(--secondary)]" size={24} />,
         },
       ],
       curriculum: [
@@ -167,11 +187,56 @@ const Academics = () => {
         "Science (Physics, Chemistry, Biology)",
         "Social Studies",
         "Computer Science/Coding",
-        "Accountancy (Management)",
-        "Business Studies (Management)",
-        "Economics (Management)"
+        "Accountancy (Optional)",
+        "Economics (Optional)"
       ],
-      specialPrograms: ["SEE Mock Tests", "Revision Camps", "Career Counseling"],
+    },
+    senior: {
+      title: "+2 (Grades 11-12)",
+      subtitle: "Specialized Higher Secondary Education",
+      icon: "🏛️",
+      color: "from-[var(--blue3)] to-[var(--blue3)]",
+      overview: "Our +2 program offers specialized education in Science, Management, and Law to prepare students for higher education and professional careers. With advanced coursework and dedicated faculty, we aim for excellence and leadership.",
+      features: [
+        {
+          title: "Science Stream",
+          description: "Intensive courses in Physics, Chemistry, Biology/Mathematics designed for medical, engineering, and IT aspirants.",
+          icon: <Microscope className="text-[color:var(--blue3)]" size={24} />,
+        },
+        {
+          title: "Management Stream",
+          description: "Comprehensive courses in Accountancy, Business Studies, and Economics for future entrepreneurs and business leaders.",
+          icon: <Briefcase className="text-[color:var(--blue3)]" size={24} />,
+        },
+        {
+          title: "Law Stream",
+          description: "In-depth foundational courses in constitutional law, jurisprudence, and legal drafting for aspiring legal professionals.",
+          icon: <Scale className="text-[color:var(--blue3)]" size={24} />,
+        },
+        {
+          title: "Expert Faculty & Guidance",
+          description: "Learn from highly experienced professionals, academicians, and guest lecturers dedicated to student success.",
+          icon: <GraduationCap className="text-[color:var(--blue3)]" size={24} />,
+        },
+      ],
+      practicalLabs: [
+        {
+          title: "State-of-the-Art Facilities",
+          description: "Advanced Science laboratories, well-equipped computer centers, and a dedicated moot court for Law students.",
+          icon: <ClipboardList className="text-[color:var(--blue3)]" size={24} />,
+        },
+      ],
+      curriculum: [
+        "Science: Physics, Chemistry, Bio/Math",
+        "Management: Accountancy, Business & Economics",
+        "Law: Jurisprudence, Constitutional Law",
+        "Common: English, Nepali",
+        "Practical & Project Works",
+        "Career Counseling Seminars",
+        "Guest Lectures by Experts",
+        "Leadership Programs"
+      ],
+      specialPrograms: ["University Placement Support", "Mock Entrance Exams", "Moot Court Practice"],
     },
   };
 
@@ -185,25 +250,44 @@ const Academics = () => {
   return (
     <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
       {/* Hero Section */}
-      <div className="relative h-48 sm:h-64 md:h-96 w-full overflow-hidden group">
-        <img
-          src={Academy}
-          alt="Academics"
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/50"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          {/* <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight animate-fadeInUp">
-            Academic Excellence
-          </h1> */}
+      <section className="group relative h-[260px] sm:h-[380px] md:h-[500px] overflow-hidden border-b border-[color:var(--border)]">
+        <img src={Academy} alt="Pioneers Academy Academics" className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/35 to-transparent" />
+        <div className="absolute inset-0 mx-auto flex max-w-7xl items-center px-4 sm:px-6">
+          <motion.div
+            className="max-w-2xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <button className="mb-4 text-sm sm:text-base text-white bg-white/20 px-3 py-1 rounded-full backdrop-blur-md border border-white/30 shadow-sm">
+              Our Academic Excellence
+            </button>
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-white mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+            >
+              Discover Our <br /> <span className="text-[var(--primary)]">Programs</span>
+            </motion.h1>
+            <motion.p
+              className="mt-3 text-sm sm:text-base md:text-lg text-slate-100 max-w-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              From pre-primary to +2 higher secondary, we empower students to achieve their highest academic potential in Science, Management, and Law.
+            </motion.p>
+          </motion.div>
         </div>
-      </div>
+      </section>
 
       {/* Main Content */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-16">
         {/* Dropdown Menu */}
         <div className="mb-8 sm:mb-12 animate-fadeInUp">
-          <div className="max-w-sm mx-auto relative">
+          <div className="max-w-sm mx-auto relative" ref={dropdownRef}>
             <button
               onClick={() => setOpenDropdown(!openDropdown)}
               className="w-full flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 rounded-lg border-2 border-[color:var(--primary)] bg-[color:var(--card)] text-[color:var(--text)] font-semibold hover:bg-[color:var(--bg-alt)] transition hover:shadow-lg"
@@ -214,9 +298,8 @@ const Academics = () => {
               </span>
               <ChevronDown
                 size={20}
-                className={`transition-transform ${
-                  openDropdown ? "rotate-180" : ""
-                }`}
+                className={`transition-transform ${openDropdown ? "rotate-180" : ""
+                  }`}
               />
             </button>
 
@@ -227,9 +310,8 @@ const Academics = () => {
                   <button
                     key={key}
                     onClick={() => handleLevelChange(key)}
-                    className={`w-full text-left px-4 sm:px-6 py-3 sm:py-4 hover:bg-[color:var(--bg-alt)] transition flex items-center gap-3 ${
-                      activeLevel === key ? "bg-[color:var(--primary)]/10 border-l-4 border-[color:var(--primary)]" : ""
-                    }`}
+                    className={`w-full text-left px-4 sm:px-6 py-3 sm:py-4 hover:bg-[color:var(--bg-alt)] transition flex items-center gap-3 ${activeLevel === key ? "bg-[color:var(--primary)]/10 border-l-4 border-[color:var(--primary)]" : ""
+                      }`}
                   >
                     <span className="text-2xl">{level.icon}</span>
                     <div>
@@ -249,7 +331,7 @@ const Academics = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[color:var(--text)] mb-4 leading-tight">
             {currentLevel.title}
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-[color:var(--muted)] leading-relaxed">
+          <p className="mt-4 text-sm sm:text-base text-[color:var(--muted)] leading-relaxed text-justify">
             {currentLevel.overview}
           </p>
         </div>
@@ -365,7 +447,7 @@ const Academics = () => {
                       <h4 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">
                         {activity.title}
                       </h4>
-                      <p className="text-xs sm:text-sm text-[color:var(--muted)] leading-relaxed">
+                      <p className="mt-4 text-sm sm:text-base text-[color:var(--muted)] leading-relaxed text-justify">
                         {activity.description}
                       </p>
                     </div>
@@ -427,25 +509,6 @@ const Academics = () => {
           </div>
         </div>
 
-        {/* Special Programs */}
-        {currentLevel.specialPrograms && (
-          <div className="rounded-2xl border-2 border-[color:var(--border)] bg-gradient-to-br from-[color:var(--card)] to-[color:var(--bg-alt)] p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 animate-fadeInUp mb-8 sm:mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-6">
-              Special Programs
-            </h3>
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              {currentLevel.specialPrograms.map((program, idx) => (
-                <div
-                  key={idx}
-                  className="px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold text-xs sm:text-sm shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300"
-                >
-                  {program}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* CTA Section */}
         <div className="mt-12 sm:mt-16 rounded-2xl border-2 border-[color:var(--primary)] bg-gradient-to-r from-[color:var(--primary)]/10 to-[color:var(--accent)]/10 p-8 sm:p-12 text-center shadow-lg hover:shadow-xl transition duration-300 animate-fadeInUp">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[color:var(--text)] mb-4 leading-tight">
@@ -454,9 +517,6 @@ const Academics = () => {
           <p className="text-sm sm:text-base md:text-lg text-[color:var(--muted)] mb-8 max-w-2xl mx-auto leading-relaxed">
             Schedule a campus visit to see our academic facilities and meet our dedicated faculty members.
           </p>
-          {/* <button className="px-8 sm:px-10 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300">
-          Contact Us
-          </button> */}
           <Link to="/contact" className="px-8 sm:px-10 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300">  Contact Us</Link>
         </div>
       </div>

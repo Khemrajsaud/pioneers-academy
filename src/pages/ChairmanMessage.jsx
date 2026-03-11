@@ -8,6 +8,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import homepage from "../assets/images/homepage.png";
+import { motion } from "framer-motion";
 
 const ChairmanMessage = () => {
   const [copied, setCopied] = useState(false);
@@ -91,162 +92,114 @@ With warm regards and best wishes for your success.`,
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-12">
-        {/* Chairman Info Card */}
-        <div className="mb-6 sm:mb-8 rounded-xl sm:rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] p-4 sm:p-8 shadow-lg hover:shadow-xl transition duration-300">
-          <div className="flex flex-col items-center sm:flex-row gap-4 sm:gap-8 sm:items-center">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden flex-shrink-0 border-4 border-[color:var(--primary)] shadow-lg">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-20">
+        <motion.div
+          className="overflow-hidden rounded-2xl bg-[color:var(--card)] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-[color:var(--border)]"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          {/* Header/Info Area */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 p-8 sm:p-12 border-b border-[color:var(--border)]/50 bg-gradient-to-br from-[color:var(--primary)]/5 to-[color:var(--card)]">
+            <motion.div
+              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex-shrink-0 shadow-lg border-4 border-white dark:border-[color:var(--card)]"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               <img
                 src={chairmanData.image}
                 alt={chairmanData.name}
                 className="w-full h-full object-cover"
               />
-            </div>
+            </motion.div>
 
-            <div className="flex-1 text-center sm:text-left">
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-[color:var(--text)]">
+            <div className="flex-1 text-center sm:text-left pt-2 sm:pt-4">
+              <motion.h2
+                className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[color:var(--text)]"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
                 {chairmanData.name}
-              </h2>
-              <p className="text-base sm:text-lg text-[color:var(--primary)] font-semibold mt-2">
+              </motion.h2>
+              <motion.p
+                className="text-lg sm:text-xl text-[color:var(--primary)] font-bold mt-2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
                 {chairmanData.title}
-              </p>
-              <p className="text-xs sm:text-sm text-[color:var(--muted)] mt-2">
+              </motion.p>
+              <motion.p
+                className="text-sm mt-3 inline-block px-3 py-1 rounded-full bg-[color:var(--bg-alt)] text-[color:var(--muted)]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
                 Published on {chairmanData.date}
-              </p>
+              </motion.p>
             </div>
           </div>
-        </div>
 
-        {/* Share Section */}
-        <div className="mb-6 sm:mb-8 rounded-xl border border-[color:var(--border)] bg-[color:var(--bg-alt)] p-4 sm:p-6">
-          <p className="text-sm font-semibold text-[color:var(--text)] mb-4">
-            Share this message
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => handleShare("facebook")}
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-auto sm:gap-2 sm:px-4 sm:py-2 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-blue-500 hover:text-white transition duration-300"
-              title="Share on Facebook"
-            >
-              <Facebook size={18} />
-              <span className="hidden sm:inline text-sm">Facebook</span>
-            </button>
+          {/* Message Content */}
+          <div className="p-8 sm:p-12 md:p-16">
+            <article className="prose prose-lg prose-invert max-w-none text-[color:var(--text)] leading-loose">
+              {chairmanData.message.split("\n\n").map((paragraph, idx) => (
+                <motion.p
+                  key={idx}
+                  className="mb-5 text-sm sm:text-base md:text-lg text-[color:var(--muted)] text-justify leading-relaxed"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: Math.min(idx * 0.1, 0.5) }}
+                >
+                  {paragraph}
+                </motion.p>
+              ))}
+            </article>
 
-            <button
-              onClick={() => handleShare("twitter")}
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-auto sm:gap-2 sm:px-4 sm:py-2 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-sky-500 hover:text-white transition duration-300"
-              title="Share on Twitter"
+            {/* Signature */}
+            <motion.div
+              className="mt-12 pt-8 border-t border-[color:var(--border)]/50"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Twitter size={18} />
-              <span className="hidden sm:inline text-sm">Twitter</span>
-            </button>
-
-            <button
-              onClick={() => handleShare("linkedin")}
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-auto sm:gap-2 sm:px-4 sm:py-2 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-blue-700 hover:text-white transition duration-300"
-              title="Share on LinkedIn"
-            >
-              <Linkedin size={18} />
-              <span className="hidden sm:inline text-sm">LinkedIn</span>
-            </button>
-
-            <button
-              onClick={() => handleShare("whatsapp")}
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-auto sm:gap-2 sm:px-4 sm:py-2 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-green-500 hover:text-white transition duration-300"
-              title="Share on WhatsApp"
-            >
-              <MessageCircle size={18} />
-              <span className="hidden sm:inline text-sm">WhatsApp</span>
-            </button>
-
-            <button
-              onClick={() => handleShare("email")}
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-auto sm:gap-2 sm:px-4 sm:py-2 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-red-500 hover:text-white transition duration-300"
-              title="Share via Email"
-            >
-              <Mail size={18} />
-              <span className="hidden sm:inline text-sm">Email</span>
-            </button>
-
-            <button
-              onClick={() => handleShare("copy")}
-              className="inline-flex items-center justify-center w-9 h-9 sm:w-auto sm:gap-2 sm:px-4 sm:py-2 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white transition duration-300"
-              title="Copy Link"
-            >
-              <Share2 size={18} />
-              <span className="hidden sm:inline text-sm">
-                {copied ? "Copied!" : "Copy Link"}
-              </span>
-            </button>
+              <p className="text-xl font-bold text-[color:var(--text)]">{chairmanData.name}</p>
+              <p className="text-base text-[color:var(--primary)] font-semibold mt-1">{chairmanData.title}</p>
+              <p className="text-sm text-[color:var(--muted)] mt-1">Pioneers Academy</p>
+            </motion.div>
           </div>
-        </div>
 
-        {/* Message Content */}
-        <div className="prose prose-invert max-w-none rounded-xl sm:rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 sm:p-8 md:p-12 shadow-lg hover:shadow-xl transition duration-300">
-          <article className="whitespace-pre-line text-[color:var(--text)] leading-relaxed">
-            {chairmanData.message.split("\n\n").map((paragraph, idx) => (
-              <p
-                key={idx}
-                className="mb-6 text-sm sm:text-base md:text-lg text-[color:var(--muted)] first:mt-0 last:mb-0"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </article>
-
-          {/* Signature */}
-          <div className="mt-8 pt-6 border-t border-[color:var(--border)]">
-            <p className="text-base sm:text-lg font-bold text-[color:var(--text)]">
-              {chairmanData.name}
+          {/* Footer Share Section */}
+          <div className="bg-[color:var(--bg-alt)] border-t border-[color:var(--border)] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm sm:text-base font-semibold text-[color:var(--text)]">
+              Share this message
             </p>
-            <p className="text-sm sm:text-base text-[color:var(--primary)] font-semibold">
-              {chairmanData.title}
-            </p>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)] mt-1">
-              Pioneers Academy
-            </p>
+            <div className="flex items-center gap-3">
+              {[
+                { platform: "facebook", icon: <Facebook size={18} />, label: "Facebook" },
+                { platform: "twitter", icon: <Twitter size={18} />, label: "Twitter" },
+                { platform: "linkedin", icon: <Linkedin size={18} />, label: "LinkedIn" },
+                { platform: "copy", icon: <Share2 size={18} />, label: "Copy Link" },
+              ].map((item) => (
+                <button
+                  key={item.platform}
+                  onClick={() => handleShare(item.platform)}
+                  className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--card)] border border-[color:var(--border)] text-[color:var(--text)] hover:border-[color:var(--primary)] hover:bg-[color:var(--primary)]/10 hover:text-[color:var(--primary)] transition-all duration-300 transform hover:scale-110"
+                  title={`Share on ${item.label}`}
+                >
+                  {item.icon}
+                </button>
+              ))}
+            </div>
+            {copied && (
+              <span className="text-sm text-[color:var(--primary)] font-medium">Link Copied!</span>
+            )}
           </div>
-        </div>
-
-        {/* Footer Share Section */}
-        <div className="mt-8 sm:mt-12 rounded-xl border border-[color:var(--border)] bg-[color:var(--bg-alt)] p-6 text-center shadow-md">
-          <p className="mb-4 text-sm sm:text-base font-semibold text-[color:var(--text)]">
-            Share this message with your network
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              {
-                platform: "facebook",
-                icon: <Facebook size={20} />,
-                label: "Facebook",
-              },
-              {
-                platform: "twitter",
-                icon: <Twitter size={20} />,
-                label: "Twitter",
-              },
-              {
-                platform: "linkedin",
-                icon: <Linkedin size={20} />,
-                label: "LinkedIn",
-              },
-              {
-                platform: "whatsapp",
-                icon: <MessageCircle size={20} />,
-                label: "WhatsApp",
-              },
-            ].map((item) => (
-              <button
-                key={item.platform}
-                onClick={() => handleShare(item.platform)}
-                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:scale-110 hover:shadow-lg transition duration-300"
-                title={`Share on ${item.label}`}
-              >
-                {item.icon}
-              </button>
-            ))}
-          </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-[color:var(--card)] rounded-lg p-2 border border-[color:var(--border)]">
+              <div className=" p-2 ">
                 <img className="w-14 h-14" src={logo} alt="Pioneers Academy" />
               </div>
               <div>
@@ -24,30 +24,30 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-            <div className="p-4 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)]">
-              <p className="max-w-md text-sm leading-relaxed text-[color:var(--muted)] font-medium">
+            <div className="p-4 ">
+              <p className="max-w-md text-sm leading-relaxed text-gray-700 font-medium">
                 {t.footer.intro}
               </p>
             </div>
 
             <div className="mt-5 flex items-center gap-3">
-              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
+              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
+              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-md border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
+              <a href="#" className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--text)] hover:bg-[color:var(--primary)] hover:text-white hover:border-[color:var(--primary)] transition-all duration-200">
                 <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>
 
-          <div className="p-6 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)]">
+          <div className="p-6 ">
             <h4 className="text-lg font-bold uppercase tracking-wider text-[color:var(--text)] mb-4">
               {t.footer.quickLinks}
             </h4>
-            <ul className="space-y-3 text-sm text-[color:var(--muted)]">
+            <ul className="space-y-3 text-sm text-gray-700">
               <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/about">{t.footer.about}</Link></li>
               <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/academic">{t.footer.academics}</Link></li>
               <li><Link className="hover:text-[color:var(--primary)] inline-block transition-colors duration-200 font-medium" to="/facilities">{t.footer.facilities}</Link></li>
@@ -57,11 +57,11 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="p-6 rounded-lg border border-[color:var(--border)] bg-[color:var(--card)]">
+          <div className="p-6 ">
             <h4 className="text-lg font-bold uppercase tracking-wider text-[color:var(--text)] mb-4">
               {t.footer.contactInfo}
             </h4>
-            <ul className="space-y-4 text-sm text-[color:var(--muted)] font-medium">
+            <ul className="space-y-4 text-sm text-gray-700 font-medium">
               <li>{t.footer.address}</li>
               <li>{t.footer.phone}</li>
               <li>{t.footer.email}</li>
@@ -69,8 +69,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-[color:var(--border)] pt-6 text-sm text-[color:var(--muted)] md:flex-row">
-          <span className="font-semibold">© {t.footer.copyright}</span>
+        <div className="mt-5 flex flex-col items-center justify-between text-gray-700 gap-4 border-t border-[var(--blue1)] pt-6 text-sm md:flex-row">
+          <span className="font-semibold"> {t.footer.copyright}</span>
           <span className="font-semibold">Designed by Niijo Tech.</span>
         </div>
       </div>

@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X, Sparkles } from "lucide-react";
 import logo from "../../assets/logo/logo.png";
 
 const AdmissionPopup = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const dismissed = window.sessionStorage.getItem("admissionPopupDismissed");
+    if (!dismissed) {
+      setIsOpen(true);
+    }
+  }, []);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    window.sessionStorage.setItem("admissionPopupDismissed", "true");
+  };
 
   if (!isOpen) return null;
 
@@ -12,7 +24,7 @@ const AdmissionPopup = () => {
       <div className="relative w-full max-w-3xl h-[calc(100vh-2.75rem)] sm:h-[calc(100vh-3.25rem)] overflow-hidden rounded-2xl border-2 border-(--primary) bg-(--card) shadow-2xl animate-fadeIn">
         <button
           type="button"
-          onClick={() => setIsOpen(false)}
+          onClick={handleClose}
           className="absolute right-3 top-3 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full bg-(--primary) text-white hover:bg-(--primary)/90 transition-colors shadow-lg"
           aria-label="Close popup"
         >

@@ -15,8 +15,9 @@ import {
   Share2,
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import { motion } from "framer-motion";
 
-const API_URL = "http://localhost:5000/api/news";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/news`; // Using env var for consistency
 
 const DetailedNews = () => {
   const { id } = useParams();
@@ -25,32 +26,6 @@ const DetailedNews = () => {
   const [news, setNews] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme") || localStorage.getItem("adminTheme");
-      return saved === "dark";
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const syncTheme = () => {
-      const saved = localStorage.getItem("theme") || localStorage.getItem("adminTheme");
-      setIsDarkMode(saved === "dark");
-    };
-
-    syncTheme();
-    window.addEventListener("storage", syncTheme);
-    document.addEventListener("visibilitychange", syncTheme);
-    const timer = setInterval(syncTheme, 500);
-
-    return () => {
-      window.removeEventListener("storage", syncTheme);
-      document.removeEventListener("visibilitychange", syncTheme);
-      clearInterval(timer);
-    };
-  }, []);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -61,7 +36,7 @@ const DetailedNews = () => {
         setNews(res.data);
       } catch (err) {
         console.error("Error fetching news:", err);
-        setError(language === "ne" ? "समाचार लोड गर्न सकिएन" : "Failed to load news");
+        setError(language === "ne" ? "समाचार लोड गर्न सकिएन" : "Failed to load the article");
       } finally {
         setLoading(false);
       }
@@ -89,7 +64,7 @@ const DetailedNews = () => {
     {
       name: "Facebook",
       icon: Facebook,
-      color: "text-blue-600 hover:bg-blue-600/10",
+      color: "text-blue-600 hover:bg-blue-600 hover:text-white",
       onClick: () => {
         const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
         window.open(url, "_blank", "width=600,height=400");
@@ -98,7 +73,7 @@ const DetailedNews = () => {
     {
       name: "Twitter",
       icon: Twitter,
-      color: "text-sky-400 hover:bg-sky-400/10",
+      color: "text-sky-500 hover:bg-sky-500 hover:text-white",
       onClick: () => {
         const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(news?.title)}&url=${encodeURIComponent(currentUrl)}`;
         window.open(url, "_blank", "width=600,height=400");
@@ -107,7 +82,7 @@ const DetailedNews = () => {
     {
       name: "LinkedIn",
       icon: Linkedin,
-      color: "text-blue-700 hover:bg-blue-700/10",
+      color: "text-blue-700 hover:bg-blue-700 hover:text-white",
       onClick: () => {
         const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
         window.open(url, "_blank", "width=600,height=400");
@@ -116,7 +91,7 @@ const DetailedNews = () => {
     {
       name: "Email",
       icon: Mail,
-      color: "text-orange-600 hover:bg-orange-600/10",
+      color: "text-orange-600 hover:bg-orange-600 hover:text-white",
       onClick: () => {
         const subject = `Check out: ${news?.title}`;
         const body = `I found this interesting article: ${news?.title}\n\n${currentUrl}`;
@@ -127,14 +102,10 @@ const DetailedNews = () => {
 
   if (loading) {
     return (
-      <div
-        className={`min-h-screen flex flex-col items-center justify-center px-4 transition-colors ${
-          isDarkMode ? "bg-[#0f0f0f]" : "bg-[#f5f7fa]"
-        }`}
-      >
-        <Loader2 className="animate-spin text-[#1a73e8]" size={40} />
-        <p className={`mt-3 ${isDarkMode ? "text-[#9aa0a6]" : "text-[#5f6368]"}`}>
-          {language === "ne" ? "समाचार लोड हुँदैछ..." : "Loading news..."}
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-[color:var(--bg)] transition-colors">
+        <Loader2 className="animate-spin text-[color:var(--primary)]" size={48} />
+        <p className="mt-4 text-lg text-[color:var(--muted)] animate-pulse">
+          {language === "ne" ? "लेख लोड हुँदैछ..." : "Loading article..."}
         </p>
       </div>
     );
@@ -142,220 +113,203 @@ const DetailedNews = () => {
 
   if (error || !news) {
     return (
-      <div
-        className={`min-h-screen flex flex-col items-center justify-center px-4 transition-colors ${
-          isDarkMode ? "bg-[#0f0f0f]" : "bg-[#f5f7fa]"
-        }`}
-      >
-        <div
-          className={`rounded-lg p-6 border flex items-center gap-3 max-w-md ${
-            isDarkMode
-              ? "bg-red-500/10 border-red-500/30 text-red-300"
-              : "bg-red-50 border-red-200 text-red-700"
-          }`}
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-[color:var(--bg)] transition-colors">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="rounded-2xl p-6 border flex flex-col items-center text-center gap-4 max-w-md bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-400"
         >
-          <AlertCircle size={20} />
-          <p>{error}</p>
-        </div>
-        <button
+          <AlertCircle size={48} />
+          <p className="text-lg font-medium">{error}</p>
+        </motion.div>
+
+        <motion.button
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
           onClick={() => navigate("/resources/news")}
-          className="mt-6 flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a73e8] text-white hover:bg-[#1765cc] transition-colors"
+          className="mt-8 flex items-center gap-2 px-6 py-3 rounded-xl bg-[color:var(--primary)] text-white hover:bg-[color:var(--primary-strong)] transition-all transform hover:-translate-y-0.5 shadow-lg"
         >
           <ArrowLeft size={18} />
-          Back to News
-        </button>
+          <span className="font-semibold">{language === "ne" ? "समाचारमा फर्कनुहोस्" : "Back to News"}</span>
+        </motion.button>
       </div>
     );
   }
 
   return (
-    <div
-      className={`min-h-screen py-8 px-4 transition-colors ${
-        isDarkMode ? "bg-[#0f0f0f]" : "bg-[#f5f7fa]"
-      }`}
-    >
+    <div className="min-h-screen py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[color:var(--bg)] text-[color:var(--text)] transition-colors">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
-        <button
+        <motion.button
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
           onClick={() => navigate("/resources/news")}
-          className={`flex items-center gap-2 mb-6 px-4 py-2 rounded-lg transition-colors ${
-            isDarkMode
-              ? "bg-[#1e1e1e] border border-[#2d2d2d] text-[#e0e0e0] hover:bg-[#252525]"
-              : "bg-white text-[#1a1a1a] hover:bg-[#fafbfc] border border-[#e8eaed]"
-          }`}
+          className="group flex items-center gap-2 mb-8 px-4 py-2 rounded-xl text-[color:var(--muted)] hover:text-[color:var(--primary)] hover:bg-[color:var(--primary)]/10 transition-colors font-medium"
         >
-          <ArrowLeft size={18} />
-          {language === "ne" ? "पछाडि" : "Back"}
-        </button>
+          <ArrowLeft size={20} className="transform group-hover:-translate-x-1 transition-transform" />
+          {language === "ne" ? "सबै लेखहरू" : "All Articles"}
+        </motion.button>
 
-        {/* Article Container */}
-        <article
-          className={`rounded-2xl border overflow-hidden transition-colors ${
-            isDarkMode
-              ? "bg-[#1e1e1e] border-[#2d2d2d]"
-              : "bg-white border-[#e8eaed]"
-          }`}
+        <motion.article
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="rounded-3xl border border-[color:var(--border)] overflow-hidden bg-[color:var(--card)] shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         >
-          {/* Featured Image */}
-          {news.image_url && (
-            <img
-              src={news.image_url}
-              alt={news.title}
-              className="w-full h-96 object-cover"
-            />
-          )}
+          {/* Header Area: Title & Meta Info */}
+          <div className="p-6 sm:p-10 md:p-14 pb-8 md:pb-10 border-b border-[color:var(--border)]/50">
+            {/* Category Tag */}
+            <div className="mb-6 inline-flex">
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase bg-[color:var(--primary)]/10 text-[color:var(--primary)]">
+                <Tag size={14} />
+                {news.category || (language === "ne" ? "सामान्य" : "General")}
+              </span>
+            </div>
 
-          {/* Content */}
-          <div className="p-8 md:p-12">
-            {/* Title */}
-            <h1
-              className={`text-4xl md:text-5xl font-bold mb-4 leading-tight ${
-                isDarkMode ? "text-[#e0e0e0]" : "text-[#1a1a1a]"
-              }`}
-            >
+            {/* Title First */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold mb-8 leading-[1.15] text-[color:var(--text)] tracking-tight">
               {news.title}
             </h1>
 
-            {/* Meta Info */}
-            <div
-              className={`grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 pb-8 border-b ${
-                isDarkMode ? "border-[#2d2d2d] text-[#9aa0a6]" : "border-[#e8eaed] text-[#5f6368]"
-              }`}
-            >
+            {/* Meta Info (Date and Author) */}
+            <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-sm sm:text-base font-medium text-[color:var(--muted)]">
               <div className="flex items-center gap-2">
-                <Tag size={16} className="text-[#1a73e8]" />
+                <div className="w-10 h-10 rounded-full bg-[color:var(--bg-alt)] flex items-center justify-center shrink-0">
+                  <UserRound size={18} className="text-[color:var(--primary)]" />
+                </div>
                 <div>
-                  <div
-                    className={`text-xs font-medium uppercase tracking-wide ${
-                      isDarkMode ? "text-slate-500" : "text-slate-500"
-                    }`}
-                  >
-                    {language === "ne" ? "श्रेणी" : "Category"}
-                  </div>
-                  <div className={isDarkMode ? "text-[#e0e0e0]" : "text-[#1a1a1a]"}>
-                    {news.category || (language === "ne" ? "सामान्य" : "General")}
-                  </div>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider font-bold opacity-70 mb-0.5">Author</p>
+                  <p className="text-[color:var(--text)]">{news.published_by || (language === "ne" ? "प्रशासन" : "Administration")}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <UserRound size={16} className="text-[#1a73e8]" />
-                <div>
-                  <div
-                    className={`text-xs font-medium uppercase tracking-wide ${
-                      isDarkMode ? "text-slate-500" : "text-slate-500"
-                    }`}
-                  >
-                    {language === "ne" ? "प्रकाशित" : "Published By"}
-                  </div>
-                  <div className={isDarkMode ? "text-[#e0e0e0]" : "text-[#1a1a1a]"}>
-                    {news.published_by || (language === "ne" ? "प्रशासन" : "Administration")}
-                  </div>
-                </div>
-              </div>
+              {/* Vertical Divider */}
+              <div className="hidden sm:block h-10 w-[1px] bg-[color:var(--border)]"></div>
 
               <div className="flex items-center gap-2">
-                <CalendarDays size={16} className="text-[#1a73e8]" />
+                <div className="w-10 h-10 rounded-full bg-[color:var(--bg-alt)] flex items-center justify-center shrink-0">
+                  <CalendarDays size={18} className="text-[color:var(--primary)]" />
+                </div>
                 <div>
-                  <div
-                    className={`text-xs font-medium uppercase tracking-wide ${
-                      isDarkMode ? "text-slate-500" : "text-slate-500"
-                    }`}
-                  >
-                    {language === "ne" ? "मिति" : "Date"}
-                  </div>
-                  <div className={isDarkMode ? "text-[#e0e0e0]" : "text-[#1a1a1a]"}>
-                    {formatDate(news.published_date)}
-                  </div>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider font-bold opacity-70 mb-0.5">Published Date</p>
+                  <p className="text-[color:var(--text)]">{formatDate(news.published_date)}</p>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Article Content */}
+          {/* Large Image */}
+          {news.image_url && (
+            <div className="w-full relative bg-[color:var(--bg-alt)]">
+              <img
+                src={news.image_url}
+                alt={news.title}
+                className="w-full h-auto max-h-[600px] object-cover"
+                loading="lazy"
+              />
+            </div>
+          )}
+
+          {/* Article Content */}
+          <div className="p-6 sm:p-10 md:p-14 pt-8">
             <div
-              className={`news-content prose prose-sm md:prose-base max-w-none mb-12 leading-relaxed ${
-                isDarkMode
-                  ? "text-[#e0e0e0] prose-invert"
-                  : "text-[#1a1a1a]"
-              }`}
+              className={`news-content prose prose-sm sm:prose-base md:prose-lg max-w-none leading-[1.8] text-[color:var(--text)] selection:bg-[color:var(--primary)]/30`}
               dangerouslySetInnerHTML={{ __html: news.description }}
             />
           </div>
 
-          {/* Social Share Section */}
-          <div
-            className={`border-t py-12 px-8 md:px-12 ${
-              isDarkMode ? "border-[#2d2d2d] bg-[#252525]" : "border-[#e8eaed] bg-[#fafbfc]"
-            }`}
-          >
-            <div className="text-center mb-8">
-              <h2
-                className={`text-2xl font-bold mb-2 flex items-center justify-center gap-2 ${
-                  isDarkMode ? "text-[#e0e0e0]" : "text-[#1a1a1a]"
-                }`}
-              >
-                <Share2 size={24} className="text-[#1a73e8]" />
-                {language === "ne" ? "साझेदारी गर्नुहोस्" : "Share this article"}
-              </h2>
-              <p className={isDarkMode ? "text-[#9aa0a6]" : "text-[#5f6368]"}>
-                {language === "ne"
-                  ? "यो रोचक लेख साझेदारी गर्नुहोस्"
-                  : "Share this interesting article with your network"}
-              </p>
-            </div>
+          {/* Social Share Section at the Very Bottom */}
+          <div className="bg-[color:var(--bg-alt)]/50 border-t border-[color:var(--border)] py-10 px-6 sm:px-10">
+            <div className="text-center max-w-2xl mx-auto">
+              <h3 className="text-xl font-bold mb-6 flex items-center justify-center gap-2">
+                <Share2 size={20} className="text-[color:var(--primary)]" />
+                {language === "ne" ? "यो लेख साझेदारी गर्नुहोस्" : "Share This Article"}
+              </h3>
 
-            {/* Social Buttons */}
-            <div className="flex flex-wrap justify-center gap-4">
-              {shareButtons.map((btn) => {
-                const Icon = btn.icon;
-                return (
-                  <button
-                    key={btn.name}
-                    onClick={btn.onClick}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all transform hover:scale-105 ${
-                      isDarkMode
-                        ? `bg-[#1e1e1e] border border-[#2d2d2d] ${btn.color} hover:shadow-lg`
-                        : `bg-white border-2 border-[#e8eaed] ${btn.color} hover:shadow-lg`
-                    }`}
-                  >
-                    <Icon size={20} />
-                    <span className="font-semibold text-sm">{btn.name}</span>
-                  </button>
-                );
-              })}
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+                {shareButtons.map((btn) => {
+                  const Icon = btn.icon;
+                  return (
+                    <button
+                      key={btn.name}
+                      onClick={btn.onClick}
+                      title={`Share on ${btn.name}`}
+                      className={`flex items-center gap-2.5 px-5 py-2.5 rounded-full font-semibold text-sm border border-[color:var(--border)] bg-[color:var(--card)] transition-all duration-300 shadow-sm ${btn.color}`}
+                    >
+                      <Icon size={18} />
+                      <span className="hidden sm:inline">{btn.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </article>
+
+        </motion.article>
       </div>
 
       <style>{`
-        .news-content ul {
-          list-style-type: disc;
-          margin-left: 1.5rem;
-          margin-bottom: 1rem;
+        .news-content {
+          color: var(--text);
         }
-        .news-content ol {
-          list-style-type: decimal;
-          margin-left: 1.5rem;
-          margin-bottom: 1rem;
+        .news-content h1, 
+        .news-content h2, 
+        .news-content h3, 
+        .news-content h4, 
+        .news-content h5, 
+        .news-content h6 {
+          color: var(--text);
+          font-weight: 800;
+          margin-top: 2em;
+          margin-bottom: 1em;
+          line-height: 1.3;
         }
-        .news-content li {
-          margin-bottom: 0.5rem;
-          line-height: 1.8;
-        }
-        .news-content strong {
-          font-weight: 700;
-          color: ${isDarkMode ? "#f1f5f9" : "#0f172a"};
-        }
-        .news-content em {
-          font-style: italic;
-        }
-        .news-content u {
-          text-decoration: underline;
-        }
+        .news-content h2 { font-size: 1.875rem; }
+        .news-content h3 { font-size: 1.5rem; }
+        
         .news-content p {
-          margin-bottom: 1.25rem;
-          line-height: 1.8;
+          margin-bottom: 1.5em;
+          color: var(--text);
+          opacity: 0.9;
+        }
+        .news-content ul, .news-content ol {
+          margin-left: 1.5em;
+          margin-bottom: 1.5em;
+        }
+        .news-content ul { list-style-type: disc; }
+        .news-content ol { list-style-type: decimal; }
+        .news-content li { margin-bottom: 0.5em; }
+        .news-content li::marker { color: var(--primary); }
+        
+        .news-content blockquote {
+          border-left: 4px solid var(--primary);
+          padding-left: 1.5em;
+          font-style: italic;
+          color: var(--muted);
+          margin: 2em 0;
+          background: var(--bg-alt);
+          padding-block: 1em;
+          padding-right: 1em;
+          border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .news-content a {
+          color: var(--primary);
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+        .news-content a:hover {
+          text-decoration-thickness: 2px;
+        }
+        
+        .news-content img {
+          border-radius: 1rem;
+          margin: 2em auto;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          max-width: 100%;
+          height: auto;
         }
       `}</style>
     </div>

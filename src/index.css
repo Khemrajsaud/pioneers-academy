@@ -1,5 +1,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=Comic+Neue:wght@300;400;700&display=swap");
+
+
 @import "tailwindcss";
 
 @layer base {
@@ -9,11 +11,12 @@
   
   body {
     overflow-x: hidden;
+    
   }
 }
 
 @layer utilities {
-  /* Subtle Professional Animations */
+  /* for Animations */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -98,6 +101,15 @@
     }
   }
 
+  @keyframes admission-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
   /* Animation Classes */
   .animate-fadeIn {
     animation: fadeIn 0.6s ease-out;
@@ -131,6 +143,12 @@
     animation: pulse-subtle 3s ease-in-out infinite;
   }
 
+  .admission-marquee {
+    display: flex;
+    width: max-content;
+    animation: admission-marquee 18s linear infinite;
+  }
+
   /* Professional Hover Effects */
   .hover-lift {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -151,47 +169,51 @@
 }
 
 :root {
-  --bg: #FAFAFA;
-  --bg-alt: #F1F5F9;
-  --text: #0F172A;
-  --muted: #64748B;
-  --primary: #033186;
-  --primary-strong: #02205c;
-  --accent: #D4AF37; /* Elegant Gold */
-  --secondary: #2563EB; /* Bright Blue */
-  --success: #059669;
-  --warning: #D97706;
-  --card: #FFFFFF;
-  --border: #E2E8F0;
-  --gradient-1: linear-gradient(135deg, #033186 0%, #02205c 100%);
-  --gradient-2: linear-gradient(135deg, #033186 0%, #2563EB 100%);
-  --gradient-3: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
-  --gradient-4: linear-gradient(135deg, #033186 0%, #D4AF37 100%);
-  --gradient-5: linear-gradient(135deg, #02205c 0%, #1E40AF 100%);
+  --bg: #FFF9F0;
+  --bg-alt: #FFEBF0;
+  --text: #1a1a1a;
+  --muted: #5f6368;
+  --primary: #FF6B9D;
+  --primary-strong: #E65A88;
+  --accent: #FFC93C; 
+  --secondary: #4ECDC4; 
+  --success: #95E1D3;
+  --warning: #FF9B50;
+  --card: #ffffff;
+  --border: #FFEBF0;
+  --yello: #FFC93C;
+  --blue1: #4ECDC4;
+  --blue2: #34B3AA;
+  --blue3: #228B82;
+  --gradient-1: linear-gradient(135deg, #FF6B9D 0%, #E65A88 100%);
+  --gradient-2: linear-gradient(135deg, #FF6B9D 0%, #FFC93C 100%);
+  --gradient-3: linear-gradient(135deg, #4ECDC4 0%, #95E1D3 100%);
+  --gradient-4: linear-gradient(135deg, #FFC93C 0%, #FF9B50 100%);
+  --gradient-5: linear-gradient(135deg, #4ECDC4 0%, #2563EB 100%);
 }
 
 [data-theme="dark"] {
-  --bg: #09090B;
-  --bg-alt: #18181B;
-  --text: #F8FAFC;
-  --muted: #94A3B8;
-  --primary: #3B82F6;
-  --primary-strong: #2563EB;
-  --accent: #FDE047;
-  --secondary: #60A5FA;
-  --success: #34D399;
-  --warning: #FBBF24;
-  --card: #18181B;
-  --border: #27272A;
-  --gradient-1: linear-gradient(135deg, #1E3A8A 0%, #033186 100%);
-  --gradient-2: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
-  --gradient-3: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
-  --gradient-4: linear-gradient(135deg, #1E3A8A 0%, #CA8A04 100%);
-  --gradient-5: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+  --bg: #1A1625;
+  --bg-alt: #2A2438;
+  --text: #e0e0e0;
+  --muted: #9aa0a6;
+  --primary: #FF85B3;
+  --primary-strong: #FF6B9D;
+  --accent: #FFD566;
+  --secondary: #6CE5DC;
+  --success: #AEEFE3;
+  --warning: #FFB37A;
+  --card: #251F34;
+  --border: #3D3551;
+  --gradient-1: linear-gradient(135deg, #FF6B9D 0%, #D4507C 100%);
+  --gradient-2: linear-gradient(135deg, #FF6B9D 0%, #FFC93C 100%);
+  --gradient-3: linear-gradient(135deg, #4ECDC4 0%, #6CE5DC 100%);
+  --gradient-4: linear-gradient(135deg, #FFC93C 0%, #FFB37A 100%);
+  --gradient-5: linear-gradient(135deg, #2A2438 0%, #4ECDC4 100%);
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", Sans-serif;
   color: var(--text);
   background: var(--bg);
   position: relative;
@@ -200,26 +222,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-/* Subtle background pattern */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(3, 49, 134, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-body > * {
-  position: relative;
-  z-index: 1;
 }
 
 h1, h2, h3, h4 {

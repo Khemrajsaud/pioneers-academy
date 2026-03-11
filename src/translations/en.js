@@ -67,7 +67,7 @@ const en = {
       students: "Students",
       teachers: "Teachers",
       years: "Years of Excellence",
-      achievements: "Achievements",      highlights: [
+      achievements: "Achievements", highlights: [
         "K-12 Education",
         "Modern Facilities",
         "International Standards",
@@ -116,7 +116,8 @@ const en = {
       library: "Library",
       sportsComplex: "Sports Complex",
       cafeteria: "Cafeteria",
-      viewAll: "View All Facilities"    },
+      viewAll: "View All Facilities"
+    },
     vision: {
       title: "Our Vision",
       description:
@@ -139,9 +140,8 @@ const en = {
     hero: "About Us",
     intro: {
       title: "Welcome to Pioneers Academy",
-      description:        " Established in 1999 AD (2056 BS), Pioneers’ Academy, Kailali is a reputed private educational institution located in Lamkichuha-1, Lamki, Kailali, Sudurpaschim Province, Nepal. The school is affiliated with the National Examination Board (NEB) and approved by the Ministry of Education.Pioneers’ Academy offers comprehensive educational programs from Play Group (PG) to Grade 10, along with Plus Two (Grades 11 and 12) in Management and Law streams.With a commitment to academic excellence, disciplined learning, and holistic development, the academy provides quality education at a moderate fee structure. The institution also offers scholarship opportunities to deserving and talented students, ensuring accessible education for all.",
-
-    },
+  description:"Established in 1999 AD (2056 BS), Pioneers’ Academy, Kailali is a reputed private educational institution located in Lamkichuha-1, Lamki, Kailali, Sudurpaschim Province, Nepal. The school is affiliated with the National Examination Board (NEB) and approved by the Ministry of Education. Pioneers’ Academy offers comprehensive educational programs from Play Group (PG) to Grade 10, along with Plus Two (Grades 11 and 12) in Management and Law streams.\n\n With a strong commitment to academic excellence, disciplined learning, and holistic development, the academy provides quality education at a moderate fee structure. The institution also offers scholarship opportunities to deserving and talented students, ensuring that education remains accessible to students from diverse backgrounds."
+},
     mission: {
       title: "Our Mission",
       description:
@@ -362,7 +362,7 @@ const en = {
       visitTitle: "Visit Us",
       visitAddress: "Lamkichuha-1, Lamki, Tambov Oblast, Russia, Kailali, Sudurpaschim Province, Nepal",
       callTitle: "Call Us",
-      callPhone:"+977-91-540488\n+977-9848420207\n+977-9841193032\n+977-9841672783",
+      callPhone: "+977-91-540488\n+977-9848420207\n+977-9841193032\n+977-9841672783",
       emailTitle: "Email Us",
       emailAddress:
         "contact@pioneers.edu.np",

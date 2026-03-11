@@ -66,13 +66,7 @@ const Sidebar = () => {
           active={isActive('/admin/notices')}
           isDarkMode={isDarkMode}
         />
-        <SidebarLink 
-          to="/admin/uploads" 
-          icon={<Download size={18} />} 
-          label="Uploads" 
-          active={isActive('/admin/uploads')}
-          isDarkMode={isDarkMode}
-        />
+        
       </nav>
     </aside>
   );
