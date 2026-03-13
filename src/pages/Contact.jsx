@@ -25,7 +25,8 @@ const Contact = () => {
       )
       .then(
         () => {
-          toast.success("Message sent successfully! We'll get back to you soon.", {
+          // Show success toast using translated message
+          toast.success(t.contact.form.success, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -33,11 +34,12 @@ const Contact = () => {
             pauseOnHover: true,
             draggable: true,
           });
-          e.target.reset();
+          e.target.reset(); // Clear form after success
         },
         (error) => {
           console.error("Email send error:", error);
-          toast.error("Failed to send message. Please try again or contact us directly.", {
+          // Show error toast if submission fails
+          toast.error(t.contact.form.error, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -53,108 +55,112 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
+    <div className="min-h-screen bg-(--bg) text-(--text)">
       <ToastContainer />
-      
-      {/* Hero */}
+
+      {/* Hero Banner Area */}
       <div className="relative h-48 sm:h-64 md:h-96 w-full overflow-hidden group">
         <img src={contactImg} alt="Contact" className="w-full h-full object-cover " />
       </div>
 
+      {/* --- CONTENT AREA --- */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-16 space-y-12">
-        
-        {/* Intro */}
+
+        {/* WELCOME SECTION
+            Brief intro text about contacting the school. */}
         <section className="text-center animate-fadeInUp">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[color:var(--text)] mb-4 leading-tight">
-            We'd Love to Hear From You
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-(--text) mb-4 leading-tight">
+            {t.contact.intro}
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-[color:var(--muted)] max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-(--muted) max-w-3xl mx-auto leading-relaxed">
             {t.contact.subtitle}
           </p>
         </section>
 
-        {/* Contact Cards */}
+        {/* CONTACT INFO CARDS
+            Direct links/info for Location, Phone, and Email. */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 animate-fadeInUp">
 
-          <div className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[color:var(--primary)] to-[color:var(--primary-strong)] flex items-center justify-center text-white mb-4 shadow-md">
+          <div className="rounded-xl border border-(--border) bg-(--card) p-6 hover:shadow-lg hover:border-(--primary) transition duration-300">
+            <div className="w-12 h-12 rounded-full bg-linear-to-br from-(--primary) to-(--primary-strong) flex items-center justify-center text-white mb-4 shadow-md">
               <MapPin size={24} />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">{t.contact.info.visitTitle}</h3>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">
-              Lamkichuha-1, Lamki, Kailali, Sudurpaschim Province, Nepal
+            <h3 className="text-base sm:text-lg font-bold text-(--text) mb-2">{t.contact.info.visitTitle}</h3>
+            <p className="text-xs sm:text-sm text-(--muted)">
+              {t.contact.info.visitAddress}
             </p>
           </div>
 
-          <div className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[color:var(--primary)] to-[color:var(--primary-strong)] flex items-center justify-center text-white mb-4 shadow-md">
+          <div className="rounded-xl border border-(--border) bg-(--card) p-6 hover:shadow-lg hover:border-(--primary) transition duration-300">
+            <div className="w-12 h-12 rounded-full bg-linear-to-br from-(--primary) to-(--primary-strong) flex items-center justify-center text-white mb-4 shadow-md">
               <Phone size={24} />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">{t.contact.info.callTitle}</h3>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">+977-91-540488</p>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">+977-9848420207</p>
+            <h3 className="text-base sm:text-lg font-bold text-(--text) mb-2">{t.contact.info.callTitle}</h3>
+            <p className="text-xs sm:text-sm text-(--muted)">{t.contact.info.callPhone}</p>
+            <p className="text-xs sm:text-sm text-(--muted)">+977-9848420207</p>
           </div>
 
-          <div className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:shadow-lg hover:border-[color:var(--primary)] transition duration-300">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[color:var(--primary)] to-[color:var(--primary-strong)] flex items-center justify-center text-white mb-4 shadow-md">
+          <div className="rounded-xl border border-(--border) bg-(--card) p-6 hover:shadow-lg hover:border-(--primary) transition duration-300">
+            <div className="w-12 h-12 rounded-full bg-linear-to-br from-(--primary) to-(--primary-strong) flex items-center justify-center text-white mb-4 shadow-md">
               <Mail size={24} />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-[color:var(--text)] mb-2">{t.contact.info.emailTitle}</h3>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">contact@pioneers.edu.np</p>
-            <p className="text-xs sm:text-sm text-[color:var(--muted)]">admissions@pioneersacademy.edu.np</p>
+            <h3 className="text-base sm:text-lg font-bold text-(--text) mb-2">{t.contact.info.emailTitle}</h3>
+            <p className="text-xs sm:text-sm text-(--muted)">{t.contact.info.emailAddress}</p>
+            <p className="text-xs sm:text-sm text-(--muted)">admissions@pioneersacademy.edu.np</p>
           </div>
 
         </section>
 
-        {/* Contact Form */}
+        {/* MESSAGE FORM
+            Submit an enquiry via EmailJS integration. */}
         <section className="animate-fadeInUp">
-          <div className="rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--card)] p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300">
-            <h3 className="text-lg sm:text-xl font-bold text-[color:var(--text)] mb-6">
+          <div className="rounded-2xl border-2 border-(--border) bg-(--card) p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300">
+            <h3 className="text-lg sm:text-xl font-bold text-(--text) mb-6">
               {t.contact.form.title}
             </h3>
 
             <form ref={form} onSubmit={sendEmail} className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
               <div>
-                <label className="text-xs sm:text-sm text-[color:var(--muted)] font-medium">{t.contact.form.name}</label>
+                <label className="text-xs sm:text-sm text-(--muted) font-medium">{t.contact.form.name}</label>
                 <input
                   type="text"
                   name="name"
-                  placeholder="Your name"
-                  className="mt-2 w-full rounded-lg border border-[color:var(--border)] bg-[color:var(--bg)] px-4 py-3 text-sm text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)] transition"
+                  placeholder={t.contact.form.placeholderName}
+                  className="mt-2 w-full rounded-lg border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--text) focus:outline-none focus:ring-2 focus:ring-(--primary) transition"
                   required
                 />
               </div>
 
               <div>
-                <label className="text-xs sm:text-sm text-[color:var(--muted)] font-medium">{t.contact.form.email}</label>
+                <label className="text-xs sm:text-sm text-(--muted) font-medium">{t.contact.form.email}</label>
                 <input
                   type="email"
                   name="email"
-                  placeholder="you@example.com"
-                  className="mt-2 w-full rounded-lg border border-[color:var(--border)] bg-[color:var(--bg)] px-4 py-3 text-sm text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)] transition"
+                  placeholder={t.contact.form.placeholderEmail}
+                  className="mt-2 w-full rounded-lg border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--text) focus:outline-none focus:ring-2 focus:ring-(--primary) transition"
                   required
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="text-xs sm:text-sm text-[color:var(--muted)] font-medium">{t.contact.form.subject}</label>
+                <label className="text-xs sm:text-sm text-(--muted) font-medium">{t.contact.form.subject}</label>
                 <input
                   type="text"
                   name="subject"
-                  placeholder="How can we help?"
-                  className="mt-2 w-full rounded-lg border border-[color:var(--border)] bg-[color:var(--bg)] px-4 py-3 text-sm text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)] transition"
+                  placeholder={t.contact.form.placeholderSubject}
+                  className="mt-2 w-full rounded-lg border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--text) focus:outline-none focus:ring-2 focus:ring-(--primary) transition"
                   required
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="text-xs sm:text-sm text-[color:var(--muted)] font-medium">{t.contact.form.message}</label>
+                <label className="text-xs sm:text-sm text-(--muted) font-medium">{t.contact.form.message}</label>
                 <textarea
                   rows="6"
                   name="message"
-                  placeholder="Write your message..."
-                  className="mt-2 w-full rounded-lg border border-[color:var(--border)] bg-[color:var(--bg)] px-4 py-3 text-sm text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)] transition resize-none"
+                  placeholder={t.contact.form.placeholderMessage}
+                  className="mt-2 w-full rounded-lg border border-(--border) bg-(--bg) px-4 py-3 text-sm text-(--text) focus:outline-none focus:ring-2 focus:ring-(--primary) transition resize-none"
                   required
                 />
               </div>
@@ -163,10 +169,10 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={sending}
-                  className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--primary-strong)] px-6 py-3 text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="inline-flex items-center gap-2 rounded-lg bg-linear-to-r from-(--primary) to-(--primary-strong) px-6 py-3 text-white font-semibold hover:shadow-lg transform hover:scale-105 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   <Send size={18} className={sending ? "animate-pulse" : ""} />
-                  {sending ? "Sending..." : t.contact.form.button}
+                  {sending ? t.contact.form.sending : t.contact.form.button}
                 </button>
               </div>
 
@@ -175,14 +181,16 @@ const Contact = () => {
         </section>
       </div>
 
+      {/* MAP SECTION
+          Google Maps integration for physical location. */}
       <section className="px-4 sm:px-6 pb-8 sm:pb-16 animate-fadeInUp">
-        <div className="overflow-hidden rounded-2xl border-2 border-[color:var(--border)] bg-[color:var(--card)] shadow-lg hover:shadow-xl transition duration-300">
-          <div className="p-4 sm:p-6 border-b border-[color:var(--border)]">
-            <h3 className="text-xl sm:text-2xl font-bold text-[color:var(--text)] mb-2">
-              Our Location
+        <div className="overflow-hidden rounded-2xl border-2 border-(--border) bg-(--card) shadow-lg hover:shadow-xl transition duration-300">
+          <div className="p-4 sm:p-6 border-b border-(--border)">
+            <h3 className="text-xl sm:text-2xl font-bold text-(--text) mb-2">
+              {t.contact.map.title}
             </h3>
-            <p className="text-sm sm:text-base text-[color:var(--muted)] leading-relaxed max-w-4xl">
-              Located in Lamkichuha-1, Lamki, Kailali, Sudurpaschim Province, Nepal, the campus is easy to reach from nearby communities and main transport routes.
+            <p className="text-sm sm:text-base text-(--muted) leading-relaxed max-w-4xl">
+              {t.contact.locationDesc}
             </p>
           </div>
 

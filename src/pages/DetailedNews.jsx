@@ -17,16 +17,22 @@ import {
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/news`; // Using env var for consistency
+const API_URL = `${import.meta.env.VITE_API_URL}/api/news`;
 
+/**
+ * DetailedNews component for rendering a single, comprehensive news article
+ */
 const DetailedNews = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
   const [news, setNews] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  /**
+   * Fetches the specific news article and updates view count
+   */
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -36,7 +42,7 @@ const DetailedNews = () => {
         setNews(res.data);
       } catch (err) {
         console.error("Error fetching news:", err);
-        setError(language === "ne" ? "समाचार लोड गर्न सकिएन" : "Failed to load the article");
+        setError(t.detailedNews.error);
       } finally {
         setLoading(false);
       }
@@ -44,13 +50,16 @@ const DetailedNews = () => {
 
     if (id) {
       fetchNews();
-      // Increment view count
+      // Asynchronous non-blocking update for analytics
       axios.patch(`${API_URL}/${id}/view`).catch(err => console.error(err));
     }
-  }, [id, language]);
+  }, [id, t.detailedNews.error]);
 
+  /**
+   * Locale-aware date formatting
+   */
   const formatDate = (date) => {
-    if (!date) return language === "ne" ? "मिति उपलब्ध छैन" : "Date not available";
+    if (!date) return t.news.dateNotAvailable;
     return new Date(date).toLocaleDateString(language === "ne" ? "ne-NP" : "en-US", {
       year: "numeric",
       month: "long",
@@ -60,6 +69,9 @@ const DetailedNews = () => {
 
   const currentUrl = `${window.location.origin}/news/${id}`;
 
+  /**
+   * Social integration configuration for external sharing
+   */
   const shareButtons = [
     {
       name: "Facebook",
@@ -100,20 +112,26 @@ const DetailedNews = () => {
     },
   ];
 
+  /**
+   * UI State: Interstitial Loading Screen
+   */
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-[color:var(--bg)] transition-colors">
-        <Loader2 className="animate-spin text-[color:var(--primary)]" size={48} />
-        <p className="mt-4 text-lg text-[color:var(--muted)] animate-pulse">
-          {language === "ne" ? "लेख लोड हुँदैछ..." : "Loading article..."}
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-(--bg) transition-colors">
+        <Loader2 className="animate-spin text-(--primary)" size={48} />
+        <p className="mt-4 text-lg text-(--muted) animate-pulse">
+          {t.detailedNews.loading}
         </p>
       </div>
     );
   }
 
+  /**
+   * UI State: Fault Resolution Screen
+   */
   if (error || !news) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-[color:var(--bg)] transition-colors">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-(--bg) transition-colors">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -128,81 +146,78 @@ const DetailedNews = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           onClick={() => navigate("/resources/news")}
-          className="mt-8 flex items-center gap-2 px-6 py-3 rounded-xl bg-[color:var(--primary)] text-white hover:bg-[color:var(--primary-strong)] transition-all transform hover:-translate-y-0.5 shadow-lg"
+          className="mt-8 flex items-center gap-2 px-6 py-3 rounded-xl bg-(--primary) text-white hover:opacity-90 transition-all transform hover:-translate-y-0.5 shadow-lg"
         >
           <ArrowLeft size={18} />
-          <span className="font-semibold">{language === "ne" ? "समाचारमा फर्कनुहोस्" : "Back to News"}</span>
+          <span className="font-semibold">{t.detailedNews.backToNews}</span>
         </motion.button>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[color:var(--bg)] text-[color:var(--text)] transition-colors">
+    <div className="min-h-screen py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-(--bg) text-(--text) transition-colors">
       <div className="max-w-4xl mx-auto">
-        {/* Back Button */}
+        {/* Navigation Control */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           onClick={() => navigate("/resources/news")}
-          className="group flex items-center gap-2 mb-8 px-4 py-2 rounded-xl text-[color:var(--muted)] hover:text-[color:var(--primary)] hover:bg-[color:var(--primary)]/10 transition-colors font-medium"
+          className="group flex items-center gap-2 mb-8 px-4 py-2 rounded-xl text-(--muted) hover:text-(--primary) hover:bg-(--primary)/10 transition-colors font-medium"
         >
           <ArrowLeft size={20} className="transform group-hover:-translate-x-1 transition-transform" />
-          {language === "ne" ? "सबै लेखहरू" : "All Articles"}
+          {t.detailedNews.allArticles}
         </motion.button>
 
         <motion.article
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-3xl border border-[color:var(--border)] overflow-hidden bg-[color:var(--card)] shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+          className="rounded-3xl border border-(--border) overflow-hidden bg-(--card) shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         >
-          {/* Header Area: Title & Meta Info */}
-          <div className="p-6 sm:p-10 md:p-14 pb-8 md:pb-10 border-b border-[color:var(--border)]/50">
-            {/* Category Tag */}
+          {/* Header Focal Point: Article Title and Source Info */}
+          <div className="p-6 sm:p-10 md:p-14 pb-8 md:pb-10 border-b border-(--border)/50">
             <div className="mb-6 inline-flex">
-              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase bg-[color:var(--primary)]/10 text-[color:var(--primary)]">
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase bg-(--primary)/10 text-(--primary)">
                 <Tag size={14} />
-                {news.category || (language === "ne" ? "सामान्य" : "General")}
+                {news.category || t.news.general}
               </span>
             </div>
 
-            {/* Title First */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold mb-8 leading-[1.15] text-[color:var(--text)] tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold mb-8 leading-[1.15] text-(--text) tracking-tight">
               {news.title}
             </h1>
 
-            {/* Meta Info (Date and Author) */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-sm sm:text-base font-medium text-[color:var(--muted)]">
+            {/* Semantic Meta Row */}
+            <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-sm sm:text-base font-medium text-(--muted)">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-[color:var(--bg-alt)] flex items-center justify-center shrink-0">
-                  <UserRound size={18} className="text-[color:var(--primary)]" />
+                <div className="w-10 h-10 rounded-full bg-(--bg-alt) flex items-center justify-center shrink-0">
+                  <UserRound size={18} className="text-(--primary)" />
                 </div>
                 <div>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-wider font-bold opacity-70 mb-0.5">Author</p>
-                  <p className="text-[color:var(--text)]">{news.published_by || (language === "ne" ? "प्रशासन" : "Administration")}</p>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider font-bold opacity-70 mb-0.5">{t.detailedNews.author}</p>
+                  <p className="text-(--text)">{news.published_by || t.news.admin}</p>
                 </div>
               </div>
 
-              {/* Vertical Divider */}
-              <div className="hidden sm:block h-10 w-[1px] bg-[color:var(--border)]"></div>
+              <div className="hidden sm:block h-10 w-[1px] bg-(--border)"></div>
 
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-[color:var(--bg-alt)] flex items-center justify-center shrink-0">
-                  <CalendarDays size={18} className="text-[color:var(--primary)]" />
+                <div className="w-10 h-10 rounded-full bg-(--bg-alt) flex items-center justify-center shrink-0">
+                  <CalendarDays size={18} className="text-(--primary)" />
                 </div>
                 <div>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-wider font-bold opacity-70 mb-0.5">Published Date</p>
-                  <p className="text-[color:var(--text)]">{formatDate(news.published_date)}</p>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-wider font-bold opacity-70 mb-0.5">{t.detailedNews.publishedDate}</p>
+                  <p className="text-(--text)">{formatDate(news.published_date)}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Large Image */}
+          {/* Core Visual Element */}
           {news.image_url && (
-            <div className="w-full relative bg-[color:var(--bg-alt)]">
+            <div className="w-full relative bg-(--bg-alt)">
               <img
                 src={news.image_url}
                 alt={news.title}
@@ -212,20 +227,20 @@ const DetailedNews = () => {
             </div>
           )}
 
-          {/* Article Content */}
+          {/* Narrative Body Section */}
           <div className="p-6 sm:p-10 md:p-14 pt-8">
             <div
-              className={`news-content prose prose-sm sm:prose-base md:prose-lg max-w-none leading-[1.8] text-[color:var(--text)] selection:bg-[color:var(--primary)]/30`}
+              className={`news-content prose prose-sm sm:prose-base md:prose-lg max-w-none leading-[1.8] text-(--text) selection:bg-(--primary)/30`}
               dangerouslySetInnerHTML={{ __html: news.description }}
             />
           </div>
 
-          {/* Social Share Section at the Very Bottom */}
-          <div className="bg-[color:var(--bg-alt)]/50 border-t border-[color:var(--border)] py-10 px-6 sm:px-10">
+          {/* Footer Integration: Viral Loops and Community Sharing */}
+          <div className="bg-(--bg-alt)/50 border-t border-(--border) py-10 px-6 sm:px-10">
             <div className="text-center max-w-2xl mx-auto">
               <h3 className="text-xl font-bold mb-6 flex items-center justify-center gap-2">
-                <Share2 size={20} className="text-[color:var(--primary)]" />
-                {language === "ne" ? "यो लेख साझेदारी गर्नुहोस्" : "Share This Article"}
+                <Share2 size={20} className="text-(--primary)" />
+                {t.detailedNews.shareArticle}
               </h3>
 
               <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
@@ -236,7 +251,7 @@ const DetailedNews = () => {
                       key={btn.name}
                       onClick={btn.onClick}
                       title={`Share on ${btn.name}`}
-                      className={`flex items-center gap-2.5 px-5 py-2.5 rounded-full font-semibold text-sm border border-[color:var(--border)] bg-[color:var(--card)] transition-all duration-300 shadow-sm ${btn.color}`}
+                      className={`flex items-center gap-2.5 px-5 py-2.5 rounded-full font-semibold text-sm border border-(--border) bg-(--card) transition-all duration-300 shadow-sm ${btn.color}`}
                     >
                       <Icon size={18} />
                       <span className="hidden sm:inline">{btn.name}</span>
@@ -246,7 +261,6 @@ const DetailedNews = () => {
               </div>
             </div>
           </div>
-
         </motion.article>
       </div>
 

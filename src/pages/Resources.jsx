@@ -11,93 +11,56 @@ import {
 import homepage from "../assets/images/homepage.png";
 import { useLanguage } from "../contexts/LanguageContext";
 
+/**
+ * Resources component acting as a central hub for school documents, news, and schedules
+ */
 const Resources = () => {
   const { t } = useLanguage();
+
+  // Mapping static icons to data from translation context
   const quickLinks = [
-    { title: "Gallery", icon: <Image size={20} /> },
-    { title: "News & Notices", icon: <Megaphone size={20} /> },
-    { title: "Routine", icon: <ClipboardList size={20} /> },
-    { title: "Downloads", icon: <Download size={20} /> },
-  ];
-
-  const newsItems = [
-    { title: "Annual Sports Day 2026", date: "Feb 18, 2026" },
-    { title: "Grade 10 Pre-Board Schedule", date: "Feb 12, 2026" },
-    { title: "Science Exhibition Winners", date: "Feb 05, 2026" },
-    { title: "Parent-Teacher Meeting", date: "Jan 30, 2026" },
-  ];
-
-  const routineItems = [
-    "Primary Section (Grade 1-5)",
-    "Lower Secondary (Grade 6-8)",
-    "Secondary (Grade 9-10)",
-    "Higher Secondary (Grade 11-12)",
-  ];
-
-  const downloads = [
-    "Admission Form",
-    "Fee Structure",
-    "School Calendar",
-    "Syllabus Overview",
-    "Transport Policy",
-  ];
-
-  const events = [
-    { title: "Art & Craft Week", date: "Mar 04, 2026" },
-    { title: "Inter-School Debate", date: "Mar 12, 2026" },
-    { title: "Field Trip - Grade 8", date: "Mar 20, 2026" },
-  ];
-
-  const exams = [
-    "Unit Test I Schedule",
-    "Mid-Term Exam Routine",
-    "Final Exam Routine",
-    "Result Publication Dates",
-  ];
-
-  const parentResources = [
-    "Student Handbook",
-    "Code of Conduct",
-    "Attendance Policy",
-    "Safety Guidelines",
+    { title: t.resources.quickLinks.gallery, icon: <Image size={20} /> },
+    { title: t.resources.quickLinks.newsNotices, icon: <Megaphone size={20} /> },
+    { title: t.resources.quickLinks.routine, icon: <ClipboardList size={20} /> },
+    { title: t.resources.quickLinks.downloads, icon: <Download size={20} /> },
   ];
 
   return (
-    <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
-      {/* Hero */}
-      <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden">
-        <img src={homepage} alt="Resources" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-[color:var(--bg)]"></div>
+    <div className="min-h-screen bg-(--bg) text-(--text) transition-colors">
+      {/* Visual Identity Hero Section */}
+      <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden border-b border-(--border)">
+        <img src={homepage} alt="School Resources" className="w-full h-full object-cover brightness-75" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 to-(--bg)" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 tracking-tight drop-shadow-md">
             {t.resources.hero}
           </h1>
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-16 space-y-12">
-        {/* Intro */}
-        <section className="text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[color:var(--text)] mb-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-20 space-y-16">
+        {/* Contextual Introduction */}
+        <section className="text-center max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-(--text) mb-5">
             {t.resources.subtitle}
           </h2>
-          <p className="text-base sm:text-lg text-[color:var(--muted)] max-w-3xl mx-auto">
-            Access school updates, schedules, downloads, and helpful resources for students and parents.
+          <p className="text-base sm:text-lg text-(--muted) leading-relaxed">
+            {t.resources.intro}
           </p>
         </section>
 
-        {/* Quick Links */}
+        {/* Tactical Navigation Grid */}
         <section>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
             {quickLinks.map((item, idx) => (
               <div
                 key={idx}
-                className="rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-4 flex items-center gap-3"
+                className="group rounded-2xl border border-(--border) bg-(--card) p-5 flex flex-col sm:flex-row items-center gap-4 hover:border-(--primary)/50 transition-all shadow-sm hover:shadow-md cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-full bg-[color:var(--bg-alt)] flex items-center justify-center text-[color:var(--primary)]">
+                <div className="w-12 h-12 rounded-xl bg-(--primary)/10 flex items-center justify-center text-(--primary) group-hover:bg-(--primary) group-hover:text-white transition-colors duration-300">
                   {item.icon}
                 </div>
-                <span className="text-sm font-semibold text-[color:var(--text)]">
+                <span className="text-sm font-bold text-(--text) text-center sm:text-left leading-tight">
                   {item.title}
                 </span>
               </div>
@@ -105,99 +68,121 @@ const Resources = () => {
           </div>
         </section>
 
-        {/* News + Events */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Megaphone size={20} className="text-[color:var(--primary)]" />
-              <h3 className="text-xl font-bold text-[color:var(--text)]">{t.resources.news.title}</h3>
+        {/* Primary Updates Grid: News & Events */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Latest News Feed Container */}
+          <div className="rounded-3xl border border-(--border) bg-(--card) p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-(--primary)/10 text-(--primary)">
+                <Megaphone size={22} />
+              </div>
+              <h3 className="text-xl font-bold text-(--text)">{t.resources.news.title}</h3>
             </div>
-            <ul className="space-y-3 text-sm text-[color:var(--muted)]">
-              {newsItems.map((item, idx) => (
-                <li key={idx} className="flex items-center justify-between">
-                  <span>{item.title}</span>
-                  <span className="text-xs">{item.date}</span>
+            <ul className="space-y-4 text-sm text-(--muted)">
+              {t.resources.newsList.map((item, idx) => (
+                <li key={idx} className="flex items-center justify-between p-3 rounded-xl hover:bg-(--bg-alt) transition-colors border border-transparent hover:border-(--border)">
+                  <span className="font-medium text-(--text)">{item.title}</span>
+                  <span className="text-xs font-semibold px-2 py-1 bg-(--bg-alt) rounded-md">{item.date}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Calendar size={20} className="text-[color:var(--primary)]" />
-              <h3 className="text-xl font-bold text-[color:var(--text)]">{t.resources.events.title}</h3>
+          {/* Academic Calendar Events Preview */}
+          <div className="rounded-3xl border border-(--border) bg-(--card) p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-(--primary)/10 text-(--primary)">
+                <Calendar size={22} />
+              </div>
+              <h3 className="text-xl font-bold text-(--text)">{t.resources.events.title}</h3>
             </div>
-            <ul className="space-y-3 text-sm text-[color:var(--muted)]">
-              {events.map((item, idx) => (
-                <li key={idx} className="flex items-center justify-between">
-                  <span>{item.title}</span>
-                  <span className="text-xs">{item.date}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* Routine + Exams */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--bg-alt)] p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <ClipboardList size={20} className="text-[color:var(--primary)]" />
-              <h3 className="text-xl font-bold text-[color:var(--text)]">{t.resources.routine.title}</h3>
-            </div>
-            <ul className="space-y-2 text-sm text-[color:var(--text)]">
-              {routineItems.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <span className="text-[color:var(--primary)]">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--bg-alt)] p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <School size={20} className="text-[color:var(--primary)]" />
-              <h3 className="text-xl font-bold text-[color:var(--text)]">{t.resources.exams.title}</h3>
-            </div>
-            <ul className="space-y-2 text-sm text-[color:var(--text)]">
-              {exams.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <span className="text-[color:var(--primary)]">•</span>
-                  <span>{item}</span>
+            <ul className="space-y-4 text-sm text-(--muted)">
+              {t.resources.eventsList.map((item, idx) => (
+                <li key={idx} className="flex items-center justify-between p-3 rounded-xl hover:bg-(--bg-alt) transition-colors border border-transparent hover:border-(--border)">
+                  <span className="font-medium text-(--text)">{item.title}</span>
+                  <span className="text-xs font-semibold px-2 py-1 bg-(--bg-alt) rounded-md">{item.date}</span>
                 </li>
               ))}
             </ul>
           </div>
         </section>
 
-        {/* Downloads + Parent Resources */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Download size={20} className="text-[color:var(--primary)]" />
-              <h3 className="text-xl font-bold text-[color:var(--text)]">{t.resources.downloads.title}</h3>
+        {/* Operational Schedules: Routine & Exams */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Class Timetable Overview */}
+          <div className="rounded-3xl border border-(--border) bg-(--bg-alt) p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-(--primary)/10 text-(--primary)">
+                <ClipboardList size={22} />
+              </div>
+              <h3 className="text-xl font-bold text-(--text)">{t.resources.routine.title}</h3>
             </div>
-            <ul className="space-y-3 text-sm text-[color:var(--muted)]">
-              {downloads.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <FileText size={16} className="text-[color:var(--primary)]" />
-                  <span>{item}</span>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-(--text)">
+              {t.resources.routineList.map((item, idx) => (
+                <li key={idx} className="flex items-center gap-3 p-2 rounded-lg bg-(--card)/50 border border-(--border)/50">
+                  <div className="w-1.5 h-1.5 rounded-full bg-(--primary)" />
+                  <span className="font-medium">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Users size={20} className="text-[color:var(--primary)]" />
-              <h3 className="text-xl font-bold text-[color:var(--text)]">{t.resources.parents.title}</h3>
+          {/* Assessment Cycles Preview */}
+          <div className="rounded-3xl border border-(--border) bg-(--bg-alt) p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-(--primary)/10 text-(--primary)">
+                <School size={22} />
+              </div>
+              <h3 className="text-xl font-bold text-(--text)">{t.resources.exams.title}</h3>
             </div>
-            <ul className="space-y-3 text-sm text-[color:var(--muted)]">
-              {parentResources.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <FileText size={16} className="text-[color:var(--primary)]" />
-                  <span>{item}</span>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-(--text)">
+              {t.resources.examsList.map((item, idx) => (
+                <li key={idx} className="flex items-center gap-3 p-2 rounded-lg bg-(--card)/50 border border-(--border)/50">
+                  <div className="w-1.5 h-1.5 rounded-full bg-(--primary)" />
+                  <span className="font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Document Repository: Downloads & Parent Guides */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Public Document Access */}
+          <div className="rounded-3xl border border-(--border) bg-(--card) p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-(--primary)/10 text-(--primary)">
+                <Download size={22} />
+              </div>
+              <h3 className="text-xl font-bold text-(--text)">{t.resources.downloads.title}</h3>
+            </div>
+            <ul className="space-y-4">
+              {t.resources.downloadsList.map((item, idx) => (
+                <li key={idx} className="group flex items-center gap-4 p-3 rounded-2xl hover:bg-(--bg-alt) transition-all border border-transparent hover:border-(--border) cursor-pointer">
+                  <div className="p-2 rounded-lg bg-red-500/10 text-red-500 group-hover:scale-110 transition-transform">
+                    <FileText size={18} />
+                  </div>
+                  <span className="text-sm font-semibold text-(--text)">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Parental Support Materials */}
+          <div className="rounded-3xl border border-(--border) bg-(--card) p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-(--primary)/10 text-(--primary)">
+                <Users size={22} />
+              </div>
+              <h3 className="text-xl font-bold text-(--text)">{t.resources.parents.title}</h3>
+            </div>
+            <ul className="space-y-4">
+              {t.resources.parentResourcesList.map((item, idx) => (
+                <li key={idx} className="group flex items-center gap-4 p-3 rounded-2xl hover:bg-(--bg-alt) transition-all border border-transparent hover:border-(--border) cursor-pointer">
+                  <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform">
+                    <FileText size={18} />
+                  </div>
+                  <span className="text-sm font-semibold text-(--text)">{item}</span>
                 </li>
               ))}
             </ul>

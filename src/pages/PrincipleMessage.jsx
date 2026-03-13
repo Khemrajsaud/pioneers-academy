@@ -2,16 +2,22 @@ import { useEffect, useState } from "react";
 import { Share2, Facebook, Twitter, Linkedin, Mail, MessageCircle } from "lucide-react";
 import principle from "../assets/images/principle.jpg";
 import homepage from "../assets/images/about.png";
+import principal from "../assets/images/principal.png";
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
 
+/**
+ * PrincipleMessage component displaying the Principal's address to the community
+ */
 const PrincipleMessage = () => {
   const { t } = useLanguage();
   const [views, setViews] = useState(0);
   const [shares, setShares] = useState(0);
   const [copied, setCopied] = useState(false);
 
-  // Simulate view counting
+  /**
+   * Simulate view counting for engagement feel
+   */
   useEffect(() => {
     const timer = setTimeout(() => {
       setViews((prev) => prev + Math.floor(Math.random() * 3));
@@ -19,6 +25,9 @@ const PrincipleMessage = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  /**
+   * Data object for the principal's message
+   */
   const principalData = {
     name: "Amit Bikram Supaek",
     title: t.principal.role,
@@ -27,6 +36,9 @@ const PrincipleMessage = () => {
     date: "02-21-2026",
   };
 
+  /**
+   * Handles sharing functionality across different platforms
+   */
   const handleShare = (platform) => {
     const url = window.location.href;
     const title = `Read ${principalData.name}'s Message - Pioneers Academy`;
@@ -37,9 +49,7 @@ const PrincipleMessage = () => {
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         break;
       case "twitter":
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-          url
-        )}&text=${encodeURIComponent(title)}`;
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
         break;
       case "linkedin":
         shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
@@ -48,9 +58,7 @@ const PrincipleMessage = () => {
         shareUrl = `https://wa.me/?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`;
         break;
       case "email":
-        shareUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(
-          url
-        )}`;
+        shareUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
         break;
       case "copy":
         navigator.clipboard.writeText(url);
@@ -68,44 +76,42 @@ const PrincipleMessage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-(--bg) text-(--text)">
+      {/* Hero Section Banner */}
       <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden">
         <img
-          //   src={principalData.image}
           src={homepage}
           alt="Principal"
           className="w-full h-full object-cover"
         />
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-[color:var(--bg)]"></div> */}
       </div>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-20">
         <motion.div
-          className="overflow-hidden rounded-2xl bg-[color:var(--card)] shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-[color:var(--border)]"
+          className="overflow-hidden rounded-2xl bg-(--card) shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-(--border)"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          {/* Header/Info Area */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 p-8 sm:p-12 border-b border-[color:var(--border)]/50 bg-gradient-to-br from-[color:var(--primary)]/5 to-[color:var(--card)]">
+          {/* Header/Identification Section */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 p-8 sm:p-12 border-b border-(--border)/50 bg-linear-to-br from-(--primary)/5 to-(--card)">
             <motion.div
-              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex-shrink-0 shadow-lg border-4 border-white dark:border-[color:var(--card)]"
+              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full  overflow-hidden shrink-0 shadow-lg border-4 border-white dark:border-(--card)"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <img
-                src={principalData.image}
+                src={principal}
                 alt={principalData.name}
-                className="w-full h-full object-cover"
+                className=" object-cover"
               />
             </motion.div>
 
             <div className="flex-1 text-center sm:text-left pt-2 sm:pt-4">
               <motion.h1
-                className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[color:var(--text)]"
+                className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-(--text)"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
@@ -113,7 +119,7 @@ const PrincipleMessage = () => {
                 {principalData.name}
               </motion.h1>
               <motion.p
-                className="text-lg sm:text-xl text-[color:var(--primary)] font-bold mt-2"
+                className="text-lg sm:text-xl text-(--primary) font-bold mt-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -121,23 +127,23 @@ const PrincipleMessage = () => {
                 {principalData.title}
               </motion.p>
               <motion.p
-                className="text-sm mt-3 inline-block px-3 py-1 rounded-full bg-[color:var(--bg-alt)] text-[color:var(--muted)]"
+                className="text-sm mt-3 inline-block px-3 py-1 rounded-full bg-(--bg-alt) text-(--muted)"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                Published on {principalData.date}
+                {t.principal.publishedOn} {principalData.date}
               </motion.p>
             </div>
           </div>
 
-          {/* Message Content */}
+          {/* Message Body Content */}
           <div className="p-8 sm:p-12 md:p-16">
-            <article className="prose prose-lg prose-invert max-w-none text-[color:var(--text)] leading-loose">
+            <article className="prose prose-lg prose-invert max-w-none text-(--text) leading-loose">
               {principalData.message.split("\n\n").map((paragraph, idx) => (
                 <motion.p
                   key={idx}
-                  className="mb-5 text-sm sm:text-base md:text-lg text-[color:var(--muted)] text-justify leading-relaxed"
+                  className="mb-5 text-sm sm:text-base md:text-lg text-(--muted) text-justify leading-relaxed"
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -149,10 +155,10 @@ const PrincipleMessage = () => {
             </article>
           </div>
 
-          {/* Footer Share Section */}
-          <div className="bg-[color:var(--bg-alt)] border-t border-[color:var(--border)] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm sm:text-base font-semibold text-[color:var(--text)]">
-              Share this message
+          {/* Social Sharing Footer */}
+          <div className="bg-(--bg-alt) border-t border-(--border) p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm sm:text-base font-semibold text-(--text)">
+              {t.principal.shareTitle}
             </p>
             <div className="flex items-center gap-3">
               {[
@@ -164,7 +170,7 @@ const PrincipleMessage = () => {
                 <button
                   key={item.platform}
                   onClick={() => handleShare(item.platform)}
-                  className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--card)] border border-[color:var(--border)] text-[color:var(--text)] hover:border-[color:var(--primary)] hover:bg-[color:var(--primary)]/10 hover:text-[color:var(--primary)] transition-all duration-300 transform hover:scale-110"
+                  className="group relative flex h-10 w-10 items-center justify-center rounded-full bg-(--card) border border-(--border) text-(--text) hover:border-(--primary) hover:bg-(--primary)/10 hover:text-(--primary) transition-all duration-300 transform hover:scale-110"
                   title={`Share on ${item.label}`}
                 >
                   {item.icon}
@@ -172,7 +178,7 @@ const PrincipleMessage = () => {
               ))}
             </div>
             {copied && (
-              <span className="text-sm text-[color:var(--primary)] font-medium">Link Copied!</span>
+              <span className="text-sm text-(--primary) font-medium">{t.principal.linkCopied}</span>
             )}
           </div>
         </motion.div>

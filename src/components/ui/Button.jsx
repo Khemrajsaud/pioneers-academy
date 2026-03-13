@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Button = ({ 
-  children, 
-  variant = 'primary', 
+const Button = ({
+  children,
+  variant = 'primary',
   size = 'md',
   icon,
   iconPosition = 'left',
@@ -11,18 +11,18 @@ const Button = ({
   loading = false,
   onClick,
   type = 'button',
-  ...props 
+  ...props
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantClasses = {
-    primary: 'bg-[color:var(--primary)] text-white hover:bg-[color:var(--primary)]/90 hover:shadow-md',
-    secondary: 'bg-[color:var(--card)] border border-[color:var(--border)] text-[color:var(--text)] hover:border-[color:var(--primary)] hover:text-[color:var(--primary)]',
-    success: 'bg-[color:var(--accent)] text-white hover:bg-[color:var(--accent)]/90 hover:shadow-md',
+    primary: 'bg-(--primary) text-white hover:bg-(--primary)/90 hover:shadow-md',
+    secondary: 'bg-(--card) border border-(--border) text-(--text) hover:border-(--primary) hover:text-(--primary)',
+    success: 'bg-(--accent) text-white hover:bg-(--accent)/90 hover:shadow-md',
     warning: 'bg-amber-500 text-white hover:bg-amber-600 hover:shadow-md',
     danger: 'bg-red-600 text-white hover:bg-red-700 hover:shadow-md',
-    outline: 'border border-[color:var(--primary)] text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white',
-    ghost: 'text-[color:var(--primary)] hover:bg-[color:var(--primary)]/10'
+    outline: 'border border-(--primary) text-(--primary) hover:bg-(--primary) hover:text-white',
+    ghost: 'text-(--primary) hover:bg-(--primary)/10'
   };
 
   const sizeClasses = {

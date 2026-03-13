@@ -1,21 +1,21 @@
 import React from 'react';
 
-const Card = ({ 
-  children, 
+const Card = ({
+  children,
   variant = 'default',
   color = 'blue',
   className = '',
   hoverable = true,
-  ...props 
+  ...props
 }) => {
   const baseClasses = 'p-5 rounded-lg border transition-all duration-300';
 
   const variantClasses = {
-    default: 'bg-[color:var(--card)] border-[color:var(--border)]',
-    gradient: 'bg-[color:var(--card)] border-[color:var(--border)]',
+    default: 'bg-(--card) border-(--border)',
+    gradient: 'bg-(--card) border-(--border)',
     glass: 'glass',
-    fun: 'bg-[color:var(--card)] border-[color:var(--border)]',
-    hover: 'bg-[color:var(--card)] border-[color:var(--border)] hover:shadow-lg hover:border-[color:var(--primary)]'
+    fun: 'bg-(--card) border-(--border)',
+    hover: 'bg-(--card) border-(--border) hover:shadow-lg hover:border-(--primary)'
   };
 
   const colorClasses = {
@@ -25,17 +25,17 @@ const Card = ({
     green: 'bg-green-50/40 dark:bg-green-900/10',
     orange: 'bg-orange-50/40 dark:bg-orange-900/10',
     yellow: 'bg-amber-50/40 dark:bg-amber-900/10',
-    rainbow: 'bg-[color:var(--bg-alt)]'
+    rainbow: 'bg-(--bg-alt)'
   };
 
   let combinedClasses = `${baseClasses} ${variantClasses[variant] || variantClasses.default}`;
-  
+
   if (variant === 'fun' || variant === 'gradient') {
     combinedClasses += ` ${colorClasses[color] || colorClasses.blue}`;
   }
-  
+
   if (hoverable && variant !== 'hover') {
-    combinedClasses += ' hover:shadow-md hover:border-[color:var(--primary)]';
+    combinedClasses += ' hover:shadow-md hover:border-(--primary)';
   }
 
   combinedClasses += ` ${className}`;
@@ -55,14 +55,14 @@ Card.Header = ({ children, className = '', ...props }) => (
 );
 
 Card.Title = ({ children, className = '', emoji, ...props }) => (
-  <h3 className={`text-xl sm:text-2xl font-bold text-[color:var(--text)] flex items-center gap-2 ${className}`} {...props}>
-    {emoji && <span className="text-xl text-[color:var(--primary)]">{emoji}</span>}
+  <h3 className={`text-xl sm:text-2xl font-bold text-(--text) flex items-center gap-2 ${className}`} {...props}>
+    {emoji && <span className="text-xl text-(--primary)">{emoji}</span>}
     {children}
   </h3>
 );
 
 Card.Description = ({ children, className = '', ...props }) => (
-  <p className={`text-sm text-[color:var(--muted)] ${className}`} {...props}>
+  <p className={`text-sm text-(--muted) ${className}`} {...props}>
     {children}
   </p>
 );
@@ -74,7 +74,7 @@ Card.Content = ({ children, className = '', ...props }) => (
 );
 
 Card.Footer = ({ children, className = '', ...props }) => (
-  <div className={`mt-4 pt-4 border-t border-[color:var(--border)] ${className}`} {...props}>
+  <div className={`mt-4 pt-4 border-t border-(--border) ${className}`} {...props}>
     {children}
   </div>
 );
@@ -95,9 +95,9 @@ export const IconCard = ({ icon, title, description, color = 'blue', ...props })
       <div className={`w-16 h-16 rounded-lg ${iconColors[color]} flex items-center justify-center mx-auto mb-4 transition-all duration-300`}>
         {icon}
       </div>
-      <h4 className="text-center text-base font-bold text-[color:var(--text)] mb-2">{title}</h4>
+      <h4 className="text-center text-base font-bold text-(--text) mb-2">{title}</h4>
       {description && (
-        <p className="text-center text-sm text-[color:var(--muted)]">{description}</p>
+        <p className="text-center text-sm text-(--muted)">{description}</p>
       )}
     </Card>
   );

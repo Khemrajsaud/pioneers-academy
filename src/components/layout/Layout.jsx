@@ -34,7 +34,7 @@ function Layout({ children }) {
         <button
           type="button"
           onClick={handleScrollTop}
-          className="fixed bottom-6 right-6 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--card)] text-[color:var(--primary)] shadow-lg transition hover:-translate-y-0.5"
+          className="fixed bottom-6 right-6 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--border) bg-(--card) text-(--primary) shadow-lg transition hover:-translate-y-0.5"
           aria-label="Scroll to top"
         >
           <span className="text-lg">↑</span>

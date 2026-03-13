@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Newspaper, Loader2, CalendarDays, UserRound, Tag, AlertCircle, Eye, ArrowRight } from "lucide-react";
+import { Newspaper, Loader2, CalendarDays, UserRound, AlertCircle, Eye, ArrowRight } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api/news`;
 
+/**
+ * ResourceNews component for displaying a list of news articles and school updates
+ */
 const ResourceNews = () => {
   const navigate = useNavigate();
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [viewedNewsIds, setViewedNewsIds] = useState(new Set());
 
+  /**
+   * Fetches news data from the API and handles loading/error states
+   */
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -24,15 +30,19 @@ const ResourceNews = () => {
         setNews(res.data || []);
       } catch (fetchError) {
         console.error("Error fetching news:", fetchError);
-        setError(language === "ne" ? "समाचार लोड गर्न सकिएन" : "Failed to load news");
+        setError(t.news.error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchNews();
-  }, [language]);
+  }, [t.news.error]);
 
+  /**
+   * Tracks and increments view count for a specific news item
+   * Utilizes a local Set to prevent multiple increments in a single session
+   */
   const incrementViewCount = async (newsId) => {
     if (viewedNewsIds.has(newsId)) return;
 
@@ -40,7 +50,7 @@ const ResourceNews = () => {
       setViewedNewsIds(prev => new Set([...prev, newsId]));
       await axios.patch(`${API_URL}/${newsId}/view`);
 
-      // Update the news list with new view count
+      // Optimistic UI update for the view count
       setNews(prevNews =>
         prevNews.map(item =>
           item.id === newsId ? { ...item, view_count: (item.view_count || 0) + 1 } : item
@@ -51,8 +61,11 @@ const ResourceNews = () => {
     }
   };
 
+  /**
+   * Formats a date string according to the current language locale
+   */
   const formatDate = (date) => {
-    if (!date) return language === "ne" ? "मिति उपलब्ध छैन" : "Date not available";
+    if (!date) return t.news.dateNotAvailable;
     return new Date(date).toLocaleDateString(language === "ne" ? "ne-NP" : "en-US", {
       year: "numeric",
       month: "long",
@@ -60,13 +73,18 @@ const ResourceNews = () => {
     });
   };
 
+  /**
+   * Cleans HTML content and provides a truncated preview string
+   */
   const getPreviewText = (html = "") => {
     const plainText = html.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
     if (plainText.length <= 150) return plainText;
     return `${plainText.slice(0, 150)}...`;
   };
 
-  // Animation variants
+  /**
+   * Animation definitions for consistent staggered reveals
+   */
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -85,63 +103,65 @@ const ResourceNews = () => {
   };
 
   return (
-    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-[color:var(--bg)] transition-colors">
+    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-(--bg) transition-colors">
       <div className="max-w-7xl mx-auto">
+        {/* Page Identity Section */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[color:var(--text)] tracking-tight mb-4">
-            {language === "ne" ? "समाचार र लेखहरू" : "News & Articles"}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-(--text) tracking-tight mb-4">
+            {t.news.hero}
           </h1>
-          <p className="text-lg md:text-xl text-[color:var(--muted)] max-w-2xl mx-auto leading-relaxed">
-            {language === "ne"
-              ? "विद्यालयका नवीनतम समाचार, घोषणा र जानकारी"
-              : "Latest school updates, announcements, and insightful article-style stories."}
+          <p className="text-lg md:text-xl text-(--muted) max-w-2xl mx-auto leading-relaxed">
+            {t.news.subtitle}
           </p>
         </motion.div>
 
+        {/* Dynamic State: Loading Indicator */}
         {loading && (
           <div className="flex flex-col items-center justify-center min-h-[40vh] gap-4">
-            <Loader2 className="animate-spin text-[color:var(--primary)]" size={48} />
-            <p className="text-lg text-[color:var(--muted)] animate-pulse">
-              {language === "ne" ? "समाचार लोड हुँदैछ..." : "Loading news..."}
+            <Loader2 className="animate-spin text-(--primary)" size={48} />
+            <p className="text-lg text-(--muted) animate-pulse">
+              {t.news.loading}
             </p>
           </div>
         )}
 
+        {/* Dynamic State: Specific Error Feedback */}
         {!loading && error && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="max-w-2xl mx-auto rounded-2xl p-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 flex items-center gap-4 text-red-600 dark:text-red-400"
           >
-            <AlertCircle size={24} className="flex-shrink-0" />
+            <AlertCircle size={24} className="shrink-0" />
             <p className="text-base font-medium m-0">{error}</p>
           </motion.div>
         )}
 
+        {/* Dynamic State: Empty Repository Placeholder */}
         {!loading && !error && news.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="max-w-2xl mx-auto text-center p-12 bg-[color:var(--card)] rounded-3xl border border-[color:var(--border)] shadow-sm"
+            className="max-w-2xl mx-auto text-center p-12 bg-(--card) rounded-3xl border border-(--border) shadow-sm"
           >
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[color:var(--bg-alt)] flex items-center justify-center text-[color:var(--muted)]/50">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-(--bg-alt) flex items-center justify-center text-(--muted)/50">
               <Newspaper size={32} />
             </div>
-            <h3 className="text-2xl font-bold mb-3 text-[color:var(--text)]">
-              {language === "ne" ? "अहिलेसम्म कुनै समाचार छैन" : "No news available yet"}
+            <h3 className="text-2xl font-bold mb-3 text-(--text)">
+              {t.news.noNews}
             </h3>
-            <p className="text-[color:var(--muted)] text-lg h-auto">
-              {language === "ne" ? "कृपया पछि फर्केर हेर्नुहोस्।" : "Check back later for updates and articles."}
+            <p className="text-(--muted) text-lg h-auto">
+              {t.news.noNewsDetail}
             </p>
           </motion.div>
         )}
 
+        {/* Primary Content: News Articles Grid */}
         {!loading && !error && news.length > 0 && (
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -155,10 +175,10 @@ const ResourceNews = () => {
                 variants={itemVariants}
                 onMouseEnter={() => incrementViewCount(item.id)}
                 onClick={() => navigate(`/news/${item.id}`)}
-                className="group flex flex-col rounded-3xl border border-[color:var(--border)] overflow-hidden bg-[color:var(--card)] hover:border-[color:var(--primary)]/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+                className="group flex flex-col rounded-3xl border border-(--border) overflow-hidden bg-(--card) hover:border-(--primary)/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
               >
-                {/* Image Section */}
-                <div className="relative h-56 md:h-64 w-full overflow-hidden bg-[color:var(--bg-alt)] shrink-0">
+                {/* Visual Anchor: Article Thumbnail */}
+                <div className="relative h-56 md:h-64 w-full overflow-hidden bg-(--bg-alt) shrink-0">
                   {item.image_url ? (
                     <img
                       src={item.image_url}
@@ -167,52 +187,52 @@ const ResourceNews = () => {
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-[color:var(--muted)]/30">
+                    <div className="w-full h-full flex items-center justify-center text-(--muted)/30">
                       <Newspaper size={64} />
                     </div>
                   )}
-                  {/* Category Badge overlaying image */}
+                  {/* Categorical Labeling */}
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-[color:var(--primary)] text-white shadow-md">
-                      {item.category || (language === "ne" ? "सामान्य" : "General")}
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-(--primary) text-white shadow-md">
+                      {item.category || t.news.general}
                     </span>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--card)] via-[color:var(--card)]/10 to-transparent opacity-80"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-(--card) via-(--card)/10 to-transparent opacity-80"></div>
                 </div>
 
-                {/* Content Section */}
-                <div className="flex flex-col flex-grow p-6 sm:p-8 relative z-10 bg-[color:var(--card)] -mt-6">
-                  {/* Date and Views */}
-                  <div className="flex items-center justify-between text-xs font-semibold text-[color:var(--muted)] mb-4">
+                {/* Article Narrative Container */}
+                <div className="flex flex-col grow p-6 sm:p-8 relative z-10 bg-(--card) -mt-6">
+                  {/* Article Metadata (Chronology and Engagement) */}
+                  <div className="flex items-center justify-between text-xs font-semibold text-(--muted) mb-4">
                     <div className="flex items-center gap-1.5">
-                      <CalendarDays size={14} className="text-[color:var(--primary)]" />
+                      <CalendarDays size={14} className="text-(--primary)" />
                       <span>{formatDate(item.published_date)}</span>
                     </div>
-                    <div className="flex items-center gap-1.5 bg-[color:var(--bg-alt)] px-2 py-1 rounded-full">
-                      <Eye size={12} className="text-[color:var(--primary)]" />
+                    <div className="flex items-center gap-1.5 bg-(--bg-alt) px-2 py-1 rounded-full">
+                      <Eye size={12} className="text-(--primary)" />
                       <span>{item.view_count || 0}</span>
                     </div>
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-bold leading-tight mb-3 text-[color:var(--text)] line-clamp-2 group-hover:text-[color:var(--primary)] transition-colors">
+                  <h2 className="text-xl sm:text-2xl font-bold leading-tight mb-3 text-(--text) line-clamp-2 group-hover:text-(--primary) transition-colors">
                     {item.title}
                   </h2>
 
-                  <p className="text-sm md:text-base leading-relaxed text-[color:var(--muted)] mb-6 flex-grow line-clamp-3">
+                  <p className="text-sm md:text-base leading-relaxed text-(--muted) mb-6 grow line-clamp-3">
                     {getPreviewText(item.description)}
                   </p>
 
-                  {/* Footer of Card */}
-                  <div className="mt-auto pt-4 border-t border-[color:var(--border)] flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-medium text-[color:var(--muted)] truncate max-w-[60%]">
-                      <div className="w-6 h-6 rounded-full bg-[color:var(--primary)]/10 flex items-center justify-center shrink-0">
-                        <UserRound size={12} className="text-[color:var(--primary)]" />
+                  {/* Contextual Action Link */}
+                  <div className="mt-auto pt-4 border-t border-(--border) flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs font-medium text-(--muted) truncate max-w-[60%]">
+                      <div className="w-6 h-6 rounded-full bg-(--primary)/10 flex items-center justify-center shrink-0">
+                        <UserRound size={12} className="text-(--primary)" />
                       </div>
-                      <span className="truncate">{item.published_by || (language === "ne" ? "प्रशासन" : "Administration")}</span>
+                      <span className="truncate">{item.published_by || t.news.admin}</span>
                     </div>
 
-                    <div className="flex items-center gap-1 text-sm font-bold text-[color:var(--primary)] group-hover:translate-x-1 transition-transform">
-                      {language === "ne" ? "पढ्नुहोस्" : "Read More"}
+                    <div className="flex items-center gap-1 text-sm font-bold text-(--primary) group-hover:translate-x-1 transition-transform">
+                      {t.news.readMore}
                       <ArrowRight size={16} />
                     </div>
                   </div>

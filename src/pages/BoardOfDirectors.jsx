@@ -1,89 +1,19 @@
 import { useState } from "react";
-import { Mail, Phone, Linkedin, MapPin, X } from "lucide-react";
+import { Mail, Phone, MapPin, X } from "lucide-react";
 import homepage from "../assets/images/contact.png";
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 
+/**
+ * BoardOfDirectors component showcasing the school's leadership team
+ */
 const BoardOfDirectors = () => {
   const { t } = useLanguage();
   const [selectedMember, setSelectedMember] = useState(null);
 
-  const boardMembers = [
-    {
-      id: 1,
-      name: "Rajesh Kumar Singh",
-      title: "Chairperson",
-      department: "Board Leadership",
-      image:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop",
-      email: "rajesh@pioneersacademy.edu.np",
-      phone: "+977 01-4234567",
-      bio: "Visionary leader with 20+ years of experience in educational management and organizational development.",
-      specialization: "Educational Leadership",
-    },
-    {
-      id: 2,
-      name: "Priya Sharma",
-      title: "Vice Chairperson",
-      department: "Academic Affairs",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop",
-      email: "priya@pioneersacademy.edu.np",
-      phone: "+977 01-4234568",
-      bio: "Expert in curriculum development and student-centered learning approaches.",
-      specialization: "Curriculum Development",
-    },
-    {
-      id: 3,
-      name: "Amit Bikram Supaek",
-      title: "Principal",
-      department: "School Administration",
-      image:
-        "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=600&h=800&fit=crop",
-      email: "amit@pioneersacademy.edu.np",
-      phone: "+977 01-4234569",
-      bio: "Dedicated educator focused on academic excellence and holistic student development.",
-      specialization: "Academic Excellence",
-    },
-    {
-      id: 4,
-      name: "Dr. Deepak Bhattarai",
-      title: "Board Member",
-      department: "Research & Innovation",
-      image:
-        "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=600&h=800&fit=crop",
-      email: "deepak@pioneersacademy.edu.np",
-      phone: "+977 01-4234570",
-      bio: "Researcher and innovator committed to modernizing educational practices.",
-      specialization: "Educational Research",
-    },
-    {
-      id: 5,
-      name: "Sarah Mitchell",
-      title: "Board Member",
-      department: "International Relations",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop",
-      email: "sarah@pioneersacademy.edu.np",
-      phone: "+977 01-4234571",
-      bio: "International education specialist fostering global partnerships and cultural exchange.",
-      specialization: "Global Education",
-    },
-    {
-      id: 6,
-      name: "Anita Devi Poudel",
-      title: "Board Member",
-      department: "Community Engagement",
-      image:
-        "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=800&fit=crop",
-      email: "anita@pioneersacademy.edu.np",
-      phone: "+977 01-4234572",
-      bio: "Community advocate dedicated to bridging school, families, and society.",
-      specialization: "Community Relations",
-    },
-  ];
-
-  // Animation variants
+  /**
+   * Animation variants for the grid container
+   */
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -94,6 +24,9 @@ const BoardOfDirectors = () => {
     },
   };
 
+  /**
+   * Animation variants for individual member cards
+   */
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -103,6 +36,9 @@ const BoardOfDirectors = () => {
     },
   };
 
+  /**
+   * Animation variants for the detail modal
+   */
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
@@ -117,19 +53,40 @@ const BoardOfDirectors = () => {
     }
   };
 
+  /**
+   * Enrich translation member data with static assets like images and contact info
+   */
+  const boardMembers = t.board.members.map(member => ({
+    ...member,
+    // Note: These image URLs are placeholders from Unsplash
+    image: member.id === 1 ? "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop" :
+      member.id === 2 ? "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop" :
+        member.id === 3 ? "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=600&h=800&fit=crop" :
+          member.id === 4 ? "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=600&h=800&fit=crop" :
+            member.id === 5 ? "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop" :
+              "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=800&fit=crop",
+    email: `${member.name.toLowerCase().replace(/\s+/g, '')}@pioneersacademy.edu.np`,
+    phone: `+977 01-42345${66 + member.id}`,
+  }));
+
   return (
-    <div className="min-h-screen bg-[color:var(--bg)] text-[color:var(--text)]">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-(--bg) text-(--text)">
+      {/* Visual Hero Section */}
       <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden">
         <img
           src={homepage}
           alt="Board of Directors"
           className="w-full h-full object-cover"
         />
-
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 to-black/40"></div>
+        {/* <div className="absolute inset-0 flex items-center justify-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight shadow-sm">
+            {t.board.hero}
+          </h1>
+        </div> */}
       </div>
 
-      {/* Main Content */}
+      {/* Primary Narrative Content */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-20">
         <motion.div
           className="mb-12 sm:mb-16 text-center"
@@ -138,12 +95,12 @@ const BoardOfDirectors = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-base sm:text-lg md:text-xl text-[color:var(--muted)] max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-(--muted) max-w-3xl mx-auto leading-relaxed">
             {t.board.subtitle}
           </p>
         </motion.div>
 
-        {/* Board Members Grid */}
+        {/* Member Showcase Grid */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"
           variants={containerVariants}
@@ -156,50 +113,46 @@ const BoardOfDirectors = () => {
               key={member.id}
               variants={itemVariants}
               onClick={() => setSelectedMember(member)}
-              className="group flex flex-col rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:border-[color:var(--primary)]/50 transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+              className="group flex flex-col rounded-2xl border border-(--border) bg-(--card) overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:border-(--primary)/50 transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
             >
-              {/* Image Container - Aspect ratio adjusted to fit full image properly */}
-              <div className="relative aspect-square w-full overflow-hidden bg-[color:var(--bg-alt)] flex items-end justify-center">
+              {/* Profile Image & Role Ribbon */}
+              <div className="relative aspect-square w-full overflow-hidden bg-(--bg-alt) flex items-end justify-center">
                 <img
                   src={member.image}
                   alt={member.name}
                   className="w-full h-full object-contain object-bottom transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--card)] via-transparent to-transparent opacity-60"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-(--card) via-transparent to-transparent opacity-60"></div>
 
-                {/* Overlay Content mapping directly on image bottom slightly */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="inline-block px-3 py-1 mb-2 text-xs font-bold tracking-wider text-white uppercase bg-[color:var(--primary)] rounded-full shadow-md">
+                  <span className="inline-block px-3 py-1 mb-2 text-xs font-bold tracking-wider text-white uppercase bg-(--primary) rounded-full shadow-md">
                     {member.title}
                   </span>
                 </div>
               </div>
 
-              {/* Info Section */}
-              <div className="flex flex-col flex-1 p-6 relative z-10 bg-[color:var(--card)]">
-                <h3 className="text-xl sm:text-2xl font-bold text-[color:var(--text)] line-clamp-2">
+              {/* Identity & Quick Actions Section */}
+              <div className="flex flex-col flex-1 p-6 relative z-10 bg-(--card)">
+                <h3 className="text-xl sm:text-2xl font-bold text-(--text) line-clamp-2">
                   {member.name}
                 </h3>
-                <p className="text-sm font-medium text-[color:var(--muted)] mt-1">
+                <p className="text-sm font-medium text-(--muted) mt-1">
                   {member.department}
                 </p>
 
-                {/* Contact Icons Mini */}
+                {/* Engagement Icons */}
                 <div className="flex gap-3 mt-5">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[color:var(--bg-alt)] text-[color:var(--muted)] group-hover:text-[color:var(--primary)] group-hover:bg-[color:var(--primary)]/10 transition-colors">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-(--bg-alt) text-(--muted) group-hover:text-(--primary) group-hover:bg-(--primary)/10 transition-colors">
                     <Mail size={14} />
                   </div>
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[color:var(--bg-alt)] text-[color:var(--muted)] group-hover:text-[color:var(--primary)] group-hover:bg-[color:var(--primary)]/10 transition-colors">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-(--bg-alt) text-(--muted) group-hover:text-(--primary) group-hover:bg-(--primary)/10 transition-colors">
                     <Phone size={14} />
-                  </div>
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[color:var(--bg-alt)] text-[color:var(--muted)] group-hover:text-blue-600 group-hover:bg-blue-50 transition-colors">
-                    <Linkedin size={14} />
                   </div>
                 </div>
 
                 <div className="mt-auto pt-6">
-                  <button className="w-full py-2.5 px-4 text-sm font-semibold rounded-xl border border-[color:var(--primary)] text-[color:var(--primary)] group-hover:bg-[color:var(--primary)] group-hover:text-white transition-colors duration-300">
-                    {t.board.viewBio || "View Profile"}
+                  <button className="w-full py-2.5 px-4 text-sm font-semibold rounded-xl border border-(--primary) text-(--primary) group-hover:bg-(--primary) group-hover:text-white transition-colors duration-300">
+                    {t.board.viewBio}
                   </button>
                 </div>
               </div>
@@ -208,29 +161,29 @@ const BoardOfDirectors = () => {
         </motion.div>
       </div>
 
-      {/* Modal */}
+      {/* Detailed Member Profile Modal */}
       <AnimatePresence>
         {selectedMember && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-            {/* Backdrop */}
+          <div className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            {/* Backdrop Layer */}
             <motion.div
-              className="fixed inset-0 bg-[color:var(--bg)]/80 backdrop-blur-sm"
+              className="fixed inset-0 bg-(--bg)/80 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
             />
 
-            {/* Modal Dialog */}
+            {/* Modal Body */}
             <motion.div
-              className="relative w-full max-w-4xl bg-[color:var(--card)] rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-(--card) rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
               variants={modalVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
+              {/* Escape Button */}
               <button
                 onClick={() => setSelectedMember(null)}
                 className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/20 hover:bg-black/40 text-white backdrop-blur-md flex items-center justify-center transition-colors"
@@ -238,82 +191,81 @@ const BoardOfDirectors = () => {
                 <X size={20} />
               </button>
 
-              {/* Image Side (Left on desktop, Top on mobile) */}
+              {/* Portrait Side */}
               <div className="w-full md:w-2/5 h-64 md:h-auto overflow-hidden relative">
                 <img
                   src={selectedMember.image}
                   alt={selectedMember.name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--card)] md:from-transparent md:bg-gradient-to-r md:to-[color:var(--card)]/90 via-transparent opacity-100"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-(--card) md:from-transparent md:bg-linear-to-r md:to-(--card)/90 via-transparent opacity-100"></div>
               </div>
 
-              {/* Content Side */}
+              {/* Biographical Content Side */}
               <div className="w-full md:w-3/5 p-8 sm:p-10 md:p-12 overflow-y-auto custom-scrollbar">
                 <div>
-                  <span className="inline-block px-3 py-1 mb-3 text-xs font-bold tracking-wider text-[color:var(--primary)] uppercase bg-[color:var(--primary)]/10 rounded-full">
+                  <span className="inline-block px-3 py-1 mb-3 text-xs font-bold tracking-wider text-(--primary) uppercase bg-(--primary)/10 rounded-full">
                     {selectedMember.specialization}
                   </span>
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-[color:var(--text)] mb-2">
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-(--text) mb-2">
                     {selectedMember.name}
                   </h2>
-                  <p className="text-xl text-[color:var(--primary)] font-semibold">
+                  <p className="text-xl text-(--primary) font-semibold">
                     {selectedMember.title}
                   </p>
-                  <p className="text-sm text-[color:var(--muted)] mt-1 font-medium">
+                  <p className="text-sm text-(--muted) mt-1 font-medium">
                     {selectedMember.department}
                   </p>
                 </div>
 
                 <div className="mt-8">
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-[color:var(--muted)] mb-3">Biography</h4>
-                  <p className="text-base text-[color:var(--text)] leading-relaxed opacity-90">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-(--muted) mb-3">Biography</h4>
+                  <p className="text-base text-(--text) leading-relaxed opacity-90">
                     {selectedMember.bio}
                   </p>
                 </div>
 
-                {/* Contact Information */}
-                <div className="mt-10 pt-8 border-t border-[color:var(--border)]">
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-[color:var(--muted)] mb-6">Contact & Info</h4>
+                {/* Full Contact Directory */}
+                <div className="mt-10 pt-8 border-t border-(--border)">
+                  <h4 className="text-sm font-bold uppercase tracking-wider text-(--muted) mb-6">Contact & Info</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <a
                       href={`mailto:${selectedMember.email}`}
-                      className="flex items-center gap-4 p-3 rounded-xl hover:bg-[color:var(--bg-alt)] transition-colors group/link"
+                      className="flex items-center gap-4 p-3 rounded-xl hover:bg-(--bg-alt) transition-colors group/link"
                     >
-                      <div className="w-10 h-10 rounded-full bg-[color:var(--primary)]/10 flex items-center justify-center text-[color:var(--primary)] group-hover/link:bg-[color:var(--primary)] group-hover/link:text-white transition-colors">
+                      <div className="w-10 h-10 rounded-full bg-(--primary)/10 flex items-center justify-center text-(--primary) group-hover/link:bg-(--primary) group-hover/link:text-white transition-colors">
                         <Mail size={18} />
                       </div>
                       <div className="overflow-hidden">
-                        <p className="text-xs font-semibold text-[color:var(--muted)] uppercase tracking-wider">Email</p>
-                        <p className="text-sm text-[color:var(--text)] truncate">{selectedMember.email}</p>
+                        <p className="text-xs font-semibold text-(--muted) uppercase tracking-wider">Email</p>
+                        <p className="text-sm text-(--text) truncate">{selectedMember.email}</p>
                       </div>
                     </a>
 
                     <a
                       href={`tel:${selectedMember.phone}`}
-                      className="flex items-center gap-4 p-3 rounded-xl hover:bg-[color:var(--bg-alt)] transition-colors group/link"
+                      className="flex items-center gap-4 p-3 rounded-xl hover:bg-(--bg-alt) transition-colors group/link"
                     >
-                      <div className="w-10 h-10 rounded-full bg-[color:var(--primary)]/10 flex items-center justify-center text-[color:var(--primary)] group-hover/link:bg-[color:var(--primary)] group-hover/link:text-white transition-colors">
+                      <div className="w-10 h-10 rounded-full bg-(--primary)/10 flex items-center justify-center text-(--primary) group-hover/link:bg-(--primary) group-hover/link:text-white transition-colors">
                         <Phone size={18} />
                       </div>
                       <div>
-                        <p className="text-xs font-semibold text-[color:var(--muted)] uppercase tracking-wider">Phone</p>
-                        <p className="text-sm text-[color:var(--text)]">{selectedMember.phone}</p>
+                        <p className="text-xs font-semibold text-(--muted) uppercase tracking-wider">Phone</p>
+                        <p className="text-sm text-(--text)">{selectedMember.phone}</p>
                       </div>
                     </a>
 
                     <div className="flex items-center gap-4 p-3 rounded-xl">
-                      <div className="w-10 h-10 rounded-full bg-[color:var(--primary)]/10 flex items-center justify-center text-[color:var(--primary)]">
+                      <div className="w-10 h-10 rounded-full bg-(--primary)/10 flex items-center justify-center text-(--primary)">
                         <MapPin size={18} />
                       </div>
                       <div>
-                        <p className="text-xs font-semibold text-[color:var(--muted)] uppercase tracking-wider">Location</p>
-                        <p className="text-sm text-[color:var(--text)]">Kathmandu, Nepal</p>
+                        <p className="text-xs font-semibold text-(--muted) uppercase tracking-wider">Location</p>
+                        <p className="text-sm text-(--text)">Kathmandu, Nepal</p>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </motion.div>
           </div>
