@@ -17,7 +17,8 @@ import {
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion } from "framer-motion";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/news`;
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = `${API_BASE}/api/news`;
 
 /**
  * DetailedNews component for rendering a single, comprehensive news article

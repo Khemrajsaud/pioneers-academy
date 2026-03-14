@@ -422,14 +422,11 @@ import {
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 
-// --- PRODUCTION CONFIGURATION ---
-// This uses the Vercel variable if it exists, otherwise it defaults to localhost
+
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const API_URL = `${API_BASE}/api/gallery`;
 
-/**
- * ResourceGallery component for displaying and managing a visual showcase of the school
- */
+
 function ResourceGallery() {
   const { t } = useLanguage();
   const [gallery, setGallery] = useState([]);
@@ -445,7 +442,6 @@ function ResourceGallery() {
     try {
       setLoading(true);
       setError(null);
-      // Logs the URL so you can see if it's hitting Render or Localhost in the F12 console
       console.log("Fetching from:", API_URL);
 
       const res = await axios.get(API_URL);
@@ -522,10 +518,10 @@ function ResourceGallery() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
+        <h1 className="text-4xl md:text-5xl lg:text-3xl font-extrabold tracking-tight mb-4">
           {t.gallery.hero}
         </h1>
-        <p className="text-lg md:text-xl text-(--muted) max-w-2xl mx-auto leading-relaxed">
+        <p className=" text-sm text-(--muted) max-w-2xl mx-auto leading-relaxed">
           {t.gallery.subtitle}
         </p>
       </motion.div>

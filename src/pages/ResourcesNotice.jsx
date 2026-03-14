@@ -13,7 +13,8 @@ import {
 import { useLanguage } from "../contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/notice`;
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = `${API_BASE}/api/notice`;
 
 
 const ResourcesNotice = () => {
@@ -109,10 +110,10 @@ const ResourcesNotice = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-(--text) tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-3xl font-extrabold text-(--text) tracking-tight mb-4">
             {t.notices.hero}
           </h1>
-          <p className="text-lg md:text-xl text-(--muted) max-w-2xl mx-auto leading-relaxed">
+          <p className=" text-sm text-(--muted) max-w-2xl mx-auto leading-relaxed">
             {t.notices.subtitle}
           </p>
         </motion.div>

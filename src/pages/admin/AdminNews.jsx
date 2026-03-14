@@ -21,7 +21,8 @@ import { useAdminTheme } from "../../contexts/AdminThemeContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 import RichTextEditor from "../../components/admin/RichTextEditor";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/news`;
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = `${API_BASE}/api/news`;
 
 /* ──────────────────────────────────── Notification Component ─── */
 const Toast = ({ toasts }) => (

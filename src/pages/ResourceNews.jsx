@@ -112,10 +112,10 @@ const ResourceNews = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-(--text) tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-3xl font-extrabold text-(--text) tracking-tight mb-4">
             {t.news.hero}
           </h1>
-          <p className="text-lg md:text-xl text-(--muted) max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm text-(--muted) max-w-2xl mx-auto leading-relaxed">
             {t.news.subtitle}
           </p>
         </motion.div>
