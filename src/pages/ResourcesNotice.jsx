@@ -103,20 +103,14 @@ const ResourcesNotice = () => {
   return (
     <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-(--bg) transition-colors">
       <div className="max-w-7xl mx-auto">
-        {/* Descriptive Page Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <h1 className="text-4xl md:text-5xl lg:text-3xl font-extrabold text-(--text) tracking-tight mb-4">
-            {t.notices.hero}
-          </h1>
-          <p className=" text-sm text-(--muted) max-w-2xl mx-auto leading-relaxed">
-            {t.notices.subtitle}
-          </p>
-        </motion.div>
+        <div className="mb-10 sm:mb-12">
+          <div className="flex items-center gap-4">
+            <div className="bg-(--primary) h-14 w-2 rounded-xs" />
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-(--text)">
+              {t.notices.hero}
+            </h1>
+          </div>
+        </div>
 
         {/* Dynamic Loading Overlay */}
         {loading && (

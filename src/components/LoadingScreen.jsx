@@ -8,17 +8,17 @@ const LoadingScreen = ({ onLoadComplete }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const next = Math.min(prev + 2, 100);
+        const next = Math.min(prev + 5, 100);
         if (next === 100) {
           clearInterval(interval);
           setTimeout(() => {
             setIsVisible(false);
             onLoadComplete?.();
-          }, 250);
+          }, 150);
         }
         return next;
       });
-    }, 40);
+    }, 30);
 
     return () => clearInterval(interval);
   }, [onLoadComplete]);

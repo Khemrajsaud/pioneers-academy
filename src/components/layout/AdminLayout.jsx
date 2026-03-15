@@ -8,14 +8,14 @@ const AdminLayoutContent = () => {
   const { isDarkMode } = useAdminTheme();
 
   return (
-    <div className={`flex min-h-screen transition-colors duration-300 ${
+    <div className={`flex flex-col lg:flex-row min-h-screen transition-colors duration-300 ${
       isDarkMode ? 'bg-[#0a0f1e]' : 'bg-slate-50'
     }`}>
       <Sidebar />
 
       <div className="flex-1 flex flex-col">
         <Topbar />
-        <div className="flex-1 p-6">
+        <div className="flex-1 p-4 sm:p-6">
           <Outlet />
         </div>
       </div>

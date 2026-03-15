@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import en from '../translations/en';
 import ne from '../translations/ne';
 
@@ -13,6 +14,7 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
+  const location = useLocation();
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem('language') || 'en';
   });
@@ -22,7 +24,8 @@ export const LanguageProvider = ({ children }) => {
     ne
   };
 
-  const t = translations[language];
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  const t = isAdminRoute ? translations.en : translations[language];
 
   useEffect(() => {
     localStorage.setItem('language', language);

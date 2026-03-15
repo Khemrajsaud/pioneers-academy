@@ -11,8 +11,6 @@ import {
 import { useAdminTheme } from "../../contexts/AdminThemeContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-// const API_URL = `${import.meta.env.VITE_API_URL}/api/gallery`;
-
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const API_URL = `${API_BASE}/api/gallery`;
 
@@ -284,7 +282,7 @@ function AdminGallery() {
         </div>
 
         {loading ? (
-          <div className="flex flex-col items-center justify-center min-h-[300px] gap-4">
+          <div className="flex flex-col items-center justify-center min-h-75 gap-4">
             <Loader size={40} className="text-blue-500 animate-spin" />
             <p className={`text-sm font-bold tracking-widest uppercase opacity-60 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
               {t.admin.common.loading}
@@ -307,7 +305,7 @@ function AdminGallery() {
             {gallery.map((item) => (
               <div
                 key={item.id}
-                className={`group rounded-2xl border overflow-hidden transition-all hover:shadow-xl hover:translate-y-[-4px] ${isDarkMode
+                className={`group rounded-2xl border overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 ${isDarkMode
                   ? 'border-slate-800 bg-slate-900/50'
                   : 'border-slate-100 bg-white shadow-sm'
                   }`}

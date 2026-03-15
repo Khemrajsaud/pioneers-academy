@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
-/**
- * fadeInUp configuration for section animations
- */
+
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
@@ -40,10 +38,7 @@ const Academics = () => {
     };
   }, []);
 
-  /**
-   * Structure containing academic level metadata and icons
-   * Uses translation objects from LanguageContext
-   */
+ 
   const academicLevels = {
     preprimary: {
       title: t.academics.levels.preprimary.title,
@@ -227,36 +222,20 @@ const Academics = () => {
   return (
     <div className="min-h-screen bg-(--bg) text-(--text)">
       {/* Page Hero Section */}
-      <section className="group relative h-[260px] sm:h-[380px] md:h-[500px] overflow-hidden border-b border-(--border)">
+      <section className="group relative h-44 sm:h-56 md:h-60 w-full overflow-hidden border-b border-(--border)">
         <img src={Academy} alt="Pioneers Academy Academics" className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-        <div className="absolute inset-0 bg-linear-to-r from-black/55 via-black/35 to-transparent" />
-        <div className="absolute inset-0 mx-auto flex max-w-7xl items-center px-4 sm:px-6">
-          <motion.div
-            className="max-w-2xl"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <button className="mb-4 text-sm sm:text-base text-white bg-white/20 px-3 py-1 rounded-full backdrop-blur-md border border-white/30 shadow-sm">
-              {t.academics.hero.tag}
-            </button>
-            <motion.h1
-              className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-white mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.05 }}
-            >
-              {t.academics.hero.title1} <br /> <span className="text-(--primary)">{t.academics.hero.title2}</span>
-            </motion.h1>
-            <motion.p
-              className="mt-3 text-sm sm:text-base md:text-lg text-slate-100 max-w-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-            >
-              {t.academics.hero.description}
-            </motion.p>
-          </motion.div>
+        
+
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 to-black/55" />
+        <div className="absolute inset-0">
+          <div className="max-w-7xl mx-auto h-full flex items-center px-4 sm:px-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-(--primary) h-12 sm:h-14 w-2 rounded-xs" />
+              <h1 className="text-white text-2xl sm:text-4xl md:text-5xl font-semibold">
+               Academics
+              </h1>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -270,7 +249,7 @@ const Academics = () => {
               className="w-full flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 rounded-lg border-2 border-(--primary) bg-(--card) text-(--text) font-semibold hover:bg-(--bg-alt) transition hover:shadow-lg"
             >
               <span className="flex items-center gap-2">
-                <span className="text-2xl">{currentLevel.icon}</span>
+                {/* <span className="text-2xl">{currentLevel.icon}</span> */}
                 <span className="text-sm sm:text-base">{currentLevel.title}</span>
               </span>
               <ChevronDown
@@ -288,7 +267,7 @@ const Academics = () => {
                     onClick={() => handleLevelChange(key)}
                     className={`w-full text-left px-4 sm:px-6 py-3 sm:py-4 hover:bg-(--bg-alt) transition flex items-center gap-3 ${activeLevel === key ? "bg-(--primary)/10 border-l-4 border-(--primary)" : ""}`}
                   >
-                    <span className="text-2xl">{level.icon}</span>
+                    {/* <span className="text-2xl">{level.icon}</span> */}
                     <div>
                       <p className="text-sm sm:text-base font-semibold text-(--text)">
                         {level.title}

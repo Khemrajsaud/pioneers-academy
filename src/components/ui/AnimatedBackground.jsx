@@ -1,9 +1,5 @@
 import React from 'react';
 
-/**
- * Animated Background Component
- * Creates a beautiful, playful background with floating elements
- */
 
 export const AnimatedBackground = ({ variant = 'dots', className = '' }) => {
   if (variant === 'dots') {

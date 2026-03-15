@@ -23,7 +23,7 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <aside className={`w-64 min-h-screen flex flex-col relative border-r transition-colors duration-300 ${isDarkMode
+    <aside className={`w-full lg:w-64 lg:min-h-screen flex flex-col relative border-b lg:border-b-0 lg:border-r transition-colors duration-300 ${isDarkMode
       ? 'bg-[#080e1e] border-slate-800/60'
       : 'bg-white border-slate-100'
       }`}>
@@ -31,7 +31,7 @@ const Sidebar = () => {
       <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-500 via-indigo-500 to-blue-700" />
 
       {/* Brand */}
-      <div className="flex items-center gap-3 px-6 pt-8 pb-8">
+      <div className="flex items-center gap-3 px-4 sm:px-6 pt-5 pb-5 lg:pt-8 lg:pb-8">
         <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/30">
           <GraduationCap className="text-white" size={20} />
         </div>
@@ -45,7 +45,7 @@ const Sidebar = () => {
       </div>
 
       {/* Nav label */}
-      <div className="px-6 mb-2">
+      <div className="hidden lg:block px-6 mb-2">
         <p className={`text-[10px] uppercase font-bold tracking-widest ${isDarkMode ? 'text-slate-600' : 'text-slate-400'
           }`}>
           Management
@@ -53,14 +53,14 @@ const Sidebar = () => {
       </div>
 
       {/* Nav Links */}
-      <nav className="flex-1 px-3 space-y-1">
+      <nav className="flex-1 px-3 pb-4 lg:pb-3 space-y-1 lg:space-y-1 overflow-x-auto lg:overflow-visible">
         {navItems.map(({ to, icon, label }) => {
           const active = isActive(to);
           return (
             <Link
               key={to}
               to={to}
-              className={`group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 ${active
+              className={`group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 lg:whitespace-normal whitespace-nowrap ${active
                 ? 'bg-linear-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25'
                 : isDarkMode
                   ? 'text-slate-400 hover:bg-slate-800/60 hover:text-white'

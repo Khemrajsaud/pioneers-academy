@@ -26,57 +26,7 @@ const en = {
     brandSubtitle: "Excellence in Education"
   },
 
-  // Admin Panel Common Labels
-  admin: {
-    dashboard: {
-      title: "Welcome back 👋",
-      subtitle: "Here's what's happening on your school website today.",
-      stats: {
-        gallery: "Gallery Images",
-        news: "News Articles",
-        notices: "Active Notices"
-      },
-      quickActions: {
-        title: "Quick Actions",
-        uploadImg: "Upload Image",
-        uploadImgSub: "Add photo to gallery",
-        createNews: "Create News",
-        createNewsSub: "Publish a new article",
-        postNotice: "Post Notice",
-        postNoticeSub: "Add a school notice"
-      }
-    },
-    gallery: {
-      title: "Gallery Management",
-      subtitle: "Upload and manage school gallery images",
-      uploadTitle: "Upload New Image",
-      imageTitle: "Image Title",
-      selectImage: "Select Image",
-      uploading: "Uploading...",
-      deleteConfirm: "Are you sure you want to delete this image?",
-      success: "Image uploaded successfully!",
-      deleted: "Image deleted successfully!",
-      noImages: "No Images Yet"
-    },
-    news: {
-      title: "News Management",
-      subtitle: "Write and publish news articles",
-      createNew: "Create News Article"
-    },
-    notices: {
-      title: "Notice Management",
-      subtitle: "Manage school notices and alerts",
-      postNew: "Post New Notice"
-    },
-    common: {
-      cancel: "Cancel",
-      upload: "Upload",
-      delete: "Delete",
-      loading: "Loading...",
-      error: "An error occurred"
-    }
-  },
-
+  
   // Website Footer
   footer: {
     intro: " We build strong foundations in academics, character, and creativity so every learner can thrive in a changing world.",
@@ -127,6 +77,16 @@ const en = {
       subtitle: "Nurturing Future Leaders Through Excellence in Education",
       cta: "Explore More",
     },
+    information: {
+      but: "Register",
+      infohead: "Admissions Open Pre-Primary | Primary |" ,
+      infosubhead: "Secondary | +2 Programs"
+
+    },
+    fromprincipal :{
+      message: "It is with great pride and joy that I welcome you to Pioneers Academy. As an institution dedicated to excellence in education, we stand committed to nurturing not just academic brilliance, but also strong character, critical thinking, and compassionate citizenship.At Pioneers Academy, we believe that every child is unique, with their own talents, interests, and potential. Our mission is to create an environment where these individual strengths can flourish, where curiosity is encouraged, and where students are inspired to dream big and work hard to achieve their goals.Our experienced and dedicated faculty members work tirelessly to provide a learning experience that goes beyond textbooks. We emphasize hands-on learning, collaborative projects, and real-world applications of knowledge. Our state-of-the-art facilities, from modern laboratories to well-equipped libraries, provide students with the tools they need to explore, discover, and excel."
+    },
+    
     intro: {
       welcome: "Welcome",
       title: "Pioneers Academy",
@@ -713,7 +673,8 @@ const en = {
 
   // Principal's Message
   principal: {
-    hero: "Principal's Message",
+    hero: "Message from ",
+    subhero: "Principal ",
     views: "Views",
     share: "Share",
     role: "Principal",
@@ -721,7 +682,7 @@ const en = {
     publishedOn: "Published on",
     shareTitle: "Share this message",
     linkCopied: "Link Copied!",
-    message: `Dear Students, Parents, and Well-wishers,
+    message: `
 
 It is with great pride and joy that I welcome you to Pioneers Academy. As an institution dedicated to excellence in education, we stand committed to nurturing not just academic brilliance, but also strong character, critical thinking, and compassionate citizenship.
 
@@ -738,8 +699,7 @@ To our parents and guardians, thank you for entrusting us with your children's e
 I look forward to working with each and every one of you to make this academic year successful and memorable.
 
 With warm regards,
-Dr. Rajesh Sharma
-Principal, Pioneers Academy`,
+`,
   },
 
   // Chairman's Message

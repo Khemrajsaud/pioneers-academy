@@ -3,7 +3,7 @@ import logo from "../../assets/logo/logo.png";
 import Nepal from "../../assets/icons/NP.png";
 import English from "../../assets/icons/US.png";
 import { Link } from "react-router-dom";
-import { Menu, Moon, Sun, X, ChevronDown, Megaphone } from "lucide-react";
+import { Menu, Moon, Sun, X, ChevronDown, Megaphone,Facebook,Instagram,Youtube } from "lucide-react";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 /**
@@ -74,15 +74,29 @@ const Navbar = () => {
       {/* ADMISSION ANNOUNCEMENT MARQUEE
           A scrolling bar for high-priority news like admissions. */}
       <div className="overflow-hidden border-b border-(--border) bg-linear-to-r from-(--primary) to-(--primary-strong) text-white">
-        <div className="admission-marquee">
+        <div className="admission-marquee flex items-center gap-4">
           {[0, 1].map((item) => (
             <div key={item} className="flex shrink-0 items-center gap-2 px-8 py-2 text-xs font-semibold sm:text-sm">
-              {/* <Megaphone size={20} className="shrink-0 animate-pulse-subtle" /> */}
+          
               <span>🎓 School Admission Open for 2026!</span>
             </div>
           ))}
+           <div className="flex items-center gap-10">
+            <p>contact@pioneers.edu.np</p>
+            <p> +977-91-540488</p>
+             <p>  Lamkichuha-1, Lamki, Kailali</p>
+           
+           
+
+            
+            </div>
+            <div className="flex items-center gap-8">
+              <Facebook className=" text-sm text-wihte" /> <Instagram/> <Youtube/>
+            </div>
+         
+          </div>
         </div>
-      </div>
+    
 
       {/* STICKY NAVIGATION BAR
           Primary navigation with desktop links and mobile hamburger menu. */}
@@ -98,9 +112,7 @@ const Navbar = () => {
               <h1 className="text-lg sm:text-xl font-black text-(--text) tracking-tight">
                 {t.nav.brandTitle}
               </h1>
-              <p className="hidden sm:block text-[10px] sm:text-xs text-(--muted) font-bold uppercase tracking-widest leading-none">
-                {t.nav.brandSubtitle}
-              </p>
+            
             </div>
           </div>
 

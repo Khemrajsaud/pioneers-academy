@@ -87,15 +87,22 @@ const About = () => {
   return (
     <div className="min-h-screen bg-(--bg) text-(--text)">
       {/* Hero Section */}
-      <div className="relative h-48 sm:h-64 md:h-96 w-full overflow-hidden group">
+      <div className="relative h-44 sm:h-56 md:h-64 w-full overflow-hidden group">
         <img
           src={homepage}
           alt="About Pioneers Academy"
           className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-black/30 to-black/50"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 to-black/55" />
+        <div className="absolute inset-0">
+          <div className="max-w-7xl mx-auto h-full flex items-center px-4 sm:px-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-(--primary) h-12 sm:h-14 w-2 rounded-xs" />
+              <h1 className="text-white text-2xl sm:text-4xl md:text-5xl font-semibold">
+                {t.about.hero}
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -109,11 +116,8 @@ const About = () => {
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center animate-fadeInUp">
           <div className="space-y-6">
             <div>
-              <button className="text-sm sm:text-base text-white bg-[var(--primary)] px-3 py-1 rounded-full uppercase tracking-wider font-bold">
-                {t.about.tag}
-              </button>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mt-2">
-                Pioneers <span className="text-[var(--primary)]">Academy</span>
+                Pioneers <span className="text-(--primary)">Academy</span>
               </h2>
               <p className="mt-4 whitespace-pre-line text-sm sm:text-base text-(--muted) text-justify leading-relaxed">
                 {t.about.intro.description}
@@ -128,6 +132,8 @@ const About = () => {
               className="w-full h-64 sm:h-80 md:h-96 object-cover hover:scale-105 transition duration-700"
             />
           </div>
+
+         
         </section>
 
         {/* STATS SECTION

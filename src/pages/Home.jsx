@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "motion/react";
 import school from "../assets/images/school.png";
@@ -8,6 +8,7 @@ import gallary1 from "../assets/images/gallary1.jpg";
 import gallary2 from "../assets/images/gallary2.jpg";
 import gallary3 from "../assets/images/gallary3.jpg";
 import gallary4 from "../assets/images/gallary4.jpg";
+import principal from "../assets/images/principal.png";
 import {
   Target,
   Users,
@@ -24,8 +25,10 @@ import {
   BookOpen,
   GraduationCap,
   Image,
+  ArrowUpRight
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+
 
 /**
  * API configuration for fetching the latest news
@@ -92,36 +95,52 @@ const Home = () => {
   return (
     <div className="bg-(--bg) text-(--text) pb-16 transition-colors">
       {/* Visual Identity Hero Section with immersive banner */}
-      <section className="group relative h-[260px] sm:h-[380px] md:h-[500px] overflow-hidden border-b border-(--border)">
+      <section className="group relative h-65 sm:h-95 md:h-125 overflow-hidden border-b border-(--border)">
         <img
           src={homepage}
           alt="Pioneers Academy Building"
           className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105 brightness-[0.85]"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-transparent" />
-        <div className="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto px-6">
+        <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/35 to-transparent" />
+        <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 flex items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -28 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-xl text-white drop-shadow-lg"
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="max-w-2xl text-white"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4">
-              {t.home.hero.title}
-            </h1>
-            <p className="text-lg sm:text-xl font-medium opacity-90">
+            <div className="flex items-center gap-3 sm:gap-4 mb-5">
+              <div className="bg-(--primary) h-12 sm:h-14 w-2 rounded-xs" />
+              <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+                {t.home.hero.title}
+              </h1>
+            </div>
+            <p className="text-sm sm:text-base md:text-lg text-white/90 max-w-xl leading-relaxed">
               {t.home.hero.subtitle}
             </p>
+            <button
+              onClick={() => navigate("/about")}
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-(--primary) px-5 py-3 text-sm font-bold text-white shadow-lg hover:opacity-95"
+            >
+              {t.home.hero.cta}
+              <ArrowRight size={16} />
+            </button>
           </motion.div>
         </div>
       </section>
 
       <main className="mx-auto max-w-7xl space-y-12 px-4 py-10 sm:space-y-16 sm:px-6 sm:py-14">
         {/* Academic Introduction and Welcome Message */}
-        <motion.section className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 items-center" {...fadeInUp}>
+        <motion.section
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 items-center"
+          {...fadeInUp}
+        >
           <div className="space-y-6">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight">
-              {t.home.intro.welcome} <span className="text-(--primary) drop-shadow-sm">{t.home.intro.welcomeMessage}</span>
+              {t.home.intro.welcome}{" "}
+              <span className="text-(--primary) drop-shadow-sm">
+                {t.home.intro.welcomeMessage}
+              </span>
             </h2>
             <p className="text-sm sm:text-base text-(--muted) leading-relaxed text-justify opacity-90">
               {t.home.intro.description}
@@ -136,17 +155,38 @@ const Home = () => {
             <img
               src={school}
               alt="Pioneers Academy Main Campus"
-              className="h-[300px] sm:h-[400px] w-full rounded-2xl border border-(--border) object-cover shadow-xl transition-transform duration-700 hover:scale-[1.02]"
+              className="h-75 sm:h-100 w-full rounded-2xl border border-(--border) object-cover shadow-xl transition-transform duration-700 hover:scale-[1.02]"
             />
           </motion.div>
         </motion.section>
 
         {/* Dynamic Growth Statistics Indicators */}
-        <motion.section className="grid grid-cols-1 gap-4 sm:grid-cols-3" {...fadeInUp}>
+        <motion.section
+          className="grid grid-cols-1 gap-4 sm:grid-cols-3"
+          {...fadeInUp}
+        >
           {[
-            { id: 1, val: "1,000+", label: t.home.intro.students, icon: <Users size={28} />, delay: 0 },
-            { id: 2, val: "100%", label: t.home.intro.statsLabels.excellence, icon: <Award size={28} />, delay: 0.1 },
-            { id: 3, val: "20+", label: t.home.intro.years, icon: <CalendarDays size={28} />, delay: 0.2 },
+            {
+              id: 1,
+              val: "1,000+",
+              label: t.home.intro.students,
+              icon: <Users size={28} />,
+              delay: 0,
+            },
+            {
+              id: 2,
+              val: "100%",
+              label: t.home.intro.statsLabels.excellence,
+              icon: <Award size={28} />,
+              delay: 0.1,
+            },
+            {
+              id: 3,
+              val: "20+",
+              label: t.home.intro.years,
+              icon: <CalendarDays size={28} />,
+              delay: 0.2,
+            },
           ].map((stat) => (
             <motion.div
               key={stat.id}
@@ -162,15 +202,73 @@ const Home = () => {
                   {stat.icon}
                 </div>
                 <div>
-                  <div className="text-3xl font-bold tracking-tight">{stat.val}</div>
-                  <div className="text-sm font-semibold text-(--muted) uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-3xl font-bold tracking-tight">
+                    {stat.val}
+                  </div>
+                  <div className="text-sm font-semibold text-(--muted) uppercase tracking-wider">
+                    {stat.label}
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.section>
 
-        {/* Philosophical Alignment: Vision & Mission Cards */}
+        <motion.div
+          className="bg-(--primary) w-full rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 py-6 px-5 sm:px-8"
+          {...fadeInUp}
+        >
+          <div className="text-white font-semibold text-xl sm:text-2xl md:text-3xl text-center md:text-left">
+            <h1>{t.home.information.infohead}</h1>
+            <p className="">
+              {t.home.information.infosubhead}
+            </p>
+          </div>
+          <div>
+            <button
+              onClick={() => navigate("/contact")}
+              className="bg-white px-5 py-3 font-semibold rounded-full flex items-center gap-2"
+            >
+              {t.home.information.but}
+              <ArrowUpRight size={18} />
+            </button>
+          </div>
+        </motion.div>
+
+        <motion.section
+          className="flex flex-col md:flex-row max-w-7xl mx-auto gap-10 items-center md:items-start px-4 py-12"
+          {...fadeInUp}
+        >
+          {/* Left Side: Image with background effect */}
+          <div className="relative shrink-0">
+            {/* This div creates the light purple background square seen in your reference image */}
+            <div className="absolute -top-4 -left-4 w-full h-full bg-blue-100 -z-10 rounded-2xl hidden md:block"></div>
+            <img
+              src={principal}
+              alt={t.principal.message}
+              className="w-75 h-100 object-cover rounded-xl shadow-lg border-4 border-white"
+            />
+          </div>
+
+          {/* Right Side: Text Content */}
+          <div className="flex-1">
+            <h1 className="text-3xl md:text-4xl font-bold text-(--text) mb-2">
+              {t.principal.hero}    <span className="text-3xl md:text-4xl font-bold text-[var(--primary)]">{t.principal.subhero}</span>
+
+            </h1>
+
+            <h2 className="text-xl font-semibold text-(--muted) mb-6">
+              {t.principal.role}
+            </h2>
+            <p className="text-(--muted) text-justify ">
+              {`${t.principal.message.slice(0, 900)}`}
+            </p>
+            <Link to="/history" className="mt-6 inline-block text-(--primary) font-bold hover:underline">
+              {t.news.readMore}
+            </Link>
+          </div>
+        </motion.section>
+        {/*  Vision & Mission Cards */}
         <section className="py-2">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <motion.article
@@ -222,7 +320,10 @@ const Home = () => {
         <motion.section {...fadeInUp}>
           <div className="mb-10 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.academics.title1} <span className="text-(--primary)">{t.home.academics.title2}</span>
+              {t.home.academics.title1}{" "}
+              <span className="text-(--primary)">
+                {t.home.academics.title2}
+              </span>
             </h2>
             <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
               {t.home.academics.subtitle}
@@ -231,9 +332,21 @@ const Home = () => {
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
-              { title: t.home.academics.prePrimary.title, icon: <Lightbulb size={28} />, desc: t.home.academics.prePrimary.description },
-              { title: t.home.academics.primary.title, icon: <BookOpen size={28} />, desc: t.home.academics.primary.description },
-              { title: t.home.academics.secondary.title, icon: <GraduationCap size={28} />, desc: t.home.academics.secondary.description },
+              {
+                title: t.home.academics.prePrimary.title,
+                icon: <Lightbulb size={28} />,
+                desc: t.home.academics.prePrimary.description,
+              },
+              {
+                title: t.home.academics.primary.title,
+                icon: <BookOpen size={28} />,
+                desc: t.home.academics.primary.description,
+              },
+              {
+                title: t.home.academics.secondary.title,
+                icon: <GraduationCap size={28} />,
+                desc: t.home.academics.secondary.description,
+              },
             ].map((level, idx) => (
               <motion.article
                 key={level.title}
@@ -248,7 +361,9 @@ const Home = () => {
                   {level.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-3">{level.title}</h3>
-                <p className="text-sm text-(--muted) leading-relaxed opacity-90">{level.desc}</p>
+                <p className="text-sm text-(--muted) leading-relaxed opacity-90">
+                  {level.desc}
+                </p>
               </motion.article>
             ))}
           </div>
@@ -256,7 +371,7 @@ const Home = () => {
           <div className="mt-10 text-center">
             <button
               onClick={() => navigate("/academic")}
-              className="inline-flex items-center gap-2 rounded-xl bg-(--primary) px-8 py-4 text-sm font-bold text-white shadow-lg shadow-(--primary)/20 hover:shadow-xl hover:translate-y-[-1px] active:translate-y-[1px] transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-(--primary) px-8 py-4 text-sm font-bold text-white shadow-lg shadow-(--primary)/20 hover:shadow-xl hover:-translate-y-px active:translate-y-px transition-all"
             >
               {t.home.academics.explorePrograms}
               <ArrowRight size={18} />
@@ -268,7 +383,8 @@ const Home = () => {
         <motion.section {...fadeInUp}>
           <div className="mb-10 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.news.title1} <span className="text-(--primary)">{t.home.news.title2}</span>
+              {t.home.news.title1}{" "}
+              <span className="text-(--primary)">{t.home.news.title2}</span>
             </h2>
             <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
               {t.home.news.subtitle}
@@ -278,7 +394,9 @@ const Home = () => {
           {newsLoading ? (
             <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-(--border) bg-(--card) py-20 shadow-sm">
               <Loader2 className="h-10 w-10 animate-spin text-(--primary)" />
-              <p className="font-semibold text-(--muted) tracking-wide">{t.home.news.loading}</p>
+              <p className="font-semibold text-(--muted) tracking-wide">
+                {t.home.news.loading}
+              </p>
             </div>
           ) : homeNews.length === 0 ? (
             <div className="rounded-3xl border border-(--border) bg-(--card) py-16 text-center font-medium text-(--muted) italic shadow-sm">
@@ -298,7 +416,11 @@ const Home = () => {
                 >
                   <div className="relative h-48 sm:h-56 overflow-hidden">
                     {item.image_url ? (
-                      <img src={item.image_url} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <img
+                        src={item.image_url}
+                        alt={item.title}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
                     ) : (
                       <div className="h-full w-full bg-(--bg-alt) flex items-center justify-center text-(--muted)">
                         <Image size={40} className="opacity-20" />
@@ -344,7 +466,10 @@ const Home = () => {
         <motion.section {...fadeInUp}>
           <div className="mb-10 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.facilities.title1} <span className="text-(--primary)">{t.home.facilities.title2}</span>
+              {t.home.facilities.title1}{" "}
+              <span className="text-(--primary)">
+                {t.home.facilities.title2}
+              </span>
             </h2>
             <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
               {t.home.facilities.subtitle}
@@ -353,12 +478,30 @@ const Home = () => {
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
             {[
-              { icon: <Building2 size={24} />, title: t.home.facilities.smartClassrooms },
-              { icon: <FlaskConical size={24} />, title: t.home.facilities.scienceLabs },
-              { icon: <Monitor size={24} />, title: t.home.facilities.computerLab },
-              { icon: <BookOpen size={24} />, title: t.home.facilities.library },
-              { icon: <Dumbbell size={24} />, title: t.home.facilities.sportsComplex },
-              { icon: <Coffee size={24} />, title: t.home.facilities.cafeteria },
+              {
+                icon: <Building2 size={24} />,
+                title: t.home.facilities.smartClassrooms,
+              },
+              {
+                icon: <FlaskConical size={24} />,
+                title: t.home.facilities.scienceLabs,
+              },
+              {
+                icon: <Monitor size={24} />,
+                title: t.home.facilities.computerLab,
+              },
+              {
+                icon: <BookOpen size={24} />,
+                title: t.home.facilities.library,
+              },
+              {
+                icon: <Dumbbell size={24} />,
+                title: t.home.facilities.sportsComplex,
+              },
+              {
+                icon: <Coffee size={24} />,
+                title: t.home.facilities.cafeteria,
+              },
             ].map((facility, idx) => (
               <motion.article
                 key={facility.title}
@@ -393,7 +536,8 @@ const Home = () => {
         <motion.section {...fadeInUp}>
           <div className="mb-10 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.gallery.title1} <span className="text-(--primary)">{t.home.gallery.title2}</span>
+              {t.home.gallery.title1}{" "}
+              <span className="text-(--primary)">{t.home.gallery.title2}</span>
             </h2>
             <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
               {t.home.gallery.subtitle}
@@ -432,7 +576,7 @@ const Home = () => {
           <div className="mt-12 text-center">
             <button
               onClick={() => navigate("/resources/gallery")}
-              className="inline-flex items-center gap-3 rounded-xl bg-linear-to-br from-(--primary) to-(--primary-strong) px-10 py-4 text-sm font-bold text-white shadow-xl shadow-(--primary)/25 hover:shadow-2xl hover:translate-y-[-2px] transition-all"
+              className="inline-flex items-center gap-3 rounded-xl bg-linear-to-br from-(--primary) to-(--primary-strong) px-10 py-4 text-sm font-bold text-white shadow-xl shadow-(--primary)/25 hover:shadow-2xl hover:-translate-y-0.5 transition-all"
             >
               <Image size={20} />
               {t.home.gallery.viewMore}

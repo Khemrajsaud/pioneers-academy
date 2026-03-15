@@ -59,8 +59,19 @@ const Contact = () => {
       <ToastContainer />
 
       {/* Hero Banner Area */}
-      <div className="relative h-48 sm:h-64 md:h-96 w-full overflow-hidden group">
+      <div className="relative h-44 sm:h-56 md:h-64 w-full overflow-hidden group">
         <img src={contactImg} alt="Contact" className="w-full h-full object-cover " />
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 to-black/55" />
+        <div className="absolute inset-0">
+          <div className="max-w-7xl mx-auto h-full flex items-center px-4 sm:px-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-(--primary) h-12 sm:h-14 w-2 rounded-xs" />
+              <h1 className="text-white text-2xl sm:text-4xl md:text-5xl font-semibold">
+                {t.contact.hero}
+              </h1>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* --- CONTENT AREA --- */}
@@ -194,7 +205,7 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="relative h-[360px] sm:h-[460px] lg:h-[560px] w-full">
+          <div className="relative h-90 sm:h-115 lg:h-140 w-full">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5827.582081480715!2d81.1524!3d28.629128000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a2133aa9535d4b%3A0xf8be8139437934d3!2sFounder%2C%20Pioneers%E2%80%99%20Academy%20Kailali%20Lamki!5e1!3m2!1sen!2snp!4v1772005905418!5m2!1sen!2snp"
               className="h-full w-full border-0"

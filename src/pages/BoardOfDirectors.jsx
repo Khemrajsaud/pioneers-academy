@@ -72,18 +72,23 @@ const BoardOfDirectors = () => {
   return (
     <div className="min-h-screen bg-(--bg) text-(--text)">
       {/* Visual Hero Section */}
-      <div className="relative h-48 sm:h-64 md:h-80 w-full overflow-hidden">
+      <div className="relative h-44 sm:h-56 md:h-60 w-full overflow-hidden">
         <img
           src={homepage}
           alt="Board of Directors"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-black/20 to-black/40"></div>
-        {/* <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center px-4 leading-tight shadow-sm">
-            {t.board.hero}
-          </h1>
-        </div> */}
+         <div className="absolute inset-0 bg-linear-to-b from-black/30 to-black/55" />
+        <div className="absolute inset-0">
+          <div className="max-w-7xl mx-auto h-full flex items-center px-4 sm:px-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="bg-(--primary) h-12 sm:h-14 w-2 rounded-xs" />
+              <h1 className="text-white text-2xl sm:text-4xl md:text-5xl font-semibold">
+              Board of Directors
+              </h1>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Primary Narrative Content */}
