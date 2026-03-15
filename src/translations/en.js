@@ -962,7 +962,57 @@ With warm regards and best wishes for your success.`,
     title: "Page Not Found",
     subtitle: "The page you are looking for does not exist or the URL is incorrect.",
     backToHome: "Back to Home",
-  }
+  },
+
+  // Admin Panel
+  admin: {
+    common: {
+      cancel: "Cancel",
+      delete: "Delete",
+      upload: "Upload",
+      loading: "Loading...",
+      error: "Something went wrong. Please try again.",
+    },
+    dashboard: {
+      title: "Admin Dashboard",
+      subtitle: "Overview of your site content",
+      stats: {
+        gallery: "Gallery Images",
+        news: "News Articles",
+        notices: "Notices",
+      },
+      quickActions: {
+        title: "Quick Actions",
+        uploadImg: "Upload Image",
+        uploadImgSub: "Add to gallery",
+        createNews: "Create News",
+        createNewsSub: "Write an article",
+        postNotice: "Post Notice",
+        postNoticeSub: "Publish an announcement",
+      },
+    },
+    gallery: {
+      title: "Gallery Management",
+      subtitle: "Upload and manage school photos",
+      uploadTitle: "Upload Image",
+      imageTitle: "Image Title",
+      selectImage: "Select Image",
+      uploading: "Uploading...",
+      success: "Image uploaded successfully",
+      deleted: "Image deleted successfully",
+      deleteConfirm: "Are you sure you want to delete this image?",
+      noImages: "No images uploaded yet",
+    },
+    news: {
+      title: "News Management",
+      createNew: "Create New Article",
+    },
+    notices: {
+      title: "Notices Management",
+      subtitle: "Manage school announcements",
+      postNew: "Post New Notice",
+    },
+  },
 };
 
 export default en;

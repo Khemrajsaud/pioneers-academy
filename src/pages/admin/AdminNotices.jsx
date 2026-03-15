@@ -23,10 +23,7 @@ import { useLanguage } from "../../contexts/LanguageContext";
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const API_URL = `${API_BASE}/api/notice`;
 
-/**
- * AdminNotices Component
- * High-priority communication management for school alerts and official notices.
- */
+
 const AdminNotices = () => {
   const { isDarkMode } = useAdminTheme();
   const { t } = useLanguage();
@@ -110,7 +107,7 @@ const AdminNotices = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm(t.admin.gallery.deleteConfirm)) return;
+    if (!window.confirm(t.admin.notices.deleteConfirm)) return;
 
     try {
       await axios.delete(`${API_URL}/${id}`);
@@ -258,7 +255,7 @@ const AdminNotices = () => {
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-(--border)">
           <h2 className="text-xl font-black tracking-tight flex items-center gap-2">
             <FileText size={22} className="text-blue-500" />
-            Dispatch Ledger
+            Notices
           </h2>
           <div className="px-5 py-1.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-black tracking-widest uppercase">
             {notices.length} active

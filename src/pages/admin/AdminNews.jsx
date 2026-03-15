@@ -24,7 +24,7 @@ import RichTextEditor from "../../components/admin/RichTextEditor";
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const API_URL = `${API_BASE}/api/news`;
 
-/* ──────────────────────────────────── Notification Component ─── */
+
 const Toast = ({ toasts }) => (
   <div className="fixed top-5 right-5 z-80 flex flex-col gap-2">
     {toasts.map((t) => (
@@ -376,7 +376,7 @@ const AdminNews = () => {
         <div className="px-8 py-6 border-b border-(--border) flex items-center justify-between">
           <h2 className="text-xl font-black tracking-tight flex items-center gap-2">
             <Newspaper size={22} className="text-blue-500" />
-            Article Ledger
+            News
           </h2>
           <div className="px-5 py-1.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-black tracking-widest uppercase">
             {newsList.length} total
