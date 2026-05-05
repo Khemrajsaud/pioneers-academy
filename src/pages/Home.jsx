@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "motion/react";
-import school from "../assets/images/school.png";
-import homepage from "../assets/images/academy.png";
+import homepage from "../assets/images/homepage.png";
 import gallary1 from "../assets/images/gallary1.jpg";
 import gallary2 from "../assets/images/gallary2.jpg";
 import gallary3 from "../assets/images/gallary3.jpg";
 import gallary4 from "../assets/images/gallary4.jpg";
-import principal from "../assets/images/principal.png";
+import image2 from "../assets/images/school1.jpeg";
+import image3 from "../assets/images/school2.jpeg";
+import image4 from "../assets/images/academy.png";
+import principal from "../assets/images/teacher.jpg";
 import {
-  Target,
-  Users,
-  Lightbulb,
-  FlaskConical,
-  Monitor,
-  Dumbbell,
-  Building2,
-  Coffee,
   ArrowRight,
   Loader2,
   CalendarDays,
@@ -25,46 +19,95 @@ import {
   BookOpen,
   GraduationCap,
   Image,
-  ArrowUpRight
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import HeroCarousel from "../components/ui/HeroCarousel";
+import { statsData, newsData } from "../components/data.js";
 
-
-/**
- * API configuration for fetching the latest news
- */
 const API_URL = "http://localhost:5000/api/news";
 
-/**
- * Standard animation variant for entrance transitions
- */
-const fadeInUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: "easeOut" },
+const revealSection = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
 };
 
-/**
- * Home component serving as the landing page of Pioneers Academy
- */
+const revealItem = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const academyLevels = [
+  {
+    title: "Primary Level",
+    image: image2,
+    icon: BookOpen,
+    accent: "bg-blue-800 ",
+    description:
+      "Strong foundations through active learning and daily guidance.",
+  },
+  {
+    title: "Secondary Level",
+    image: image4,
+    icon: Award,
+    accent: "bg-amber-600 ",
+    description: "Balanced academic growth with discipline and confidence.",
+  },
+  {
+    title: "High School Level",
+    image: image3,
+    icon: GraduationCap,
+    accent: "bg-blue-800 ",
+    description: "Focused preparation for exams, careers, and future study.",
+  },
+];
+
+const galleryItems = [
+  { img: gallary1, alt: "School building" },
+  { img: gallary2, alt: "Campus view" },
+  { img: gallary3, alt: "Students" },
+  { img: gallary4, alt: "Activities" },
+];
+
+const SectionHeading = ({ eyebrow, title, description, action }) => (
+  <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div className="max-w-2xl space-y-2">
+      <p className="text-xs font-bold uppercase tracking-widest text-sky-700">
+        {eyebrow}
+      </p>
+      <h2 className="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+        {title}
+      </h2>
+      {description ? (
+        <p className="text-sm leading-7 text-slate-600 sm:text-base">
+          {description}
+        </p>
+      ) : null}
+    </div>
+    {action ? <div>{action}</div> : null}
+  </div>
+);
+
 const Home = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  // State for managing dynamic news feed
   const [homeNews, setHomeNews] = useState([]);
   const [newsLoading, setNewsLoading] = useState(true);
 
   useEffect(() => {
-    /**
-     * Fetches the 3 most recent news items for the home page preview
-     */
     const fetchHomeNews = async () => {
       try {
         setNewsLoading(true);
         const res = await axios.get(API_URL);
-        // We only show the top 3 items on the home page for clean layout
         setHomeNews((res.data || []).slice(0, 3));
       } catch (error) {
         console.error("Error fetching home news:", error);
@@ -76,11 +119,6 @@ const Home = () => {
     fetchHomeNews();
   }, []);
 
-  /**
-   * Sanitizes HTML content and returns a truncated plain text preview
-   * @param {string} html - The HTML string from the news description
-   * @returns {string} Cleaned and truncated text
-   */
   const getPreviewText = (html = "") => {
     const plainText = html
       .replace(/<[^>]*>/g, " ")
@@ -93,493 +131,280 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-(--bg) text-(--text) pb-16 transition-colors">
-      {/* Visual Identity Hero Section with immersive banner */}
-      <section className="group relative h-65 sm:h-95 md:h-125 overflow-hidden border-b border-(--border)">
-        <img
-          src={homepage}
-          alt="Pioneers Academy Building"
-          className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105 brightness-[0.85]"
-        />
-        <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/35 to-transparent" />
-        <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 flex items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -28 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-2xl text-white"
-          >
-            <div className="flex items-center gap-3 sm:gap-4 mb-5">
-              <div className="bg-(--primary) h-12 sm:h-14 w-2 rounded-xs" />
-              <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-                {t.home.hero.title}
-              </h1>
-            </div>
-            <p className="text-sm sm:text-base md:text-lg text-white/90 max-w-xl leading-relaxed">
-              {t.home.hero.subtitle}
-            </p>
-            <button
-              onClick={() => navigate("/about")}
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-(--primary) px-5 py-3 text-sm font-bold text-white shadow-lg hover:opacity-95"
-            >
-              {t.home.hero.cta}
-              <ArrowRight size={16} />
-            </button>
-          </motion.div>
+    <div className="bg-slate-50 text-slate-900">
+      <section className="bg-linear-to-b from-sky-50 via-white to-slate-50 pb-6 pt-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="overflow-hidden  border border-slate-200 bg-white shadow-2xl">
+            <HeroCarousel />
+          </div>
         </div>
       </section>
 
-      <main className="mx-auto max-w-7xl space-y-12 px-4 py-10 sm:space-y-16 sm:px-6 sm:py-14">
-        {/* Academic Introduction and Welcome Message */}
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <motion.section
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 items-center"
-          {...fadeInUp}
+          className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+          variants={revealSection}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
         >
-          <div className="space-y-6">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight">
-              {t.home.intro.welcome}{" "}
-              <span className="text-(--primary) drop-shadow-sm">
-                {t.home.intro.welcomeMessage}
-              </span>
-            </h2>
-            <p className="text-sm sm:text-base text-(--muted) leading-relaxed text-justify opacity-90">
-              {t.home.intro.description}
-            </p>
-          </div>
+          {statsData.map((item) => (
+            <motion.article
+              key={item.id}
+              variants={revealItem}
+              className="rounded-3xl border border-white/70 bg-white p-6 shadow-sm ring-1 ring-slate-100 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <p className="text-3xl font-black tracking-tight text-sky-800 sm:text-4xl">
+                {item.number}
+              </p>
+              <p className="mt-3 text-lg font-bold text-amber-600">
+                {item.label}
+              </p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">
+                {item.description}
+              </p>
+            </motion.article>
+          ))}
+        </motion.section>
+
+        <motion.section
+          className="mt-16 grid gap-8 lg:grid-cols-2 lg:items-center"
+          variants={revealSection}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <motion.div variants={revealItem} className="space-y-6">
+            <SectionHeading
+              eyebrow="About the Academy"
+              title="College Profile"
+              description="Established in 1999 AD (2056 BS), Pioneers’ Academy, Kailali is a reputed private educational institution in Lamkichuha-1, Lamki, Kailali. We focus on quality education, character building, and a learning environment that helps students grow with confidence."
+            />
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                "Supportive faculty",
+                "Modern facilities",
+                "Strong academic culture",
+              ].map((point) => (
+                <div
+                  key={point}
+                  className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
+                >
+                  {point}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
+            variants={revealItem}
+            className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-xl"
           >
+            <div className="absolute inset-x-6 top-6 h-20 rounded-full bg-sky-100 blur-3xl" />
             <img
-              src={school}
-              alt="Pioneers Academy Main Campus"
-              className="h-75 sm:h-100 w-full rounded-2xl border border-(--border) object-cover shadow-xl transition-transform duration-700 hover:scale-[1.02]"
+              src={homepage}
+              alt="Pioneers' Academy campus"
+              className="relative h-64 w-full rounded-2xl object-cover shadow-lg sm:h-80"
             />
           </motion.div>
         </motion.section>
 
-        {/* Dynamic Growth Statistics Indicators */}
         <motion.section
-          className="grid grid-cols-1 gap-4 sm:grid-cols-3"
-          {...fadeInUp}
+          className="mt-16 rounded-3xl bg-sky-50/80 px-5 py-8 sm:px-8 sm:py-10"
+          variants={revealSection}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
         >
-          {[
-            {
-              id: 1,
-              val: "1,000+",
-              label: t.home.intro.students,
-              icon: <Users size={28} />,
-              delay: 0,
-            },
-            {
-              id: 2,
-              val: "100%",
-              label: t.home.intro.statsLabels.excellence,
-              icon: <Award size={28} />,
-              delay: 0.1,
-            },
-            {
-              id: 3,
-              val: "20+",
-              label: t.home.intro.years,
-              icon: <CalendarDays size={28} />,
-              delay: 0.2,
-            },
-          ].map((stat) => (
-            <motion.div
-              key={stat.id}
-              className="rounded-2xl border border-(--border) bg-(--card) p-6 shadow-sm hover:shadow-md transition-all border-b-4 border-b-(--primary)/30"
-              whileHover={{ y: -5 }}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: stat.delay }}
-            >
-              <div className="flex items-center gap-5">
-                <div className="rounded-xl bg-(--primary)/10 p-4 text-(--primary) shadow-inner">
-                  {stat.icon}
-                </div>
-                <div>
-                  <div className="text-3xl font-bold tracking-tight">
-                    {stat.val}
-                  </div>
-                  <div className="text-sm font-semibold text-(--muted) uppercase tracking-wider">
-                    {stat.label}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.section>
+          <SectionHeading
+            eyebrow="Academy Levels"
+            title="A clear path for every stage of learning"
+            description="Each level is designed with focused support so students can move forward with confidence and purpose."
+          />
 
-        <motion.div
-          className="bg-(--primary) w-full rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 py-6 px-5 sm:px-8"
-          {...fadeInUp}
-        >
-          <div className="text-white font-semibold text-xl sm:text-2xl md:text-3xl text-center md:text-left">
-            <h1>{t.home.information.infohead}</h1>
-            <p className="">
-              {t.home.information.infosubhead}
-            </p>
-          </div>
-          <div>
-            <button
-              onClick={() => navigate("/contact")}
-              className="bg-white px-5 py-3 font-semibold rounded-full flex items-center gap-2"
-            >
-              {t.home.information.but}
-              <ArrowUpRight size={18} />
-            </button>
-          </div>
-        </motion.div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {academyLevels.map((level) => {
+              const Icon = level.icon;
 
-        <motion.section
-          className="flex flex-col md:flex-row max-w-7xl mx-auto gap-10 items-center md:items-start px-4 py-12"
-          {...fadeInUp}
-        >
-          {/* Left Side: Image with background effect */}
-          <div className="relative shrink-0">
-            {/* This div creates the light purple background square seen in your reference image */}
-            <div className="absolute -top-4 -left-4 w-full h-full bg-blue-100 -z-10 rounded-2xl hidden md:block"></div>
-            <img
-              src={principal}
-              alt={t.principal.message}
-              className="w-75 h-100 object-cover rounded-xl shadow-lg border-4 border-white"
-            />
-          </div>
-
-          {/* Right Side: Text Content */}
-          <div className="flex-1">
-            <h1 className="text-3xl md:text-4xl font-bold text-(--text) mb-2">
-              {t.principal.hero}    <span className="text-3xl md:text-4xl font-bold text-[var(--primary)]">{t.principal.subhero}</span>
-
-            </h1>
-
-            <h2 className="text-xl font-semibold text-(--muted) mb-6">
-              {t.principal.role}
-            </h2>
-            <p className="text-(--muted) text-justify ">
-              {`${t.principal.message.slice(0, 900)}`}
-            </p>
-            <Link to="/history" className="mt-6 inline-block text-(--primary) font-bold hover:underline">
-              {t.news.readMore}
-            </Link>
-          </div>
-        </motion.section>
-        {/*  Vision & Mission Cards */}
-        <section className="py-2">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <motion.article
-              className="relative overflow-hidden rounded-3xl border border-(--primary)/10 bg-linear-to-br from-(--card) to-(--primary)/5 p-10 shadow-lg hover:border-(--primary)/30 transition-all group"
-              whileHover={{ y: -6 }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-(--primary)/5 blur-3xl group-hover:bg-(--primary)/10 transition-colors" />
-              <div className="relative z-10 space-y-6">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-(--primary) to-(--primary-strong) text-white shadow-lg shadow-(--primary)/20">
-                  <Target className="h-8 w-8" />
-                </div>
-                <h3 className="text-3xl font-bold tracking-tight text-(--text)">
-                  {t.home.vision.title}
-                </h3>
-                <p className="text-sm sm:text-base text-(--muted) leading-relaxed text-justify opacity-90">
-                  {t.home.vision.description}
-                </p>
-              </div>
-            </motion.article>
-
-            <motion.article
-              className="relative overflow-hidden rounded-3xl border border-blue-500/10 bg-linear-to-br from-(--card) to-blue-500/5 p-10 shadow-lg hover:border-blue-500/30 transition-all group"
-              whileHover={{ y: -6 }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-blue-500/5 blur-3xl group-hover:bg-blue-500/10 transition-colors" />
-              <div className="relative z-10 space-y-6">
-                <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/20">
-                  <Lightbulb className="h-8 w-8" />
-                </div>
-                <h3 className="text-3xl font-bold tracking-tight text-(--text)">
-                  {t.home.mission.title}
-                </h3>
-                <p className="text-sm sm:text-base text-(--muted) leading-relaxed text-justify opacity-90">
-                  {t.home.mission.description}
-                </p>
-              </div>
-            </motion.article>
-          </div>
-        </section>
-
-        {/* Academic Hierarchy and Educational Framework Highlights */}
-        <motion.section {...fadeInUp}>
-          <div className="mb-10 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.academics.title1}{" "}
-              <span className="text-(--primary)">
-                {t.home.academics.title2}
-              </span>
-            </h2>
-            <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
-              {t.home.academics.subtitle}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              {
-                title: t.home.academics.prePrimary.title,
-                icon: <Lightbulb size={28} />,
-                desc: t.home.academics.prePrimary.description,
-              },
-              {
-                title: t.home.academics.primary.title,
-                icon: <BookOpen size={28} />,
-                desc: t.home.academics.primary.description,
-              },
-              {
-                title: t.home.academics.secondary.title,
-                icon: <GraduationCap size={28} />,
-                desc: t.home.academics.secondary.description,
-              },
-            ].map((level, idx) => (
-              <motion.article
-                key={level.title}
-                className="group h-full rounded-2xl border border-(--border) bg-(--card) p-8 shadow-sm hover:border-(--primary)/40 hover:shadow-md transition-all flex flex-col items-center text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-(--primary)/10 text-(--primary) group-hover:bg-(--primary) group-hover:text-white transition-all duration-300">
-                  {level.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3">{level.title}</h3>
-                <p className="text-sm text-(--muted) leading-relaxed opacity-90">
-                  {level.desc}
-                </p>
-              </motion.article>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <button
-              onClick={() => navigate("/academic")}
-              className="inline-flex items-center gap-2 rounded-xl bg-(--primary) px-8 py-4 text-sm font-bold text-white shadow-lg shadow-(--primary)/20 hover:shadow-xl hover:-translate-y-px active:translate-y-px transition-all"
-            >
-              {t.home.academics.explorePrograms}
-              <ArrowRight size={18} />
-            </button>
-          </div>
-        </motion.section>
-
-        {/* Content Streams: Latest News and School Media Briefings */}
-        <motion.section {...fadeInUp}>
-          <div className="mb-10 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.news.title1}{" "}
-              <span className="text-(--primary)">{t.home.news.title2}</span>
-            </h2>
-            <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
-              {t.home.news.subtitle}
-            </p>
-          </div>
-
-          {newsLoading ? (
-            <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-(--border) bg-(--card) py-20 shadow-sm">
-              <Loader2 className="h-10 w-10 animate-spin text-(--primary)" />
-              <p className="font-semibold text-(--muted) tracking-wide">
-                {t.home.news.loading}
-              </p>
-            </div>
-          ) : homeNews.length === 0 ? (
-            <div className="rounded-3xl border border-(--border) bg-(--card) py-16 text-center font-medium text-(--muted) italic shadow-sm">
-              {t.home.news.noNews}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-              {homeNews.map((item, idx) => (
+              return (
                 <motion.article
-                  key={item.id}
-                  className="overflow-hidden rounded-2xl border border-(--border) bg-(--card) shadow-sm hover:shadow-xl transition-all group"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  whileHover={{ y: -8 }}
+                  key={level.title}
+                  variants={revealItem}
+                  whileHover={{ y: -6 }}
+                  className="overflow-hidden rounded-2xl border border-white bg-white shadow-sm transition-shadow hover:shadow-lg"
                 >
-                  <div className="relative h-48 sm:h-56 overflow-hidden">
-                    {item.image_url ? (
-                      <img
-                        src={item.image_url}
-                        alt={item.title}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    ) : (
-                      <div className="h-full w-full bg-(--bg-alt) flex items-center justify-center text-(--muted)">
-                        <Image size={40} className="opacity-20" />
-                      </div>
-                    )}
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-(--primary) text-xs font-bold rounded-lg shadow-sm uppercase tracking-wider">
-                        Update
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6 space-y-4">
-                    <h3 className="line-clamp-2 text-xl font-bold leading-tight group-hover:text-(--primary) transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="line-clamp-3 text-sm text-(--muted) leading-relaxed opacity-90">
-                      {getPreviewText(item.description)}
-                    </p>
-                    <button
-                      onClick={() => navigate(`/news/${item.id}`)}
-                      className="inline-flex items-center gap-2 text-sm font-bold text-(--primary) border-b-2 border-transparent hover:border-(--primary) transition-all pb-1 pt-2"
+                  <div>
+                    <img
+                      src={level.image}
+                      alt={level.title}
+                      className="h-48 sm:h-52 md:h-56 w-full object-cover rounded-t-2xl"
+                    />
+
+                    <p
+                      className={`${level.accent} py-3 px-2 text-white text-base sm:text-lg text-center`}
                     >
-                      {t.home.news.readMore}
-                      <ArrowRight size={16} />
-                    </button>
+                      {level.title}
+                    </p>
                   </div>
                 </motion.article>
-              ))}
+              );
+            })}
+          </div>
+        </motion.section>
+
+        <motion.section
+          className="mt-16 grid gap-8 lg:grid-cols-2 lg:items-start"
+          variants={revealSection}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <motion.div
+            variants={revealItem}
+            className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+          >
+            <div className="absolute right-6 top-6 h-20 w-20 rounded-full bg-sky-100 blur-2xl" />
+            <div className="relative mb-5 inline-flex items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-xs font-black uppercase tracking-widest text-sky-700">
+              Principal Message
             </div>
-          )}
+            <div className="grid gap-5 sm:grid-cols-2 sm:items-start">
+              <img
+                src={principal}
+                alt={t.principal.message}
+                className="h-56 w-full rounded-2xl object-cover shadow-md sm:h-72"
+              />
+              <div className="space-y-4">
+                <h3 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+                  Principal Message
+                </h3>
+                <p className="text-sm leading-7 text-slate-600 sm:text-base">
+                  It is with great pride and joy that I welcome you to Pioneers
+                  Academy. As an institution dedicated to excellence in
+                  education, we are committed to nurturing academic brilliance,
+                  strong character, critical thinking, and compassionate
+                  citizenship.
+                </p>
+                <p className="text-sm leading-7 text-slate-600 sm:text-base">
+                  Our goal is to create an environment where curiosity is
+                  encouraged, individual strengths can flourish, and students
+                  are inspired to dream big while working steadily toward their
+                  goals.
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
-          <div className="mt-12 text-center">
-            <button
-              onClick={() => navigate("/resources/news")}
-              className="px-8 py-3 rounded-xl border-2 border-(--primary) text-(--primary) font-bold hover:bg-(--primary) hover:text-white transition-all shadow-md active:scale-95"
-            >
-              {t.home.news.viewAll}
-            </button>
-          </div>
-        </motion.section>
+          {/* News */}
 
-        {/* Infrastructure Assets: Class Facilities Highlights */}
-        <motion.section {...fadeInUp}>
-          <div className="mb-10 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.facilities.title1}{" "}
-              <span className="text-(--primary)">
-                {t.home.facilities.title2}
-              </span>
-            </h2>
-            <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
-              {t.home.facilities.subtitle}
-            </p>
-          </div>
+          <motion.div variants={revealItem}>
+            <SectionHeading
+              eyebrow="News & Articles"
+              title="Fresh updates from the academy"
+              description="Catch the latest activities, announcements, and academic updates from the school."
+            />
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
-            {[
-              {
-                icon: <Building2 size={24} />,
-                title: t.home.facilities.smartClassrooms,
-              },
-              {
-                icon: <FlaskConical size={24} />,
-                title: t.home.facilities.scienceLabs,
-              },
-              {
-                icon: <Monitor size={24} />,
-                title: t.home.facilities.computerLab,
-              },
-              {
-                icon: <BookOpen size={24} />,
-                title: t.home.facilities.library,
-              },
-              {
-                icon: <Dumbbell size={24} />,
-                title: t.home.facilities.sportsComplex,
-              },
-              {
-                icon: <Coffee size={24} />,
-                title: t.home.facilities.cafeteria,
-              },
-            ].map((facility, idx) => (
-              <motion.article
-                key={facility.title}
-                className="rounded-2xl border border-(--border) bg-(--card) p-5 text-center shadow-sm hover:border-(--primary) hover:bg-(--primary)/5 transition-all cursor-default group"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
+            {homeNews.length === 0 && newsLoading && newsData.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-slate-200 bg-white py-16 shadow-sm">
+                <Loader2 className="h-10 w-10 animate-spin text-sky-700" />
+                <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">
+                  Loading news
+                </p>
+              </div>
+            ) : (
+              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {(homeNews.length ? homeNews : newsData).map((item) => {
+                  const imageSrc = item.image_url || item.image;
+
+                  return (
+                    <motion.article
+                      key={item.id}
+                      variants={revealItem}
+                      whileHover={{ y: -6 }}
+                      className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
+                    >
+                      <div className="relative h-48 overflow-hidden">
+                        {imageSrc ? (
+                          <img
+                            src={imageSrc}
+                            alt={item.title}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-slate-100 text-slate-400">
+                            <Image size={40} />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-4 p-5">
+                        <h3 className="line-clamp-2 text-lg font-black leading-tight text-slate-900 transition-colors group-hover:text-sky-700">
+                          {item.title}
+                        </h3>
+
+                        <p className="line-clamp-3 text-sm leading-7 text-slate-600">
+                          {getPreviewText(item.description)}
+                        </p>
+
+                        <button
+                          onClick={() => navigate(`/news/${item.id}`)}
+                          className="inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition-transform hover:translate-x-1"
+                        >
+                          Read more
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+                    </motion.article>
+                  );
+                })}
+              </div>
+            )}
+
+            <div className="flex items-end mt-10">
+              <button
+                onClick={() => navigate("/resources/news")}
+                className="inline-flex mt-5 ml-auto gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-sm transition-transform hover:-translate-y-0.5"
               >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-(--primary)/10 text-(--primary) group-hover:scale-110 transition-transform">
-                  {facility.icon}
-                </div>
-                <h4 className="text-xs sm:text-sm font-bold leading-tight uppercase tracking-tight text-(--text)">
-                  {facility.title}
-                </h4>
-              </motion.article>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <button
-              onClick={() => navigate("/facilities")}
-              className="text-sm font-bold text-(--primary) flex items-center gap-2 mx-auto hover:gap-3 transition-all underline-offset-4 hover:underline"
-            >
-              {t.home.facilities.viewAll}
-              <ArrowRight size={18} />
-            </button>
-          </div>
+                View all
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </motion.div>
         </motion.section>
 
-        {/* Visual Record: Curated Campus Gallery Preview */}
-        <motion.section {...fadeInUp}>
-          <div className="mb-10 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-              {t.home.gallery.title1}{" "}
-              <span className="text-(--primary)">{t.home.gallery.title2}</span>
-            </h2>
-            <p className="mx-auto max-w-3xl text-sm sm:text-base text-(--muted) opacity-90">
-              {t.home.gallery.subtitle}
-            </p>
-          </div>
+        <motion.section
+          className="mt-16"
+          variants={revealSection}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <SectionHeading eyebrow="Gallery" title="Moments from School life" />
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {[
-              { img: gallary1, alt: t.home.gallery.images.schoolBuilding },
-              { img: gallary2, alt: t.home.gallery.images.campusView },
-              { img: gallary3, alt: t.home.gallery.images.students },
-              { img: gallary4, alt: t.home.gallery.images.activities },
-            ].map((item, idx) => (
-              <motion.div
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {galleryItems.map((item, idx) => (
+              <motion.article
                 key={item.alt}
-                className="group relative overflow-hidden rounded-2xl border border-(--border) bg-(--card) shadow-md"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
+                variants={revealItem}
+                whileHover={{ y: -6 }}
+                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
               >
                 <img
                   src={item.img}
                   alt={item.alt}
-                  className="h-44 w-full object-cover sm:h-56 transition-transform duration-700 group-hover:scale-110"
+                  className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-110 sm:h-56"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-white text-xs font-bold uppercase tracking-widest px-4 py-2 border border-white/40 rounded-full backdrop-blur-xs">
-                    View Image
-                  </span>
-                </div>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className=" flex items-end">
             <button
               onClick={() => navigate("/resources/gallery")}
-              className="inline-flex items-center gap-3 rounded-xl bg-linear-to-br from-(--primary) to-(--primary-strong) px-10 py-4 text-sm font-bold text-white shadow-xl shadow-(--primary)/25 hover:shadow-2xl hover:-translate-y-0.5 transition-all"
+              className="inline-flex mt-5 ml-auto gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-sm transition-transform hover:-translate-y-0.5"
             >
-              <Image size={20} />
-              {t.home.gallery.viewMore}
+              View all
+              <ArrowRight size={16} />
             </button>
           </div>
         </motion.section>

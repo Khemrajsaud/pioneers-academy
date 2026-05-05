@@ -3,17 +3,21 @@ import { X, Sparkles } from "lucide-react";
 import logo from "../../assets/logo/logo.png";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-/**
- * AdmissionPopup Component
- * Displays a stylish overlay for new admissions.
- * Automatically dismisses after one view per session.
- */
 const AdmissionPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
-    // Check if the user has already seen and closed the popup in this session.
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     const dismissed = window.sessionStorage.getItem("admissionPopupDismissed");
     if (!dismissed) {
       setIsOpen(true);
@@ -21,23 +25,19 @@ const AdmissionPopup = () => {
   }, []);
 
   const handleClose = () => {
-    // Hide the popup and save preference so it doesn't show again until next browser session.
     setIsOpen(false);
     window.sessionStorage.setItem("admissionPopupDismissed", "true");
   };
 
-  // Do not render anything if the state is closed.
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-70 flex items-start justify-center bg-black/60 px-4 pt-8 sm:pt-10 pb-3 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-3xl h-[calc(100vh-2.75rem)] sm:h-[calc(100vh-3.25rem)] overflow-hidden rounded-2xl border-2 border-(--primary) bg-(--card) shadow-2xl">
-
-        {/* Close Button - Large and easy to tap on mobile */}
+    <div className="fixed inset-0 z-70 flex items-start justify-center  bg-black/60 px-4 pt-8 sm:pt-10 pb-3 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-2xl h-[calc(100vh-2.75rem)] sm:h-[calc(100vh-3.25rem)] overflow-hidden rounded-2xl bg-(--card) shadow-2xl">
         <button
           type="button"
           onClick={handleClose}
-          className="absolute right-3 top-3 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full bg-(--primary) text-white hover:bg-(--primary)/90 transition-colors shadow-lg active:scale-95"
+          className="absolute right-3 top-3 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-900 text-white hover:bg-(--primary)/90 transition-colors shadow-lg active:scale-95"
           aria-label={t.admission.popup.closeAria}
         >
           <X size={22} />
@@ -49,23 +49,21 @@ const AdmissionPopup = () => {
 
         {/* Main content grid or column */}
         <div className="relative h-full flex flex-col justify-center items-center px-6 py-7 sm:py-8 text-center space-y-6 sm:space-y-8 overflow-y-auto">
-
           {/* School Identity */}
           <div className="flex justify-center">
-            <div className="w-32 h-32 sm:w-48 sm:h-48 rounded-full bg-white shadow-xl p-3 border-4 border-(--primary)/20 relative">
-              <img src={logo} alt="School Logo" className="w-full h-full object-contain" />
-              <div className="absolute -bottom-2 -right-2 bg-yellow-400 p-2 rounded-full shadow-md animate-bounce">
-                <Sparkles size={16} className="text-white" />
-              </div>
+            <div className="w-32 h-32 sm:w-48 sm:h-48 relative">
+              <img
+                src={logo}
+                alt="School Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
 
           {/* New Admission Badge */}
           <div className="flex justify-center">
-            <div className="inline-flex items-center gap-2 px-6 py-2.5 bg-linear-to-r from-(--primary) to-(--primary-strong) text-white rounded-full text-sm sm:text-base font-black tracking-widest shadow-lg transform hover:scale-105 transition-transform cursor-default">
-              <Sparkles size={18} />
+            <div className="inline-flex items-center">
               {t.admission.popup.title}
-              <Sparkles size={18} />
             </div>
           </div>
 
@@ -78,7 +76,7 @@ const AdmissionPopup = () => {
               <p className="text-lg sm:text-xl font-bold text-(--muted) uppercase tracking-widest">
                 {t.admission.popup.sessionLabel}
               </p>
-              <p className="text-6xl sm:text-8xl font-black text-(--primary) drop-shadow-sm">
+              <p className="text-6xl sm:text-8xl font-black text-blue-900 drop-shadow-sm">
                 {t.admission.popup.year}
               </p>
             </div>

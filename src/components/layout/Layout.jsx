@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AdmissionPopup from "../ui/AdmissionPopup";
+import { IoIosArrowRoundUp } from "react-icons/io";
 
 function Layout({ children }) {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -25,7 +26,7 @@ function Layout({ children }) {
     <>
       <AdmissionPopup />
       <Navbar />
-      <main className="lg:px-10">
+      <main className="">
         {children || <Outlet />}
       </main>
       <Footer />
@@ -34,10 +35,10 @@ function Layout({ children }) {
         <button
           type="button"
           onClick={handleScrollTop}
-          className="fixed bottom-6 right-6 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--border) bg-(--card) text-(--primary) shadow-lg transition hover:-translate-y-0.5"
+          className="fixed bottom-6 right-6 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--border) bg-yellow-600 text-(--primary) shadow-lg transition hover:-translate-y-0.5"
           aria-label="Scroll to top"
         >
-          <span className="text-lg">↑</span>
+          <IoIosArrowRoundUp className="h-6 w-6 text-white" />
         </button>
       )}
     </>

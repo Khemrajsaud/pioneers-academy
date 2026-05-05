@@ -9,6 +9,7 @@ import {
   GraduationCap,
 } from 'lucide-react';
 import { useAdminTheme } from '../../contexts/AdminThemeContext';
+import logo from "../../assets/logo/logos.png";
 
 const navItems = [
   { to: '/admin/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
@@ -32,8 +33,9 @@ const Sidebar = () => {
 
       {/* Brand */}
       <div className="flex items-center gap-3 px-4 sm:px-6 pt-5 pb-5 lg:pt-8 lg:pb-8">
-        <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/30">
-          <GraduationCap className="text-white" size={20} />
+        <div className="w-14 h-14   flex items-center justify-center ">
+          {/* <GraduationCap className="text-white" size={20} /> */}
+          <img src={logo} alt="Logo" />
         </div>
         <div>
           <p className={`text-sm font-black tracking-tight leading-tight ${isDarkMode ? 'text-white' : 'text-slate-900'

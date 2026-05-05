@@ -23,6 +23,10 @@ import ResourcesNotice from "../../pages/ResourcesNotice";
 import DetailedNews from "../../pages/DetailedNews";
 import NotFound from "../../pages/NotFound";
 import AnimatedPage from "../ui/AnimatedPage";
+import Primary from "../../pages/Primary";
+import Secondary from "../../pages/Secondary";
+import HigherSecondary from "../../pages/HigherSecondary";
+import LowerSecondary from "../../pages/LowerSecondary";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -46,6 +50,11 @@ const AppRoutes = () => {
           <Route path="/resources/notices" element={<AnimatedPage><ResourcesNotice /></AnimatedPage>} />
           <Route path="/news/:id" element={<AnimatedPage><DetailedNews /></AnimatedPage>} />
           <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
+          <Route path="/primary" element={<AnimatedPage><Primary/></AnimatedPage>} />
+          <Route path="/secondary" element={<AnimatedPage><Secondary/></AnimatedPage>} />
+          
+          <Route path="/lower-secondary" element={<AnimatedPage><LowerSecondary/></AnimatedPage>} />
+          <Route path="/higher-secondary" element={<AnimatedPage><HigherSecondary/></AnimatedPage>} />
         </Route>
 
         <Route

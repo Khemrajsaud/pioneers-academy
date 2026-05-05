@@ -10,11 +10,9 @@ import {
 import axios from 'axios';
 import { useAdminTheme } from '../../contexts/AdminThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
+import logo from "../../assets/logo/logos.png";
 
-/**
- * AdminDashboard Component
- * Provides a high-level overview of site content statistics and shortcuts.
- */
+
 const AdminDashboard = () => {
   const { isDarkMode } = useAdminTheme();
   const { t } = useLanguage();

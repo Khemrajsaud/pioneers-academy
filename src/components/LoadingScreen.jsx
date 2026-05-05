@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import logo from "../assets/logo/logo.png";
+import logo from "../assets/logo/logos.png";
 
 const LoadingScreen = ({ onLoadComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    setIsVisible(true);
+
     const interval = setInterval(() => {
       setProgress((prev) => {
         const next = Math.min(prev + 5, 100);
