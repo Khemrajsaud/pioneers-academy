@@ -37,7 +37,7 @@ const AdmissionPopup = () => {
         <button
           type="button"
           onClick={handleClose}
-          className="absolute right-3 top-3 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-900 text-white hover:bg-(--primary)/90 transition-colors shadow-lg active:scale-95"
+          className="absolute right-3 top-3 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-900 text-white transition-colors shadow-lg active:scale-95"
           aria-label={t.admission.popup.closeAria}
         >
           <X size={22} />

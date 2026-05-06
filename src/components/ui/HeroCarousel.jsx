@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation, Autoplay } from "swiper/modules";
-import image1 from "../../assets/images/homepage.png";
+import image1 from "../../assets/images/homepage.jpg";
 import image2 from "../../assets/images/school1.jpeg";
 import image3 from "../../assets/images/school2.jpeg";
 import image4 from "../../assets/images/academy.png";

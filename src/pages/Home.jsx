@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "motion/react";
-import homepage from "../assets/images/homepage.png";
+import homepage from "../assets/images/homepage.jpg";
 import gallary1 from "../assets/images/gallary1.jpg";
 import gallary2 from "../assets/images/gallary2.jpg";
 import gallary3 from "../assets/images/gallary3.jpg";
