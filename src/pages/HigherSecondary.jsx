@@ -1,9 +1,100 @@
 import React from "react";
 import image from "../assets/images/highschool.jpg";
 
+const faculties = [
+  {
+    faculty: "Management",
+    color: "bg-blue-900",
+    classes: [
+      {
+        className: "Class 11",
+        subjects: [
+          "English",
+          "Nepali",
+          "Accountancy",
+          "Business Studies",
+          "Economics",
+          "Hotel Management / Computer Science",
+          "Marketing",
+        ],
+      },
+      {
+        className: "Class 12",
+        subjects: [
+          "English",
+          "Nepali",
+          "Accountancy",
+          "Business Studies",
+          "Economics",
+          "Hotel Management / Computer Science",
+          "Marketing",
+        ],
+      },
+    ],
+  },
+
+  {
+    faculty: "Science",
+    color: "bg-green-700",
+    classes: [
+      {
+        className: "Class 11",
+        subjects: [
+          "English",
+          "Nepali",
+          "Physics",
+          "Chemistry",
+          "Mathematics",
+          "Biology / Computer Science",
+        ],
+      },
+      {
+        className: "Class 12",
+        subjects: [
+          "English",
+          "Nepali",
+          "Physics",
+          "Chemistry",
+          "Mathematics",
+          "Biology / Computer Science",
+        ],
+      },
+    ],
+  },
+
+  {
+    faculty: "Law",
+    color: "bg-purple-700",
+    classes: [
+      {
+        className: "Class 11",
+        subjects: [
+          "English",
+          "Nepali",
+          "Legal Studies",
+          "Political Science",
+          "Sociology",
+          "Mass Communication",
+        ],
+      },
+      {
+        className: "Class 12",
+        subjects: [
+          "English",
+          "Nepali",
+          "Legal Studies",
+          "Political Science",
+          "Sociology",
+          "Mass Communication",
+        ],
+      },
+    ],
+  },
+];
+
 const HigherSecondary = () => {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 min-h-screen">
       
       {/* Header */}
       <div className="bg-blue-900 py-6 text-center">
@@ -12,78 +103,95 @@ const HigherSecondary = () => {
         </h1>
       </div>
 
-      {/* Section 1: Image + Introduction */}
+      {/* Top Section */}
       <div className="max-w-6xl mx-auto px-4 py-10">
-        <div className="flex flex-col md:flex-row gap-8">
+        
+        <div className="flex flex-col md:flex-row gap-8 items-center">
           
           {/* Image */}
           <div className="md:w-1/2">
             <img
               src={image}
               alt="Higher Secondary"
-              className="w-full h-[300px] object-cover rounded-lg shadow"
+              className="w-full h-[320px] object-cover rounded-2xl shadow-lg"
             />
           </div>
 
-          {/* Introduction */}
+          {/* Intro */}
           <div className="md:w-1/2">
             <p className="text-gray-700 leading-7">
-              The Higher Secondary (+2) program provides students with advanced
-              knowledge and specialization in their chosen fields. It prepares
-              them for higher education and professional careers by combining
-              theoretical understanding with practical application.
-              
+              The Higher Secondary (+2) program provides students with
+              specialized education in Management, Science, and Law streams.
+              Our curriculum is designed to develop academic excellence,
+              practical skills, leadership qualities, and career readiness.
+
               <br /><br />
 
-              Our institution offers multiple streams including Management,
-              Science, and Law, guided by experienced faculty and supported by
-              modern facilities.
+              Students are guided by experienced faculty members with access
+              to modern classrooms, laboratories, and learning resources to
+              prepare them for university education and professional success.
             </p>
           </div>
         </div>
 
-        {/* Section 2: Subjects */}
-        <div className="mt-10">
-          <h2 className="text-xl font-bold mb-4">Subjects Offered</h2>
+        {/* Faculties */}
+        <div className="mt-14">
+          <h2 className="text-3xl font-bold text-center text-blue-900 mb-10">
+            Faculties & Subjects
+          </h2>
 
-          {/* Management */}
-          <div className="mb-6">
-            <h3 className="text-blue-700 font-semibold mb-2">
-              Management Faculty
-            </h3>
-            <ul className="list-disc pl-5 text-gray-700">
-              <li>Accountancy</li>
-              <li>Business Studies</li>
-              <li>Economics</li>
-              <li>Marketing</li>
-            </ul>
+          {/* Faculty Sections */}
+          <div className="space-y-12">
+            {faculties.map((facultyItem, index) => (
+              <div key={index}>
+                
+                {/* Faculty Title */}
+                <div
+                  className={`${facultyItem.color} text-white py-3 rounded-2xl text-center mb-6`}
+                >
+                  <h3 className="text-2xl font-bold">
+                    {facultyItem.faculty} Faculty
+                  </h3>
+                </div>
+
+                {/* Class Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {facultyItem.classes.map((cls, i) => (
+                    <div
+                      key={i}
+                      className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-6 border border-gray-100"
+                    >
+                      {/* Class Header */}
+                      <div
+                        className={`${facultyItem.color} text-white text-center py-3 rounded-xl mb-5`}
+                      >
+                        <h4 className="text-xl font-semibold">
+                          {cls.className}
+                        </h4>
+                      </div>
+
+                      {/* Subjects */}
+                      <ul className="space-y-3">
+                        {cls.subjects.map((subject, j) => (
+                          <li
+                            key={j}
+                            className="flex items-center gap-3 text-gray-700"
+                          >
+                            <span
+                              className={`w-2 h-2 rounded-full ${facultyItem.color}`}
+                            ></span>
+
+                            {subject}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* Science */}
-          <div className="mb-6">
-            <h3 className="text-green-700 font-semibold mb-2">
-              Science Faculty
-            </h3>
-            <ul className="list-disc pl-5 text-gray-700">
-              <li>Physics</li>
-              <li>Chemistry</li>
-              <li>Biology / Computer Science</li>
-              <li>Mathematics</li>
-            </ul>
-          </div>
-
-          {/* Law */}
-          <div>
-            <h3 className="text-purple-700 font-semibold mb-2">
-              Law Faculty
-            </h3>
-            <ul className="list-disc pl-5 text-gray-700">
-              <li>Legal Studies</li>
-              <li>Political Science</li>
-              <li>Sociology</li>
-              <li>English</li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
