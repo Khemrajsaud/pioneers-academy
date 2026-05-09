@@ -15,7 +15,7 @@ const HeroCarousel = () => {
       navigation
       autoplay={{ delay: 3000 }}
       loop={true}
-      className="mx-auto h-64 w-full sm:h-80 lg:h-96"
+      className="w-full h-screen"
       
     >
       <SwiperSlide>

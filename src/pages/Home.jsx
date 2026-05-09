@@ -134,8 +134,34 @@ const Home = () => {
     <div className="bg-slate-50 text-slate-900">
       <section className="bg-linear-to-b from-sky-50 via-white to-slate-50 pb-6 pt-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden  border border-slate-200 bg-white shadow-2xl">
+          {/* <div className="overflow-hidden relative border border-slate-200 bg-white shadow-2xl">
             <HeroCarousel />
+            <div className=" absolute ">
+              <p>Learn Today. Lead Tomorrow</p>
+              <h1>Empowering students with quality education, creativity, and leadership.</h1>
+            </div>
+          </div> */}
+
+          <div className="relative overflow-hidden border border-slate-200 shadow-2xl h-screen">
+            {/* Hero Carousel */}
+            <HeroCarousel />
+
+            {/* Blue Overlay */}
+            <div className="absolute inset-0 bg-blue-950/60 z-10"></div>
+
+            {/* Content */}
+            <div className="absolute inset-0 z-20 flex items-center">
+              <div className="max-w-4xl px-6 md:px-16">
+                <p className="text-blue-300 text-lg md:text-xl font-semibold mb-4">
+                  Learn Today. Lead Tomorrow
+                </p>
+
+                <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
+                  Empowering students with quality education, creativity, and
+                  leadership.
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
       </section>

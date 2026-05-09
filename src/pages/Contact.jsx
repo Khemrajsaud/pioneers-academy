@@ -139,7 +139,7 @@ const Contact = () => {
                 type="text"
                 name="name"
                 placeholder={t.contact.form.placeholderName}
-                className="border p-3 rounded-lg focus:ring-2 focus:ring-blue-900 outline-none"
+                className="border p-3 rounded-lg border border-gray-200 shadow outline-none"
                 required
               />
 
@@ -148,7 +148,7 @@ const Contact = () => {
                 type="email"
                 name="email"
                 placeholder={t.contact.form.placeholderEmail}
-                className="border p-3 rounded-lg focus:ring-2 focus:ring-blue-900 outline-none"
+                className="border p-3 rounded-lg border border-gray-200 shadow outline-none"
                 required
               />
 
@@ -157,7 +157,7 @@ const Contact = () => {
                 type="text"
                 name="subject"
                 placeholder={t.contact.form.placeholderSubject}
-                className="md:col-span-2 border p-3 rounded-lg focus:ring-2 focus:ring-blue-900 outline-none"
+                className="md:col-span-2 border p-3 rounded-lg border border-gray-200 shadow outline-none"
                 required
               />
 
@@ -166,7 +166,7 @@ const Contact = () => {
                 rows="5"
                 name="message"
                 placeholder={t.contact.form.placeholderMessage}
-                className="md:col-span-2 border p-3 rounded-lg focus:ring-2 focus:ring-blue-900 outline-none resize-none"
+                className="md:col-span-2 border p-3 rounded-lg border border-gray-200 shadow outline-none resize-none"
                 required
               />
 
