@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "motion/react";
-import homepage from "../assets/images/homepage.jpg";
+import homepage from "../assets/images/school-homepage.jpeg";
 import gallary1 from "../assets/images/gallary1.jpg";
 import gallary2 from "../assets/images/gallary2.jpg";
 import gallary3 from "../assets/images/gallary3.jpg";
@@ -21,7 +21,6 @@ import {
   Image,
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
-import HeroCarousel from "../components/ui/HeroCarousel";
 import { statsData, newsData } from "../components/data.js";
 
 const API_URL = "http://localhost:5000/api/news";
@@ -134,35 +133,43 @@ const Home = () => {
     <div className="bg-slate-50 text-slate-900">
       <section className="bg-linear-to-b from-sky-50 via-white to-slate-50 pb-6 pt-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* <div className="overflow-hidden relative border border-slate-200 bg-white shadow-2xl">
-            <HeroCarousel />
-            <div className=" absolute ">
-              <p>Learn Today. Lead Tomorrow</p>
-              <h1>Empowering students with quality education, creativity, and leadership.</h1>
-            </div>
-          </div> */}
+      
 
-          <div className="relative overflow-hidden border border-slate-200 shadow-2xl h-screen">
-            {/* Hero Carousel */}
-            <HeroCarousel />
+<div className="relative overflow-hidden h-[70vh] sm:h-[80vh] lg:h-screen">
+  
+  {/* Image */}
+  <img
+    src={homepage}
+    alt="homepage"
+    className="w-full h-full object-cover"
+  />
 
-            {/* Blue Overlay */}
-            <div className="absolute inset-0 bg-blue-950/60 z-10"></div>
+  {/* Blue Overlay */}
+  <div className="absolute inset-0 bg-blue-950/50 z-10"></div>
 
-            {/* Content */}
-            <div className="absolute inset-0 z-20 flex items-center">
-              <div className="max-w-4xl px-6 md:px-16">
-                <p className="text-blue-300 text-lg md:text-xl font-semibold mb-4">
-                  Learn Today. Lead Tomorrow
-                </p>
+  {/* Content */}
+  <div className="absolute inset-0 z-20 flex items-end md:items-center pb-14 md:pb-0">
+    
+    <div className="max-w-4xl px-4 sm:px-8 md:px-16">
+      
+      {/* Small Heading */}
+      <p className="text-yellow-400 text-sm sm:text-lg md:text-xl font-bold mb-3 md:mb-4">
+        Learn Today. Lead Tomorrow
+      </p>
 
-                <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
-                  Empowering students with quality education, creativity, and
-                  leadership.
-                </h1>
-              </div>
-            </div>
-          </div>
+      {/* Main Heading */}
+      <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight max-w-3xl">
+        Empowering students with quality education,
+        creativity, and leadership.
+      </h1>
+
+    </div>
+
+  </div>
+
+</div>
+
+          
         </div>
       </section>
 
