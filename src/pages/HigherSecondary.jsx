@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../assets/images/highschool.jpg";
+import image from "../assets/images/gallary4.jpeg";
 
 const faculties = [
   {

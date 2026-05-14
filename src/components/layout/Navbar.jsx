@@ -6,14 +6,18 @@ import Nepal from "../../assets/icons/NP.png";
 import English from "../../assets/icons/US.png";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-import { IoMailOutline, IoCallOutline, IoLocationOutline } from 'react-icons/io5';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import {
+  IoMailOutline,
+  IoCallOutline,
+  IoLocationOutline,
+} from "react-icons/io5";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 const aboutLinks = [
   { label: "Introduction", to: "/about" },
   { label: "Principal Message", to: "/history" },
-  { label: "Board of Directors", to: "/team" },
-  { label: "Chairman Message", to: "/chairman-message" },
-  { label: "School Rules", to: "/rules" }, 
+  // { label: "Board of Directors", to: "/team" },
+  // { label: "Chairman Message", to: "/chairman-message" },
+  { label: "School Rules", to: "/rules" },
 ];
 
 const academicLinks = [
@@ -50,20 +54,20 @@ const Navbar = () => {
       type: "email",
       icon: <IoMailOutline className="text-lg" />,
       text: "contact@pioneers.edu.np",
-      href: "mailto:contact@pioneers.edu.np"
+      href: "mailto:contact@pioneers.edu.np",
     },
     {
       type: "phone",
       icon: <IoCallOutline className="text-lg" />,
       text: "+977-91-540488",
-      href: "tel:+97791540488"
+      href: "tel:+97791540488",
     },
     {
       type: "location",
       icon: <IoLocationOutline className="text-lg" />,
       text: "Lamkichuha-1, Lamki, Kailali",
-      href: null
-    }
+      href: null,
+    },
   ];
 
   // Auto-carousel effect
@@ -80,13 +84,21 @@ const Navbar = () => {
       const isInsideAbout = aboutRef.current?.contains(event.target);
       const isInsideAcademics = academicsRef.current?.contains(event.target);
       const isInsideResources = resourcesRef.current?.contains(event.target);
-      const isInsideMobileAbout = mobileAboutRef.current?.contains(event.target);
-      const isInsideMobileAcademics = mobileAcademicsRef.current?.contains(event.target);
-      const isInsideMobileResources = mobileResourcesRef.current?.contains(event.target);
+      const isInsideMobileAbout = mobileAboutRef.current?.contains(
+        event.target,
+      );
+      const isInsideMobileAcademics = mobileAcademicsRef.current?.contains(
+        event.target,
+      );
+      const isInsideMobileResources = mobileResourcesRef.current?.contains(
+        event.target,
+      );
 
       if (!isInsideAbout && !isInsideMobileAbout) setAboutOpen(false);
-      if (!isInsideAcademics && !isInsideMobileAcademics) setAcademicsOpen(false);
-      if (!isInsideResources && !isInsideMobileResources) setResourcesOpen(false);
+      if (!isInsideAcademics && !isInsideMobileAcademics)
+        setAcademicsOpen(false);
+      if (!isInsideResources && !isInsideMobileResources)
+        setResourcesOpen(false);
       if (!isInsideNav) setIsOpen(false);
     };
 
@@ -101,99 +113,78 @@ const Navbar = () => {
     setResourcesOpen(false);
   };
 
-  const menuItemClass = "rounded-xl p-3 text-sm font-bold transition-colors hover:bg-(--bg-alt)";
-  const dropdownClass = "absolute left-0 top-full mt-2 w-56 overflow-hidden rounded-2xl border border-(--border) bg-(--card) shadow-xl animate-fadeInDown";
+  const menuItemClass =
+    "rounded-xl p-3 text-sm font-bold transition-colors hover:bg-(--bg-alt)";
+  const dropdownClass =
+    "absolute left-0 top-full mt-2 w-56 overflow-hidden rounded-2xl border border-(--border) bg-(--card) shadow-xl animate-fadeInDown";
 
   return (
     <>
-      {/* <div className="overflow-hidden  bg-blue-900 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-2 text-xs sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:text-sm">
-         
+      <div className="bg-[#1e3a8a] text-white py-2 overflow-hidden">
+        <div className="marquee-track flex items-center gap-16 text-sm font-medium">
+          {[0, 1].map((item) => (
+            <div key={item} className="flex items-center gap-12 px-6">
+              {/* Contact Info */}
+              <a
+                href="mailto:contact@pioneers.edu.np"
+                className="flex items-center gap-2 hover:text-orange-400 transition"
+              >
+                <IoMailOutline />
+                <span>contact@pioneers.edu.np</span>
+              </a>
 
-<div className="bg-[#1e3a8a] text-white py-2 px-4">
-    
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center gap-x-12 gap-y-2 text-sm font-medium">
-        
-   
-        <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
-          <a href="mailto:contact@pioneers.edu.np" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
-            <IoMailOutline className="text-lg" />
-            <span>contact@pioneers.edu.np</span>
-          </a>
+              <a
+                href="tel:+97791540488"
+                className="flex items-center gap-2 hover:text-orange-400 transition"
+              >
+                <IoCallOutline />
+                <span>+977-91-540488</span>
+              </a>
 
-          <a href="tel:+97791540488" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
-            <IoCallOutline className="text-lg" />
-            <span>+977-91-540488</span>
-          </a>
+              <div className="flex items-center gap-2">
+                <IoLocationOutline />
+                <span>Lamkichuha-1, Lamki, Kailali</span>
+              </div>
 
-          <div className="flex items-center gap-2">
-            <IoLocationOutline className="text-lg" />
-            <span>Lamkichuha-1, Lamki, Kailali</span>
-          </div>
-        </div>
-
-      
-        <div className="flex items-center gap-4 border-t md:border-t-0 md:border-l border-blue-400 pt-2 md:pt-0 md:pl-6">
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-orange-400 transition-colors">
-            <FaFacebookF />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-orange-400 transition-colors">
-            <FaInstagram />
-          </a>
+              {/* Social Icons */}
+              <div className="flex items-center gap-4 border-l border-blue-400 pl-6">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-orange-400 transition"
+                >
+                  <FaFacebookF />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-orange-400 transition"
+                >
+                  <FaInstagram />
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
 
-
-        </div>
-      </div> */}
-
-
-       <div className="bg-[#1e3a8a] text-white py-2 overflow-hidden">
-      
-      <div className="marquee-track flex items-center gap-16 text-sm font-medium">
-
-        {[0, 1].map((item) => (
-          <div key={item} className="flex items-center gap-12 px-6">
-
-            {/* Contact Info */}
-            <a href="mailto:contact@pioneers.edu.np" className="flex items-center gap-2 hover:text-orange-400 transition">
-              <IoMailOutline />
-              <span>contact@pioneers.edu.np</span>
-            </a>
-
-            <a href="tel:+97791540488" className="flex items-center gap-2 hover:text-orange-400 transition">
-              <IoCallOutline />
-              <span>+977-91-540488</span>
-            </a>
-
-            <div className="flex items-center gap-2">
-              <IoLocationOutline />
-              <span>Lamkichuha-1, Lamki, Kailali</span>
-            </div>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-4 border-l border-blue-400 pl-6">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-orange-400 transition">
-                <FaFacebookF />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-orange-400 transition">
-                <FaInstagram />
-              </a>
-            </div>
-
-          </div>
-        ))}
-
-      </div>
-    </div>
-
-
-
-      <nav ref={navRef} className="sticky top-0 z-50 border-b border-(--border) bg-(--bg)/95 shadow-sm backdrop-blur-md">
+      <nav
+        ref={navRef}
+        className="sticky top-0 z-50 border-b border-(--border) bg-(--bg)/95 shadow-sm backdrop-blur-md"
+      >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Link to="/" onClick={handleLinkClick} className="flex min-w-0 items-center gap-3 transition-opacity duration-300 hover:opacity-80">
-            <img className="h-12 w-12 object-contain sm:h-14 sm:w-14" src={logo} alt="Logo" />
+          <Link
+            to="/"
+            onClick={handleLinkClick}
+            className="flex min-w-0 items-center gap-3 transition-opacity duration-300 hover:opacity-80"
+          >
+            <img
+              className="h-12 w-12 object-contain sm:h-14 sm:w-14"
+              src={logo}
+              alt="Logo"
+            />
             <div className="min-w-0">
               <h1 className="truncate text-lg font-black tracking-tight text-(--text) sm:text-xl">
                 {t.nav.brandTitle}
@@ -202,19 +193,37 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden items-center gap-1 text-(--text) lg:flex xl:gap-2">
-            <Link to="/" className="px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)">
+            <Link
+              to="/"
+              className="px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+            >
               {t.nav.home}
             </Link>
 
             <div className="relative" ref={aboutRef}>
-              <button onClick={() => setAboutOpen((value) => !value)} className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)">
+              <button
+                onClick={() => setAboutOpen((value) => !value)}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+              >
                 {t.nav.about}
-                <ChevronDown size={14} className={aboutOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                <ChevronDown
+                  size={14}
+                  className={
+                    aboutOpen
+                      ? "rotate-180 transition-transform"
+                      : "transition-transform"
+                  }
+                />
               </button>
               {aboutOpen && (
                 <div className={dropdownClass}>
                   {aboutLinks.map((item) => (
-                    <Link key={item.to} to={item.to} onClick={handleLinkClick} className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white">
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={handleLinkClick}
+                      className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -223,14 +232,29 @@ const Navbar = () => {
             </div>
 
             <div className="relative" ref={academicsRef}>
-              <button onClick={() => setAcademicsOpen((value) => !value)} className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)">
+              <button
+                onClick={() => setAcademicsOpen((value) => !value)}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+              >
                 {t.nav.academics}
-                <ChevronDown size={14} className={academicsOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                <ChevronDown
+                  size={14}
+                  className={
+                    academicsOpen
+                      ? "rotate-180 transition-transform"
+                      : "transition-transform"
+                  }
+                />
               </button>
               {academicsOpen && (
                 <div className={dropdownClass}>
                   {academicLinks.map((item) => (
-                    <Link key={item.label} to={item.to} onClick={handleLinkClick} className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white">
+                    <Link
+                      key={item.label}
+                      to={item.to}
+                      onClick={handleLinkClick}
+                      className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -238,19 +262,37 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link to="/facilities" className="px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)">
+            <Link
+              to="/facilities"
+              className="px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+            >
               {t.nav.facilities}
             </Link>
 
             <div className="relative" ref={resourcesRef}>
-              <button onClick={() => setResourcesOpen((value) => !value)} className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)">
+              <button
+                onClick={() => setResourcesOpen((value) => !value)}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+              >
                 {t.nav.resources}
-                <ChevronDown size={14} className={resourcesOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                <ChevronDown
+                  size={14}
+                  className={
+                    resourcesOpen
+                      ? "rotate-180 transition-transform"
+                      : "transition-transform"
+                  }
+                />
               </button>
               {resourcesOpen && (
                 <div className={dropdownClass}>
                   {resourceLinks.map((item) => (
-                    <Link key={item.to} to={item.to} onClick={handleLinkClick} className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white">
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={handleLinkClick}
+                      className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -258,23 +300,43 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link to="/contact" className="rounded-full bg-(--primary) px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5">
+            <Link
+              to="/contact"
+              className="rounded-full bg-(--primary) px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+            >
               Inquiry Open
             </Link>
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <button onClick={toggleLanguage} className="flex items-center gap-2 rounded-full border border-(--border) bg-(--card) px-3 py-2 transition-all hover:bg-(--bg-alt)">
-              <img src={language === "ne" ? Nepal : English} alt="flag" className="h-5 w-5 rounded-sm object-cover" />
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 rounded-full border border-(--border) bg-(--card) px-3 py-2 transition-all hover:bg-(--bg-alt)"
+            >
+              <img
+                src={language === "ne" ? Nepal : English}
+                alt="flag"
+                className="h-5 w-5 rounded-sm object-cover"
+              />
               <span className="text-xs font-bold uppercase">{language}</span>
             </button>
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            <button onClick={toggleLanguage} className="rounded-full border border-(--border) bg-(--card) p-2 transition-all hover:bg-(--bg-alt)">
-              <img src={language === "ne" ? Nepal : English} alt="flag" className="h-5 w-5 rounded-sm object-cover" />
+            <button
+              onClick={toggleLanguage}
+              className="rounded-full border border-(--border) bg-(--card) p-2 transition-all hover:bg-(--bg-alt)"
+            >
+              <img
+                src={language === "ne" ? Nepal : English}
+                alt="flag"
+                className="h-5 w-5 rounded-sm object-cover"
+              />
             </button>
-            <button onClick={() => setIsOpen((value) => !value)} className="rounded-full bg-(--primary) p-2.5 text-white shadow-lg shadow-blue-500/20">
+            <button
+              onClick={() => setIsOpen((value) => !value)}
+              className="rounded-full bg-(--primary) p-2.5 text-white shadow-lg shadow-blue-500/20"
+            >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
@@ -287,14 +349,29 @@ const Navbar = () => {
             </Link>
 
             <div ref={mobileAboutRef} className="rounded-xl">
-              <button onClick={() => setAboutOpen((value) => !value)} className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)">
+              <button
+                onClick={() => setAboutOpen((value) => !value)}
+                className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)"
+              >
                 {t.nav.about}
-                <ChevronDown size={16} className={aboutOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                <ChevronDown
+                  size={16}
+                  className={
+                    aboutOpen
+                      ? "rotate-180 transition-transform"
+                      : "transition-transform"
+                  }
+                />
               </button>
               {aboutOpen && (
                 <div className="ml-4 flex flex-col gap-1 border-l-2 border-(--border) py-1 pl-4">
                   {aboutLinks.map((item) => (
-                    <Link key={item.to} to={item.to} onClick={handleLinkClick} className="p-2.5 text-sm transition-colors hover:text-(--primary)">
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={handleLinkClick}
+                      className="p-2.5 text-sm transition-colors hover:text-(--primary)"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -303,14 +380,29 @@ const Navbar = () => {
             </div>
 
             <div ref={mobileAcademicsRef} className="rounded-xl">
-              <button onClick={() => setAcademicsOpen((value) => !value)} className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)">
+              <button
+                onClick={() => setAcademicsOpen((value) => !value)}
+                className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)"
+              >
                 {t.nav.academics}
-                <ChevronDown size={16} className={academicsOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                <ChevronDown
+                  size={16}
+                  className={
+                    academicsOpen
+                      ? "rotate-180 transition-transform"
+                      : "transition-transform"
+                  }
+                />
               </button>
               {academicsOpen && (
                 <div className="ml-4 flex flex-col gap-1 border-l-2 border-(--border) py-1 pl-4">
                   {academicLinks.map((item) => (
-                    <Link key={item.label} to={item.to} onClick={handleLinkClick} className="p-2.5 text-sm transition-colors hover:text-(--primary)">
+                    <Link
+                      key={item.label}
+                      to={item.to}
+                      onClick={handleLinkClick}
+                      className="p-2.5 text-sm transition-colors hover:text-(--primary)"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -318,19 +410,38 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link to="/facilities" onClick={handleLinkClick} className={menuItemClass}>
+            <Link
+              to="/facilities"
+              onClick={handleLinkClick}
+              className={menuItemClass}
+            >
               {t.nav.facilities}
             </Link>
 
             <div ref={mobileResourcesRef} className="rounded-xl">
-              <button onClick={() => setResourcesOpen((value) => !value)} className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)">
+              <button
+                onClick={() => setResourcesOpen((value) => !value)}
+                className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)"
+              >
                 {t.nav.resources}
-                <ChevronDown size={16} className={resourcesOpen ? "rotate-180 transition-transform" : "transition-transform"} />
+                <ChevronDown
+                  size={16}
+                  className={
+                    resourcesOpen
+                      ? "rotate-180 transition-transform"
+                      : "transition-transform"
+                  }
+                />
               </button>
               {resourcesOpen && (
                 <div className="ml-4 flex flex-col gap-1 border-l-2 border-(--border) py-1 pl-4">
                   {resourceLinks.map((item) => (
-                    <Link key={item.to} to={item.to} onClick={handleLinkClick} className="p-2.5 text-sm transition-colors hover:text-(--primary)">
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={handleLinkClick}
+                      className="p-2.5 text-sm transition-colors hover:text-(--primary)"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -338,7 +449,11 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link to="/contact" onClick={handleLinkClick} className="rounded-xl bg-(--primary) p-3 text-sm font-bold text-white">
+            <Link
+              to="/contact"
+              onClick={handleLinkClick}
+              className="rounded-xl bg-(--primary) p-3 text-sm font-bold text-white"
+            >
               Inquiry Open
             </Link>
 
@@ -347,7 +462,11 @@ const Navbar = () => {
                 onClick={toggleLanguage}
                 className="flex w-full items-center justify-center gap-3 rounded-xl border border-(--border) bg-(--card) p-4 text-sm font-black uppercase tracking-tight shadow-sm transition-transform active:scale-95"
               >
-                <img src={language === "ne" ? Nepal : English} alt="flag" className="h-6 w-6 rounded-md shadow-sm" />
+                <img
+                  src={language === "ne" ? Nepal : English}
+                  alt="flag"
+                  className="h-6 w-6 rounded-md shadow-sm"
+                />
                 {language === "ne" ? "English Version" : "नेपाली संस्करण"}
               </button>
             </div>

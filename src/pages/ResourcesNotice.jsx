@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useCallback, useMemo, lazy, Suspense } from "react";
 import axios from "axios";
 import {
   Calendar,
@@ -16,6 +17,111 @@ import { motion, AnimatePresence } from "framer-motion";
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const API_URL = `${API_BASE}/api/notice`;
 
+// Lazy load heavy components
+const NoticeCard = ({ notice, isExpanded, shouldShowToggle, onToggle, formatDate, t }) => (
+  <motion.article
+    variants={itemVariants}
+    className="flex flex-col bg-(--card) border border-(--border) rounded-3xl overflow-hidden hover:border-blue-500/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 will-change-transform"
+  >
+    <div className="p-6 sm:p-8 flex flex-col grow">
+      <h3 className="text-xl font-bold mb-4 text-(--text) leading-snug line-clamp-2">
+        {notice.title}
+      </h3>
+
+      <div className="flex items-center gap-3 mb-5 p-3 rounded-2xl bg-(--bg-alt)/50 border border-(--border)/50">
+        <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-sm font-bold text-blue-600 shrink-0">
+          {notice.author ? getInitials(notice.author) : <User size={18} />}
+        </div>
+
+        <div className="flex flex-col min-w-0 flex-1">
+          <span className="text-sm font-semibold text-(--text) truncate">
+            {notice.author || t.notices.pa}
+          </span>
+          <div className="flex items-center gap-1.5 text-xs text-blue-600">
+            <Calendar size={12} />
+            <span className="font-medium">{formatDate(notice.notice_date)}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="text-(--muted) leading-relaxed text-sm mb-6 grow">
+        {isExpanded || !shouldShowToggle
+          ? notice.description
+          : truncateText(notice.description, 200)
+        }
+      </div>
+
+      <div className="mt-auto pt-4 border-t border-(--border) flex items-center justify-between flex-wrap gap-3">
+        {shouldShowToggle ? (
+          <button
+            onClick={() => onToggle(notice.id)}
+            className="flex items-center gap-1 text-blue-600 text-sm font-bold hover:opacity-80 transition-opacity p-1 -ml-1"
+          >
+            {isExpanded ? (
+              <>
+                {t.notices.readLess}
+                <ChevronUp size={16} />
+              </>
+            ) : (
+              <>
+                {t.notices.readMore}
+                <ChevronDown size={16} />
+              </>
+            )}
+          </button>
+        ) : (
+          <div />
+        )}
+
+        {notice.document_url && (
+          <a
+            href={notice.document_url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 rounded-xl text-sm font-bold transition-colors ml-auto"
+          >
+            <Download size={16} />
+            {t.notices.download}
+          </a>
+        )}
+      </div>
+    </div>
+  </motion.article>
+);
+
+// Helper functions outside component for better performance
+const getInitials = (name) => {
+  if (!name) return 'PA';
+  const words = name.trim().split(' ');
+  if (words.length >= 2) {
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+  return name.substring(0, 2).toUpperCase();
+};
+
+const truncateText = (text, maxLength = 200) => {
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength) + '...';
+};
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.05 } // Reduced stagger for faster appearance
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: "easeOut" }
+  }
+};
 
 const ResourcesNotice = () => {
   const { t, language } = useLanguage();
@@ -24,27 +130,8 @@ const ResourcesNotice = () => {
   const [error, setError] = useState(null);
   const [expandedNotices, setExpandedNotices] = useState({});
 
-  
-  useEffect(() => {
-    const fetchNotices = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await axios.get(API_URL);
-        setNotices(response.data);
-      } catch (err) {
-        console.error("Error fetching notices:", err);
-        setError(t.notices.error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNotices();
-  }, [t.notices.error]);
-
-  
-  const formatDate = (dateString) => {
+  // Memoized format date function
+  const formatDate = useCallback((dateString) => {
     try {
       const date = new Date(dateString);
       return date.toLocaleDateString(language === 'ne' ? 'ne-NP' : 'en-US', {
@@ -55,74 +142,114 @@ const ResourcesNotice = () => {
     } catch {
       return dateString;
     }
-  };
+  }, [language]);
 
- 
-  const toggleExpanded = (noticeId) => {
+  // Memoized toggle function
+  const toggleExpanded = useCallback((noticeId) => {
     setExpandedNotices(prev => ({
       ...prev,
       [noticeId]: !prev[noticeId]
     }));
-  };
+  }, []);
 
- 
-  const truncateText = (text, maxLength = 200) => {
-    if (!text) return "";
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
-  };
+  // Optimized fetch with AbortController
+  useEffect(() => {
+    const abortController = new AbortController();
+    
+    const fetchNotices = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Add cache-busting and timeout
+        const response = await axios.get(API_URL, {
+          signal: abortController.signal,
+          timeout: 10000, // 10 second timeout
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        });
+        
+        setNotices(response.data);
+      } catch (err) {
+        if (err.name !== 'AbortError' && err.name !== 'CanceledError') {
+          console.error("Error fetching notices:", err);
+          setError(t.notices.error || "Failed to load notices");
+        }
+      } finally {
+        if (!abortController.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
 
-  
-  const getInitials = (name) => {
-    if (!name) return 'PA';
-    const words = name.trim().split(' ');
-    if (words.length >= 2) {
-      return (words[0][0] + words[1][0]).toUpperCase();
-    }
-    return name.substring(0, 2).toUpperCase();
-  };
+    fetchNotices();
 
- 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
+    return () => {
+      abortController.abort();
+    };
+  }, [t.notices.error]);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: "easeOut" }
-    }
-  };
+  // Memoized notices list with shouldShowToggle calculation
+  const noticesList = useMemo(() => {
+    return notices.map(notice => ({
+      ...notice,
+      shouldShowToggle: notice.description && notice.description.length > 200,
+      isExpanded: expandedNotices[notice.id] || false
+    }));
+  }, [notices, expandedNotices]);
+
+  // Loading skeleton component
+  const LoadingSkeleton = () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i} className="bg-(--card) border border-(--border) rounded-3xl p-6 sm:p-8 animate-pulse">
+          <div className="h-6 bg-gray-200 rounded-lg mb-4 w-3/4"></div>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+            <div className="flex-1">
+              <div className="h-4 bg-gray-200 rounded mb-2 w-32"></div>
+              <div className="h-3 bg-gray-200 rounded w-24"></div>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div className="h-3 bg-gray-200 rounded w-full"></div>
+            <div className="h-3 bg-gray-200 rounded w-11/12"></div>
+            <div className="h-3 bg-gray-200 rounded w-4/5"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-(--bg) transition-colors">
       <div className="max-w-7xl mx-auto">
+        {/* Header with blue accent */}
         <div className="mb-10 sm:mb-12">
           <div className="flex items-center gap-4">
-            <div className="bg-(--primary) h-14 w-2 rounded-xs" />
+            <div className="bg-blue-600 h-14 w-2 rounded-full" />
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-(--text)">
-              {t.notices.hero}
+              {t.notices.hero || "Notices"}
             </h1>
           </div>
         </div>
 
-        {/* Dynamic Loading Overlay */}
+        {/* Loading State with Blue Spinner */}
         {loading && (
           <div className="flex flex-col items-center justify-center min-h-[40vh] gap-4">
-            <Loader2 className="animate-spin text-(--primary)" size={48} />
+            <div className="relative">
+              <div className="w-16 h-16 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600"></div>
+              <Loader2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-blue-600 w-6 h-6 animate-spin" />
+            </div>
             <p className="text-lg text-(--muted) animate-pulse">
-              {t.notices.loading}
+              {t.notices.loading || "Loading notices..."}
             </p>
           </div>
         )}
 
-        {/* Dynamic Error Feedback Message */}
+        {/* Error State */}
         {error && !loading && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -134,7 +261,7 @@ const ResourcesNotice = () => {
           </motion.div>
         )}
 
-        {/* Empty State Notification */}
+        {/* Empty State */}
         {!loading && notices.length === 0 && !error && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -145,15 +272,15 @@ const ResourcesNotice = () => {
               <FileText size={32} />
             </div>
             <h3 className="text-2xl font-bold mb-3 text-(--text)">
-              {t.notices.noNotices}
+              {t.notices.noNotices || "No notices available"}
             </h3>
             <p className="text-(--muted) text-lg h-auto">
-              {t.notices.noNoticesDetail}
+              {t.notices.noNoticesDetail || "Check back later for updates"}
             </p>
           </motion.div>
         )}
 
-        {/* Primary Archive View: Notices Staggered Grid */}
+        {/* Notices Grid with Performance Optimizations */}
         {!loading && notices.length > 0 && (
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8"
@@ -161,42 +288,40 @@ const ResourcesNotice = () => {
             initial="hidden"
             animate="visible"
           >
-            {notices.map((notice) => {
-              const isExpanded = expandedNotices[notice.id];
-              const shouldShowToggle = notice.description && notice.description.length > 200;
-
+            {noticesList.map((notice) => {
+              const { shouldShowToggle, isExpanded, ...noticeData } = notice;
+              
               return (
                 <motion.article
                   key={notice.id}
                   variants={itemVariants}
-                  className="flex flex-col bg-(--card) border border-(--border) rounded-3xl overflow-hidden hover:border-(--primary)/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300"
+                  className="flex flex-col bg-(--card) border border-(--border) rounded-3xl overflow-hidden hover:border-blue-500/50 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 will-change-transform"
+                  loading="lazy"
                 >
                   <div className="p-6 sm:p-8 flex flex-col grow">
-                    {/* Notice Primary Identity (Title) */}
+                    {/* Title */}
                     <h3 className="text-xl font-bold mb-4 text-(--text) leading-snug line-clamp-2">
                       {notice.title}
                     </h3>
 
-                    {/* Meta Section: Provenance and Chronology */}
+                    {/* Meta Section */}
                     <div className="flex items-center gap-3 mb-5 p-3 rounded-2xl bg-(--bg-alt)/50 border border-(--border)/50">
-                      {/* Distinguishing Author Mark */}
-                      <div className="w-10 h-10 rounded-full bg-(--primary)/10 flex items-center justify-center text-sm font-bold text-(--primary) shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-sm font-bold text-blue-600 shrink-0">
                         {notice.author ? getInitials(notice.author) : <User size={18} />}
                       </div>
 
-                      {/* Explicit Origin and Timing */}
                       <div className="flex flex-col min-w-0 flex-1">
                         <span className="text-sm font-semibold text-(--text) truncate">
-                          {notice.author || t.notices.pa}
+                          {notice.author || t.notices.pa || "Pioneers' Academy"}
                         </span>
-                        <div className="flex items-center gap-1.5 text-xs text-(--primary)">
+                        <div className="flex items-center gap-1.5 text-xs text-blue-600">
                           <Calendar size={12} />
                           <span className="font-medium">{formatDate(notice.notice_date)}</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Notice Semantic Detail (Description) */}
+                    {/* Description */}
                     <div className="text-(--muted) leading-relaxed text-sm mb-6 grow">
                       {isExpanded || !shouldShowToggle
                         ? notice.description
@@ -204,43 +329,36 @@ const ResourcesNotice = () => {
                       }
                     </div>
 
-                    {/* Complementary Actions Footer */}
+                    {/* Actions */}
                     <div className="mt-auto pt-4 border-t border-(--border) flex items-center justify-between flex-wrap gap-3">
-                      {/* Segment Visibility Toggle */}
-                      {shouldShowToggle ? (
+                      {shouldShowToggle && (
                         <button
                           onClick={() => toggleExpanded(notice.id)}
-                          className="flex items-center gap-1 text-(--primary) text-sm font-bold hover:opacity-80 transition-opacity p-1 -ml-1"
+                          className="flex items-center gap-1 text-blue-600 text-sm font-bold hover:opacity-80 transition-opacity p-1 -ml-1"
                         >
-                          {isExpanded
-                            ? (
-                              <>
-                                {t.notices.readLess}
-                                <ChevronUp size={16} />
-                              </>
-                            )
-                            : (
-                              <>
-                                {t.notices.readMore}
-                                <ChevronDown size={16} />
-                              </>
-                            )
-                          }
+                          {isExpanded ? (
+                            <>
+                              {t.notices.readLess || "Read Less"}
+                              <ChevronUp size={16} />
+                            </>
+                          ) : (
+                            <>
+                              {t.notices.readMore || "Read More"}
+                              <ChevronDown size={16} />
+                            </>
+                          )}
                         </button>
-                      ) : (
-                        <div />
                       )}
 
-                      {/* Content Retrieval Action (Download) */}
                       {notice.document_url && (
                         <a
                           href={notice.document_url}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-(--primary)/10 hover:bg-(--primary)/20 text-(--primary) rounded-xl text-sm font-bold transition-colors ml-auto"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 rounded-xl text-sm font-bold transition-colors ml-auto"
                         >
                           <Download size={16} />
-                          {t.notices.download}
+                          {t.notices.download || "Download"}
                         </a>
                       )}
                     </div>

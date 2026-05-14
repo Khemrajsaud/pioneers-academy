@@ -1,5 +1,5 @@
 import React from "react";
-import home from "../assets/images/principle.jpg";
+import home from "../assets/images/principle.jpeg";
 
 const PrincipleMessage = () => {
   return (
@@ -17,11 +17,11 @@ const PrincipleMessage = () => {
         <div className="flex flex-col md:flex-row gap-8 items-start">
           
           {/* Image */}
-          <div className="w-full md:w-1/3 text-center">
+          <div className="w-full md:w-1/4 text-center ">
             <img
               src={home}
               alt="Principal"
-              className="w-full h-[350px] object-contain rounded-lg shadow-md bg-white"
+              className="] object-contain rounded-md"
             />
 
             {/* Name + Designation */}

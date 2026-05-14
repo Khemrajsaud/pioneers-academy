@@ -1,5 +1,5 @@
 import React from "react";
-import home from "../assets/images/principle.jpg";
+import home from "../assets/images/principle.jpeg";
 
 const ChairmanMessage = () => {
   return (

@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "motion/react";
 import homepage from "../assets/images/school-homepage.jpeg";
-import gallary1 from "../assets/images/gallary1.jpg";
-import gallary2 from "../assets/images/gallary2.jpg";
-import gallary3 from "../assets/images/gallary3.jpg";
-import gallary4 from "../assets/images/gallary4.jpg";
-import image2 from "../assets/images/school1.jpeg";
-import image3 from "../assets/images/school2.jpeg";
-import image4 from "../assets/images/academy.png";
-import principal from "../assets/images/teacher.jpg";
+
+import gallary1 from "../assets/images/gallary1.jpeg";
+import gallary2 from "../assets/images/gallary2.jpeg";
+import gallary3 from "../assets/images/gallary3.jpeg";
+import gallary4 from "../assets/images/gallary4.jpeg";
+
+import primary from "../assets/images/primary.jpeg";
+import secondary from "../assets/images/secondary.jpeg";
+import highlevel from "../assets/images/higher-secondary.jpeg";
+import principal from "../assets/images/principle.jpeg";
 import {
   ArrowRight,
   Loader2,
@@ -47,7 +49,7 @@ const revealItem = {
 const academyLevels = [
   {
     title: "Primary Level",
-    image: image2,
+    image: primary,
     icon: BookOpen,
     accent: "bg-blue-800 ",
     description:
@@ -55,14 +57,14 @@ const academyLevels = [
   },
   {
     title: "Secondary Level",
-    image: image4,
+    image: secondary,
     icon: Award,
     accent: "bg-amber-600 ",
     description: "Balanced academic growth with discipline and confidence.",
   },
   {
     title: "High School Level",
-    image: image3,
+    image: highlevel,
     icon: GraduationCap,
     accent: "bg-blue-800 ",
     description: "Focused preparation for exams, careers, and future study.",
@@ -175,7 +177,7 @@ const Home = () => {
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <motion.section
-          className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+          className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
           variants={revealSection}
           initial="hidden"
           whileInView="show"
@@ -210,7 +212,7 @@ const Home = () => {
           <motion.div variants={revealItem} className="space-y-6">
             <SectionHeading
               eyebrow="About the Academy"
-              title="College Profile"
+              title="School Profile"
               description="Established in 1999 AD (2056 BS), Pioneers’ Academy, Kailali is a reputed private educational institution in Lamkichuha-1, Lamki, Kailali. We focus on quality education, character building, and a learning environment that helps students grow with confidence."
             />
 

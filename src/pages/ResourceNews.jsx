@@ -39,10 +39,7 @@ const ResourceNews = () => {
     fetchNews();
   }, [t.news.error]);
 
-  /**
-   * Tracks and increments view count for a specific news item
-   * Utilizes a local Set to prevent multiple increments in a single session
-   */
+  
   const incrementViewCount = async (newsId) => {
     if (viewedNewsIds.has(newsId)) return;
 
@@ -107,17 +104,21 @@ const ResourceNews = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 sm:mb-12">
           <div className="flex items-center gap-4">
-            <div className="bg-(--primary) h-14 w-2 rounded-xs" />
+            {/* Changed to blue */}
+            <div className="bg-blue-600 h-14 w-2 rounded-full" />
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-(--text)">
               {t.news.hero}
             </h1>
           </div>
         </div>
 
-        {/* Dynamic State: Loading Indicator */}
+        {/* Dynamic State: Loading Indicator - Changed to blue */}
         {loading && (
           <div className="flex flex-col items-center justify-center min-h-[40vh] gap-4">
-            <Loader2 className="animate-spin text-(--primary)" size={48} />
+            <div className="relative">
+              <div className="w-16 h-16 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600"></div>
+              <Loader2 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-blue-600 w-6 h-6 animate-spin" />
+            </div>
             <p className="text-lg text-(--muted) animate-pulse">
               {t.news.loading}
             </p>
@@ -169,7 +170,7 @@ const ResourceNews = () => {
                 variants={itemVariants}
                 onMouseEnter={() => incrementViewCount(item.id)}
                 onClick={() => navigate(`/news/${item.id}`)}
-                className="group flex flex-col rounded-3xl border border-(--border) overflow-hidden bg-(--card) hover:border-(--primary)/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+                className="group flex flex-col rounded-3xl border border-(--border) overflow-hidden bg-(--card) hover:border-blue-500/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
               >
                 {/* Visual Anchor: Article Thumbnail */}
                 <div className="relative h-56 md:h-64 w-full overflow-hidden bg-(--bg-alt) shrink-0">
@@ -185,9 +186,9 @@ const ResourceNews = () => {
                       <Newspaper size={64} />
                     </div>
                   )}
-                  {/* Categorical Labeling */}
+                  {/* Categorical Labeling - Changed to blue */}
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-(--primary) text-white shadow-md">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-blue-600 text-white shadow-md">
                       {item.category || t.news.general}
                     </span>
                   </div>
@@ -199,16 +200,16 @@ const ResourceNews = () => {
                   {/* Article Metadata (Chronology and Engagement) */}
                   <div className="flex items-center justify-between text-xs font-semibold text-(--muted) mb-4">
                     <div className="flex items-center gap-1.5">
-                      <CalendarDays size={14} className="text-(--primary)" />
+                      <CalendarDays size={14} className="text-blue-600" />
                       <span>{formatDate(item.published_date)}</span>
                     </div>
                     <div className="flex items-center gap-1.5 bg-(--bg-alt) px-2 py-1 rounded-full">
-                      <Eye size={12} className="text-(--primary)" />
+                      <Eye size={12} className="text-blue-600" />
                       <span>{item.view_count || 0}</span>
                     </div>
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-bold leading-tight mb-3 text-(--text) line-clamp-2 group-hover:text-(--primary) transition-colors">
+                  <h2 className="text-xl sm:text-2xl font-bold leading-tight mb-3 text-(--text) line-clamp-2 group-hover:text-blue-600 transition-colors">
                     {item.title}
                   </h2>
 
@@ -219,13 +220,13 @@ const ResourceNews = () => {
                   {/* Contextual Action Link */}
                   <div className="mt-auto pt-4 border-t border-(--border) flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs font-medium text-(--muted) truncate max-w-[60%]">
-                      <div className="w-6 h-6 rounded-full bg-(--primary)/10 flex items-center justify-center shrink-0">
-                        <UserRound size={12} className="text-(--primary)" />
+                      <div className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
+                        <UserRound size={12} className="text-blue-600" />
                       </div>
                       <span className="truncate">{item.published_by || t.news.admin}</span>
                     </div>
 
-                    <div className="flex items-center gap-1 text-sm font-bold text-(--primary) group-hover:translate-x-1 transition-transform">
+                    <div className="flex items-center gap-1 text-sm font-bold text-blue-600 group-hover:translate-x-1 transition-transform">
                       {t.news.readMore}
                       <ArrowRight size={16} />
                     </div>

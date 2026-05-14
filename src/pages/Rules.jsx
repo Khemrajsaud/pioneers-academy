@@ -10,7 +10,7 @@ const Rules = () => {
       </div>
 
       <div className="max-w-4xl mx-auto p-6">
-        <ul className="list-disc space-y-3 text-gray-700 text-lg">
+        <ul className="list-disc space-y-3 text-gray-700 text-lg font-extrabold">
           <li>Come to school on time every day.</li>
           <li>Wear proper school uniform.</li>
           <li>Respect teachers, staff, and classmates.</li>

@@ -1,49 +1,7 @@
 
 import React from "react";
 import { lowerSecondaryData } from "../components/data.js";
-import lowersecondary from "../assets/images/secondary.jpg";
-
-const classSubjects = [
-  {
-    className: "Class 6",
-    subjects: [
-      "Nepali",
-      "English",
-      "Mathematics",
-      "Science",
-      "Social Studies",
-      "Health & Population",
-      "Moral Education",
-      "Computer / ICT",
-    ],
-  },
-  {
-    className: "Class 7",
-    subjects: [
-      "Nepali",
-      "English",
-      "Mathematics",
-      "Science",
-      "Social Studies",
-      "Health & Population",
-      "Moral Education",
-      "Computer / ICT",
-    ],
-  },
-  {
-    className: "Class 8",
-    subjects: [
-      "Nepali",
-      "English",
-      "Mathematics",
-      "Science",
-      "Social Studies",
-      "Health & Population",
-      "Moral Education",
-      "Computer / ICT",
-    ],
-  },
-];
+import lowersecondary from "../assets/images/secondary.jpeg";
 
 const LowerSecondary = () => {
   return (
@@ -93,43 +51,7 @@ const LowerSecondary = () => {
           </div>
         </div>
 
-        {/* Subjects Section */}
-        <div className="mt-14">
-          <h2 className="text-3xl font-bold text-center text-blue-900 mb-10">
-            Subjects Offered
-          </h2>
-
-          {/* Grid Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {classSubjects.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-6 border border-gray-100"
-              >
-                {/* Card Title */}
-                <div className="bg-blue-900 text-white text-center py-3 rounded-xl mb-5">
-                  <h3 className="text-xl font-semibold">
-                    {item.className}
-                  </h3>
-                </div>
-
-                {/* Subjects */}
-                <ul className="space-y-3">
-                  {item.subjects.map((subject, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-gray-700"
-                    >
-                      <span className="w-2 h-2 bg-blue-700 rounded-full"></span>
-                      {subject}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        
       </div>
     </div>
   );

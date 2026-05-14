@@ -1,94 +1,79 @@
+
 import { useEffect, useState } from "react";
 import { X, Sparkles } from "lucide-react";
 import logo from "../../assets/logo/logo.png";
-import { useLanguage } from "../../contexts/LanguageContext";
+import popupimage from "../../assets/images/popup-image1.jpeg"
+import popupimage2 from "../../assets/images/popup-image3.jpeg" // Second popup image
 
 const AdmissionPopup = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { t } = useLanguage();
+  const [isFirstOpen, setIsFirstOpen] = useState(false);
+  const [isSecondOpen, setIsSecondOpen] = useState(false);
 
+  // Handle body scroll locking
   useEffect(() => {
-    if (isOpen) {
+    if (isFirstOpen || isSecondOpen) {
       document.body.style.overflow = "hidden";
     }
 
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isOpen]);
+  }, [isFirstOpen, isSecondOpen]);
 
+  // Initial load - check session storage
   useEffect(() => {
     const dismissed = window.sessionStorage.getItem("admissionPopupDismissed");
     if (!dismissed) {
-      setIsOpen(true);
+      setIsFirstOpen(true);
     }
   }, []);
 
-  const handleClose = () => {
-    setIsOpen(false);
+  const handleCloseFirst = () => {
+    setIsFirstOpen(false);
+    // Open second popup immediately after closing first
+    setIsSecondOpen(true);
+  };
+
+  const handleCloseSecond = () => {
+    setIsSecondOpen(false);
+    // Mark both as dismissed in session storage
     window.sessionStorage.setItem("admissionPopupDismissed", "true");
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-70 flex items-start justify-center  bg-black/60 px-4 pt-8 sm:pt-10 pb-3 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-2xl h-[calc(100vh-2.75rem)] sm:h-[calc(100vh-3.25rem)] overflow-hidden rounded-2xl bg-(--card) shadow-2xl">
-        <button
-          type="button"
-          onClick={handleClose}
-          className="absolute right-3 top-3 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-900 text-white transition-colors shadow-lg active:scale-95"
-          aria-label={t.admission.popup.closeAria}
-        >
-          <X size={22} />
-        </button>
-
-        {/* Decorative background elements for premium feel */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-(--primary)/5 rounded-full -mr-20 -mt-20"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-(--accent)/5 rounded-full -ml-12 -mb-12"></div>
-
-        {/* Main content grid or column */}
-        <div className="relative h-full flex flex-col justify-center items-center px-6 py-7 sm:py-8 text-center space-y-6 sm:space-y-8 overflow-y-auto">
-          {/* School Identity */}
-          <div className="flex justify-center">
-            <div className="w-32 h-32 sm:w-48 sm:h-48 relative">
-              <img
-                src={logo}
-                alt="School Logo"
-                className="w-full h-full object-contain"
-              />
-            </div>
+    <>
+      {/* First Popup */}
+      {isFirstOpen && (
+        <div className="fixed inset-0 z-70 flex items-start justify-center bg-black/60 px-4 pt-8 sm:pt-10 pb-3 backdrop-blur-sm animate-fadeIn">
+          <div className="relative w-full max-w-2xl h-[calc(100vh-2.75rem)] sm:h-[calc(100vh-3.25rem)] overflow-scroll rounded-2xl bg-(--card) shadow-2xl">
+            <button
+              type="button"
+              onClick={handleCloseFirst}
+              className="absolute right-0 top-0 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-900 text-white transition-colors shadow-lg active:scale-95"
+            >
+              <X size={22} />
+            </button>
+            <img src={popupimage} alt="Popup 1" className=" object-contain" />
           </div>
-
-          {/* New Admission Badge */}
-          <div className="flex justify-center">
-            <div className="inline-flex items-center">
-              {t.admission.popup.title}
-            </div>
-          </div>
-
-          {/* Session Details */}
-          <div className="space-y-3 sm:space-y-4">
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-(--text) leading-tight tracking-tight">
-              {t.admission.popup.joinUs}
-            </h2>
-            <div className="space-y-1">
-              <p className="text-lg sm:text-xl font-bold text-(--muted) uppercase tracking-widest">
-                {t.admission.popup.sessionLabel}
-              </p>
-              <p className="text-6xl sm:text-8xl font-black text-blue-900 drop-shadow-sm">
-                {t.admission.popup.year}
-              </p>
-            </div>
-          </div>
-
-          {/* Call to action text/subtext could go here */}
-          <p className="text-(--muted) text-sm sm:text-base max-w-sm mx-auto leading-relaxed italic">
-            "Your journey towards a brighter future starts here."
-          </p>
         </div>
-      </div>
-    </div>
+      )}
+
+      {/* Second Popup */}
+      {isSecondOpen && (
+        <div className="fixed inset-0 z-80 flex items-start justify-center bg-black/60 px-4 pt-8 sm:pt-10 pb-3 backdrop-blur-sm animate-fadeIn">
+          <div className="relative w-full max-w-2xl h-[calc(100vh-2.75rem)] sm:h-[calc(100vh-3.25rem)] overflow-scroll rounded-2xl bg-(--card) shadow-2xl">
+            <button
+              type="button"
+              onClick={handleCloseSecond}
+              className="absolute right-3 top-3 z-30 inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-900 text-white transition-colors shadow-lg active:scale-95"
+            >
+              <X size={22} />
+            </button>
+            <img src={popupimage2} alt="Popup 2" className="object-contain" />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

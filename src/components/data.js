@@ -1,17 +1,18 @@
-import gallary1 from "../assets/images/gallary1.jpg";
-import gallary2 from "../assets/images/gallary2.jpg";
-import gallary3 from "../assets/images/gallary3.jpg";
-import gallary4 from "../assets/images/gallary4.jpg";
-import image2 from "../assets/images/school1.jpeg";
-import image3 from "../assets/images/school2.jpeg";
-import image4 from "../assets/images/academy.png";
-import teacher from "../assets/images/teacher.jpg";
+import gallary1 from "../assets/images/gallary1.jpeg";
+import gallary2 from "../assets/images/gallary2.jpeg";
+import gallary3 from "../assets/images/gallary3.jpeg";
+import gallary4 from "../assets/images/gallary4.jpeg";
+
+import image2 from "../assets/images/secondary.jpeg";
+import image3 from "../assets/images/secondary.jpeg";
+import image4 from "../assets/images/secondary.jpeg";
+import teacher from "../assets/images/secondary.jpeg";
 
 export const statsData = [
   {
     id: 1,
-    number: "1000+",
-    label: "Alumni Worldwide",
+    number: "700+",
+    label: "Successful graduates",
     description: "Successful graduates over 15 glorious years",
   },
   {
@@ -22,16 +23,16 @@ export const statsData = [
   },
   {
     id: 3,
-    number: "20",
+    number: "21+",
     label: "Years of Excellence",
     description: "A reputed educational institution for over the two decades",
   },
-  {
-    id: 4,
-    number: "75+",
-    label: "Districts of Nepal",
-    description: "Represented among our students",
-  },
+  // {
+  //   id: 4,
+  //   number: "75+",
+  //   label: "Districts of Nepal",
+  //   description: "Represented among our students",
+  // },
 ];
 
 export const newsData = [
@@ -62,7 +63,6 @@ export const newsData = [
     date: "2026-01-25",
     category: "Announcement",
   },
- 
 ];
 
 export const boardMembers = [
@@ -76,7 +76,7 @@ export const boardMembers = [
     id: 2,
     name: "Mrs. Sita Koirala",
     position: "Vice Chairman",
-    image: teacher ,
+    image: teacher,
   },
   {
     id: 3,
@@ -161,7 +161,6 @@ export const secondaryData = {
   image: "/images/secondary.jpg",
 };
 
-
 export const higherSecondaryData = {
   title: "Higher Secondary (+2)",
   description:
@@ -170,12 +169,7 @@ export const higherSecondaryData = {
   faculties: [
     {
       name: "Management",
-      subjects: [
-        "Accountancy",
-        "Business Studies",
-        "Economics",
-        "Marketing",
-      ],
+      subjects: ["Accountancy", "Business Studies", "Economics", "Marketing"],
       color: "bg-blue-600",
     },
     {
@@ -190,17 +184,11 @@ export const higherSecondaryData = {
     },
     {
       name: "Law",
-      subjects: [
-        "Legal Studies",
-        "Political Science",
-        "Sociology",
-        "English",
-      ],
+      subjects: ["Legal Studies", "Political Science", "Sociology", "English"],
       color: "bg-purple-600",
     },
   ],
 };
-
 
 export const lowerSecondaryData = {
   title: "Lower Secondary Level",
