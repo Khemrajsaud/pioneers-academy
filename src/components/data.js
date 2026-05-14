@@ -3,9 +3,9 @@ import gallary2 from "../assets/images/gallary2.jpeg";
 import gallary3 from "../assets/images/gallary3.jpeg";
 import gallary4 from "../assets/images/gallary4.jpeg";
 
-import image2 from "../assets/images/secondary.jpeg";
-import image3 from "../assets/images/secondary.jpeg";
-import image4 from "../assets/images/secondary.jpeg";
+import image2 from "../assets/images/gallary3.jpeg";
+import image3 from "../assets/images/computer-lab.jpg";
+import image4 from "../assets/images/program.jpeg";
 import teacher from "../assets/images/secondary.jpeg";
 
 export const statsData = [
