@@ -52,7 +52,7 @@ const en = {
     address: "Lamkichuha-1, Lamki, Kailali, Sudurpaschim Province, Nepal",
     phone: "+977-91-540488",
     email: "contact@pioneers.edu.np",
-    copyright: "© 2024 Pioneers Academy. All rights reserved.",
+    copyright: "© 2026 Pioneers Academy. All rights reserved.",
     title: "Pioneers Academy",
     subtitle: "Excellence in Education",
     designedBy: "Designed by Niijo Tech.",

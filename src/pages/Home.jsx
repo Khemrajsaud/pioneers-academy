@@ -134,7 +134,7 @@ const Home = () => {
   return (
     <div className="bg-slate-50 text-slate-900">
       <section className="bg-linear-to-b from-sky-50 via-white to-slate-50 pb-6 pt-4">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className=" w-full ">
       
 
 <div className="relative overflow-hidden h-[70vh] sm:h-[80vh] lg:h-screen">

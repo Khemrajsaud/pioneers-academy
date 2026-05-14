@@ -26,10 +26,8 @@ const Footer = () => {
   return (
     <footer className="mt-16 border-t border-slate-200 bg-linear-to-b from-white via-slate-50 to-sky-50 text-slate-900">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        
         {/* Responsive Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-4 sm:p-6 lg:p-8">
-          
           {/* Section 1 */}
           <section className="space-y-6 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
@@ -99,15 +97,16 @@ const Footer = () => {
               <li>{t.footer.email}</li>
             </ul>
           </section>
-
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-8 mx-4 sm:mx-10 flex flex-col gap-3 text-sm text-black sm:flex-row sm:items-center sm:justify-between">
           <span className="font-medium">{t.footer.copyright}</span>
-          <span className="font-medium">{t.footer.designedBy}</span>
+          {/* <span className="font-medium">{t.footer.designedBy}</span> */}
+          <a className="font-medium hover:underline" href="https://www.niijotech.com/">
+            {t.footer.designedBy}
+          </a>
         </div>
-
       </div>
     </footer>
   );

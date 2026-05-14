@@ -11,7 +11,7 @@ import teacher from "../assets/images/secondary.jpeg";
 export const statsData = [
   {
     id: 1,
-    number: "700+",
+    number: "1700+",
     label: "Successful graduates",
     description: "Successful graduates over 15 glorious years",
   },
