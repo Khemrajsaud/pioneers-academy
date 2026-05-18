@@ -27,6 +27,8 @@ import Primary from "../../pages/Primary";
 import Secondary from "../../pages/Secondary";
 import HigherSecondary from "../../pages/HigherSecondary";
 import LowerSecondary from "../../pages/LowerSecondary";
+import Login from "../../pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -57,9 +59,15 @@ const AppRoutes = () => {
           <Route path="/higher-secondary" element={<AnimatedPage><HigherSecondary/></AnimatedPage>} />
         </Route>
 
+        <Route path="/admin/login" element={<Login />} />
+
         <Route
           path="/admin"
-          element={<AdminLayout />}
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
         >
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />

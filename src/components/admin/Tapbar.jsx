@@ -2,6 +2,9 @@ import React from 'react';
 import { Moon, Sun, GraduationCap } from 'lucide-react';
 import { useAdminTheme } from '../../contexts/AdminThemeContext';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { clearAdminAuthenticated } from '../../utils/adminAuth';
 
 const pageTitles = {
   '/admin/dashboard': { title: 'Dashboard', subtitle: 'Overview of your school content' },
@@ -13,7 +16,19 @@ const pageTitles = {
 const Topbar = () => {
   const { isDarkMode, toggleTheme } = useAdminTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   const page = pageTitles[location.pathname] || { title: 'Admin', subtitle: '' };
+
+  const handleLogout = async () => {
+    try {
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+      await axios.post(`${baseUrl}/api/admin/logout`, {}, { withCredentials: true });
+    } finally {
+      clearAdminAuthenticated();
+      navigate('/admin/login', { replace: true });
+    }
+  };
 
   return (
     <header className={`sticky top-0 z-20 border-b transition-colors duration-300 ${isDarkMode
@@ -53,6 +68,13 @@ const Topbar = () => {
           >
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
             <span className="hidden sm:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className="rounded-xl bg-red-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+          >
+            Logout
           </button>
         </div>
       </div>

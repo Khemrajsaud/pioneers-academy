@@ -200,7 +200,7 @@ const About = () => {
               <div className="text-sm opacity-90">Years of Excellence</div>
             </div>
             <div>
-              <div className="text-3xl font-bold">700+</div>
+              <div className="text-3xl font-bold">1700+</div>
               <div className="text-sm opacity-90">Students Graduated</div>
             </div>
             <div>
