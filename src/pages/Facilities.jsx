@@ -1,82 +1,36 @@
 import React from "react";
-import { BookOpen, FlaskConical, Monitor, Bus, Trophy, ShieldCheck } from "lucide-react";
-
-const facilitiesData = [
-  {
-    title: "Library",
-    icon: BookOpen,
-    description: "Well-stocked library with academic and reference books.",
-  },
-  {
-    title: "Science Lab",
-    icon: FlaskConical,
-    description: "Modern labs for practical learning and experiments.",
-  },
-  {
-    title: "Computer Lab",
-    icon: Monitor,
-    description: "Equipped with latest computers and internet access.",
-  },
-  {
-    title: "Transportation",
-    icon: Bus,
-    description: "Safe and reliable transport service for students.",
-  },
-  {
-    title: "Sports",
-    icon: Trophy,
-    description: "Indoor and outdoor sports facilities for students.",
-  },
-  {
-    title: "Security",
-    icon: ShieldCheck,
-    description: "24/7 security with CCTV monitoring system.",
-  },
-];
+import { CheckCircle } from "lucide-react";
 
 const Facilities = () => {
+  const facilities = [
+    "Well-equipped laboratories",
+    "Digital classrooms",
+    "Conference & seminar hall",
+    "Sports & extracurricular activities",
+    "Training Kitchen",
+  ];
+
   return (
-    <div className="bg-gray-50">
-      
-      {/* Header */}
-      <div className="w-full bg-blue-900 py-6">
-        <h1 className="text-white font-bold text-2xl md:text-3xl text-center">
-          School Facilities
+    <div className="bg-gray-100 py-10 px-4 sm:px-8 md:px-12">
+      {/* Heading */}
+      <div className="mb-6">
+        <h1 className="inline-block bg-[#1e3a8a] text-white font-bold text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-r-full">
+          OUR FACILITIES
         </h1>
       </div>
 
-      {/* Content */}
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {facilitiesData.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-center"
-              >
-                {/* Icon */}
-                <div className="flex justify-center mb-4">
-                  <Icon className="w-10 h-10 text-blue-700" />
-                </div>
-
-                {/* Title */}
-                <h2 className="font-bold text-lg mb-2">
-                  {item.title}
-                </h2>
-
-                {/* Description */}
-                <p className="text-gray-600 text-sm">
-                  {item.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      {/* Facilities List */}
+      <ul className="space-y-4">
+        {facilities.map((item, index) => (
+          <li
+            key={index}
+            className="flex items-center gap-3 text-gray-700 text-sm sm:text-base md:text-lg font-medium"
+          >
+            <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -1,7 +1,34 @@
 // import React from "react";
 // import home from "../assets/images/school-homepage.jpeg";
-
+// import {
+//   GraduationCap,
+//   Users,
+//   Award,
+//   BookOpen,
+//   Target,
+//   Heart,
+// } from "lucide-react";
+// import { Eye } from "lucide-react";
+// import { CheckCircle } from "lucide-react";
 // const About = () => {
+//   const features = [
+//     "Qualified, Experienced & Caring Teachers",
+//     "Child-Friendly & Safe Learning Environment",
+//     "Modern Teaching Methods & Smart Classes",
+//     "Regular counselling, career orientation & mentorship",
+//     "Extra-Curricular Activities (ECA) & Clubs",
+//     "Focus on academics, co-curricular, leadership and values.",
+//     "Focus on Discipline, Values & Moral Education",
+//     "Individual Attention to Every Student",
+//   ];
+
+//   const differenc = [
+//     "Student-Centred Learning",
+//     "Focus on Life Skills & Values",
+//     "Use of Technology in Education",
+//     "Continuous Parent-Teacher Interaction",
+//     "Safe, Secure & Inclusive Environment",
+//   ];
 //   return (
 //     <div className="bg-gray-50">
 //       {/* Header */}
@@ -14,55 +41,140 @@
 //       {/* Content */}
 //       <div className="max-w-6xl mx-auto px-4 py-10">
 //         <div className="flex flex-col md:flex-row gap-8 items-start">
-          
 //           {/* Image */}
 //           <div className="w-full md:w-1/3">
 //             <img
 //               src={home}
-//               alt="About"
-//               className=" object-contain rounded-lg "
+//               alt="Pioneers' Academy Campus"
+//               className="w-full object-contain rounded-lg shadow-md"
 //             />
 //           </div>
 
 //           {/* Text */}
 //           <div className="md:w-2/3 text-gray-700 leading-7 text-justify">
 //             <p>
-//               Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-//               natus saepe voluptatibus repellat iste perspiciatis facere
-//               exercitationem aperiam tempora illum? Modi harum possimus, hic
-//               libero enim explicabo quam id ipsum!
+//               Pioneers' Academy Kailali is committed to providing quality
+//               education from Play Group (PG) to Grade 12 in a nurturing,
+//               inspiring, and student-centered environment. We believe that
+//               education goes beyond academic achievement and focuses on
+//               developing character, creativity, leadership, critical thinking,
+//               and essential life skills in every child
 //             </p>
 
 //             <p className="mt-4">
-//               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-//               Repellat natus enim, eaque, et, maxime necessitatibus molestiae ab
-//               sit voluptate rem atque nobis quidem deserunt ipsum cum nihil
-//               adipisci tempora facere?
+//               Established in 1999 AD (2056 BS), Pioneers' Academy is a reputed
+//               private educational institution located in Lamkichuha
+//               Municipality–1, Lamki, Kailali, Nepal. With over two decades of
+//               excellence in education, we have earned the trust of parents and
+//               the community as one of the region's leading educational
+//               institutions.
 //             </p>
 //           </div>
 //         </div>
 
-//         {/* Second Section */}
-//         <div className="mt-8 text-gray-700 leading-7 text-justify">
+//         {/* Mission & Vision Section */}
+//         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+//           <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-900">
+//             <h2 className="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+//               <Target className="w-5 h-5  uppercase" /> Our Mission
+//             </h2>
+//             <p className="text-gray-600 leading-relaxed">
+//               To impact quality education and number young minds to become
+//               knowledgeable, responsible global citizen.
+//             </p>
+//           </div>
+
+//           <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-900">
+//             <h2 className="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+//               <Eye className="w-5 h-5" /> Our Vision
+//             </h2>
+//             <p className="text-gray-600 leading-relaxed">
+//               To be leading institutional recognized for academic excellence,
+//               innovation and holistic development.{" "}
+//             </p>
+//           </div>
+//         </div>
+
+//         <div clssName="   mt-12 flex gap-10">
+//           <div className="mb-6 mt-12">
+//             <h1 className="inline-block  bg-[#1e3a8a] text-white font-bold text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-full">
+//               WHY CHOOSE US?
+//             </h1>
+
+//             {/* features List */}
+//             <ul className="space-y-4">
+//               {features.map((item, index) => (
+//                 <li
+//                   key={index}
+//                   className="flex items-center text-center gap-3 text-gray-700 text-sm sm:text-base md:text-lg font-medium"
+//                 >
+//                   <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+//                   <span>{item}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+
+//           <div className="">
+//             <h1 className="inline-block  bg-[#4fb342] text-white font-bold text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-full">
+//               WHAT MAKES US DIFFERENT?
+//             </h1>
+
+//             {/* features List */}
+//             <ul className="space-y-4">
+//               {differenc.map((item, index) => (
+//                 <li
+//                   key={index}
+//                   className="flex items-center text-center gap-3 text-gray-700 text-sm sm:text-base md:text-lg font-medium"
+//                 >
+//                   <CheckCircle className="h-5 w-5 text-blue-500 flex-shrink-0" />
+//                   <span>{item}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+//         </div>
+
+       
+
+//         {/* Detailed Content */}
+//         <div className="mt-12 text-gray-700 leading-7 text-justify space-y-4">
 //           <p>
-//             Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-//             numquam possimus adipisci maxime non fuga eius quasi, vel, enim
-//             blanditiis ab impedit recusandae reprehenderit itaque voluptatibus,
-//             rerum saepe id harum.
+//             Our mission is to empower students with knowledge, confidence, and
+//             values that prepare them for future success. We foster a balanced
+//             approach to learning by combining academic excellence with
+//             extracurricular activities, sports, cultural programs, and
+//             leadership opportunities. At Pioneers' Academy, we are dedicated to
+//             creating a safe, inclusive, and motivating learning environment
+//             where every student is encouraged to discover their potential,
+//             pursue their passions, and become responsible global citizens.
+//             Established: 1999 AD (2056 BS) Location: Lamkichuha Municipality–1,
+//             Lamki, Kailali, Nepal
 //           </p>
 
-//           <p className="mt-4">
-//             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nihil
-//             aliquam voluptas maxime vitae quod nisi voluptates quas velit ad.
-//             Magnam rem aliquid fuga totam, a incidunt nisi doloribus soluta?
-//           </p>
+          
+//         </div>
 
-//           <p className="mt-4">
-//             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quos
-//             nulla provident illo voluptates quam in veniam porro minima alias
-//             libero itaque natus exercitationem reprehenderit voluptate
-//             dignissimos dolor, fuga quasi?
-//           </p>
+//         {/* Stats Section */}
+//         <div className="mt-12 bg-blue-900 text-white rounded-lg p-8">
+//           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+//             <div>
+//               <div className="text-3xl font-bold">21+</div>
+//               <div className="text-sm opacity-90">Years of Excellence</div>
+//             </div>
+//             <div>
+//               <div className="text-3xl font-bold">1700+</div>
+//               <div className="text-sm opacity-90">Students Graduated</div>
+//             </div>
+//             <div>
+//               <div className="text-3xl font-bold">4+</div>
+//               <div className="text-sm opacity-90">Dedicated Faculty</div>
+//             </div>
+//             <div>
+//               <div className="text-3xl font-bold">100%</div>
+//               <div className="text-sm opacity-90">Exam Success Rate</div>
+//             </div>
+//           </div>
 //         </div>
 //       </div>
 //     </div>
@@ -72,13 +184,34 @@
 // export default About;
 
 
+
+
 import React from "react";
 import home from "../assets/images/school-homepage.jpeg";
-import { GraduationCap, Users, Award, BookOpen, Target, Heart } from "lucide-react";
+import { Target, Eye, CheckCircle } from "lucide-react";
 
 const About = () => {
+  const features = [
+    "Qualified, Experienced & Caring Teachers",
+    "Safe, Child-Friendly Learning Environment",
+    "Modern Teaching Methods & Smart Classrooms",
+    "Regular Career Guidance & Mentorship",
+    "Rich ECA, Sports & Club Activities",
+    "Strong Focus on Academic Excellence",
+    "Discipline, Values & Moral Education",
+    "Individual Attention for Every Student",
+  ];
+
+  const differenc = [
+     "Student-Centred Learning",
+    "Focus on Life Skills & Values",
+    "Use of Technology in Education",
+    "Continuous Parent-Teacher Interaction",
+    "Safe, Secure & Inclusive Environment",
+  ];
+
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 min-h-screen">
       {/* Header */}
       <div className="w-full bg-blue-900 py-6">
         <h1 className="text-white font-bold text-2xl md:text-3xl text-center">
@@ -86,130 +219,152 @@ const About = () => {
         </h1>
       </div>
 
-      {/* Content */}
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        <div className="flex flex-col md:flex-row gap-8 items-start">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* About Section */}
+        <div className="flex flex-col lg:flex-row gap-10 items-center">
           {/* Image */}
-          <div className="w-full md:w-1/3">
+          <div className="w-full lg:w-1/3">
             <img
               src={home}
-              alt="Pioneers' Academy Campus"
-              className="w-full object-contain rounded-lg shadow-md"
+              alt="Pioneers Academy Campus"
+              className="w-full h-auto rounded-xl shadow-lg object-cover"
             />
           </div>
 
-          {/* Text */}
-          <div className="md:w-2/3 text-gray-700 leading-7 text-justify">
+          {/* Content */}
+          <div className="w-full lg:w-2/3 text-gray-700 leading-8 text-justify">
             <p>
-              Established in 1999 AD (2056 BS), <span className="font-semibold text-blue-900">Pioneers' Academy, Kailali</span> is a reputed private educational institution in Lamkichuha-1, Lamki, Kailali. With over two decades of excellence in education, we have established ourselves as a trusted name in the region.
+              Pioneers' Academy Kailali is committed to providing quality
+              education from Play Group (PG) to Grade 12 in a nurturing,
+              inspiring, and student-centered environment. We believe that
+              education goes beyond academic achievement and focuses on
+              developing character, creativity, leadership, critical thinking,
+              and essential life skills in every child.
             </p>
 
             <p className="mt-4">
-              We focus on <span className="font-semibold">quality education, character building, and a learning environment</span> that helps students grow with confidence. Our institution believes in nurturing young minds through a balanced approach of academic rigor and extracurricular activities.
+              Established in 1999 AD (2056 BS), Pioneers' Academy is a reputed
+              private educational institution located in Lamkichuha
+              Municipality–1, Lamki, Kailali, Nepal. With over two decades of
+              excellence in education, we have earned the trust of parents and
+              the community as one of the region’s leading educational
+              institutions.
             </p>
           </div>
         </div>
 
-        {/* Mission & Vision Section */}
+        {/* Mission & Vision */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-900">
+          <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-900">
             <h2 className="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
-              <Target className="w-5 h-5" /> Our Mission
+              <Target className="w-5 h-5" />
+              Our Mission
             </h2>
+
             <p className="text-gray-600 leading-relaxed">
-              To provide quality education that empowers students with knowledge, skills, and values necessary to become responsible global citizens and future leaders.
+              To impart quality education and nurture young minds to become
+              knowledgeable, responsible, compassionate, and globally competent
+              citizens.
             </p>
           </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-900">
-            <h2 className="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
-              <Heart className="w-5 h-5" /> Our Vision
+
+          <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-600">
+            <h2 className="text-xl font-bold text-green-700 mb-3 flex items-center gap-2">
+              <Eye className="w-5 h-5" />
+              Our Vision
             </h2>
+
             <p className="text-gray-600 leading-relaxed">
-              To be a center of excellence in education that produces competent, confident, and compassionate individuals who contribute positively to society.
+              To be a leading educational institution recognized for academic
+              excellence, innovation, character development, and holistic
+              growth.
             </p>
           </div>
         </div>
 
-        {/* Key Features Section */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-blue-900 text-center mb-8">Why Choose Pioneers' Academy?</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <GraduationCap className="w-8 h-8 text-blue-900" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Quality Education</h3>
-              <p className="text-gray-500 text-sm">Experienced faculty and modern teaching methodologies</p>
-            </div>
-            
-            <div className="text-center p-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Users className="w-8 h-8 text-blue-900" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Expert Faculty</h3>
-              <p className="text-gray-500 text-sm">Dedicated and highly qualified teachers</p>
-            </div>
-            
-            <div className="text-center p-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <BookOpen className="w-8 h-8 text-blue-900" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Modern Curriculum</h3>
-              <p className="text-gray-500 text-sm">Updated syllabus with practical learning approach</p>
-            </div>
-            
-            <div className="text-center p-4">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Award className="w-8 h-8 text-blue-900" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Proven Results</h3>
-              <p className="text-gray-500 text-sm">Excellent academic track record and achievements</p>
-            </div>
+        {/* Why Choose Us & Difference */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Why Choose Us */}
+          <div className="bg-white rounded-xl shadow-md p-6 text-center">
+            <h2 className="inline-block bg-blue-900 text-white font-bold text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-full mb-8">
+              WHY CHOOSE US?
+            </h2>
+
+            <ul className="space-y-4 max-w-lg mx-auto">
+              {features.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex items-center gap-3 text-gray-700 text-sm sm:text-base md:text-lg"
+                >
+                  <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                  <span className="text-left">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* What Makes Us Different */}
+          <div className="bg-white rounded-xl shadow-md p-6 text-center">
+            <h2 className="inline-block bg-green-600 text-white font-bold text-lg sm:text-xl md:text-2xl py-3 px-6 rounded-full mb-8">
+              WHAT MAKES US DIFFERENT?
+            </h2>
+
+            <ul className="space-y-4 max-w-lg mx-auto">
+              {differenc.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex items-center gap-3 text-gray-700 text-sm sm:text-base md:text-lg"
+                >
+                  <CheckCircle className="h-5 w-5 text-blue-500 flex-shrink-0" />
+                  <span className="text-left">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         {/* Detailed Content */}
-        <div className="mt-12 text-gray-700 leading-7 text-justify space-y-4">
-          <p>
-            At <span className="font-semibold">Pioneers' Academy</span>, we understand that education extends beyond textbooks. Our holistic approach combines academic excellence with co-curricular activities, sports, arts, and community service. We provide state-of-the-art facilities including well-equipped science laboratories, a comprehensive library, computer labs, and sports grounds to ensure all-round development of our students.
+        <div className="mt-12 bg-white p-6 rounded-xl shadow-md">
+          <p className="text-gray-700 leading-8 text-justify">
+            Our mission is to empower students with knowledge, confidence, and
+            values that prepare them for future success. We foster a balanced
+            approach to learning by combining academic excellence with
+            extracurricular activities, sports, cultural programs, and
+            leadership opportunities.
           </p>
 
-          <p>
-            Our dedicated team of educators works tirelessly to create an engaging learning environment where every student feels valued and motivated to achieve their full potential. We maintain an optimal student-teacher ratio to ensure personalized attention and support for each child's unique learning journey.
+          <p className="mt-4 text-gray-700 leading-8 text-justify">
+            At Pioneers' Academy, we are dedicated to creating a safe,
+            inclusive, and motivating learning environment where every student
+            is encouraged to discover their potential, pursue their passions,
+            and become responsible global citizens.
           </p>
 
-          <p>
-            Character building is at the heart of our educational philosophy. Through various programs and activities, we instill values such as integrity, respect, responsibility, and compassion in our students. We believe that these core values, combined with academic knowledge, prepare our students for success in all aspects of life.
-          </p>
-
-          <p>
-            The school has consistently produced outstanding results in board examinations, and our alumni have gone on to excel in various fields including medicine, engineering, business, civil services, and academia. Many have secured admissions in prestigious universities in Nepal and abroad.
-          </p>
-
-          <p>
-            We invite you to be a part of the <span className="font-semibold">Pioneers' Academy family</span>, where we nurture tomorrow's leaders, innovators, and responsible citizens. Together, let's build a brighter future through quality education and character development.
-          </p>
+      
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-12 bg-blue-900 text-white rounded-lg p-8">
+        {/* Statistics */}
+        <div className="mt-12 bg-blue-900 text-white rounded-xl p-8 shadow-lg">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-              <div className="text-3xl font-bold">21+</div>
+              <div className="text-3xl font-bold">25+</div>
               <div className="text-sm opacity-90">Years of Excellence</div>
             </div>
+
             <div>
               <div className="text-3xl font-bold">1700+</div>
               <div className="text-sm opacity-90">Students Graduated</div>
             </div>
+
             <div>
-              <div className="text-3xl font-bold">4+</div>
+              <div className="text-3xl font-bold">40+</div>
               <div className="text-sm opacity-90">Dedicated Faculty</div>
             </div>
+
             <div>
               <div className="text-3xl font-bold">100%</div>
-              <div className="text-sm opacity-90">Exam Success Rate</div>
+              <div className="text-sm opacity-90">Commitment to Success</div>
             </div>
           </div>
         </div>

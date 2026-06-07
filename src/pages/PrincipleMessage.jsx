@@ -36,45 +36,25 @@ const PrincipleMessage = () => {
           {/* Text */}
           <div className="md:w-2/3">
             <p className="text-gray-700 leading-7 text-justify">
-              It is with great pride and joy that I welcome you to Pioneers Academy.
-              As an institution dedicated to excellence in education, we stand committed
-              to nurturing not just academic brilliance, but also strong character,
-              critical thinking, and compassionate citizenship.
+             At Pioneers' Academy, we believe every student has the
+                  potential to excel We provide a supportive environment that
+                  nurtures curiosity, creativity and character, preparing our
+                  students for a successful future
+                  <br />
+                  <br />
 
-              <br /><br />
-
-              At Pioneers Academy, we believe that every child is unique, with their own
-              talents, interests, and potential. Our mission is to create an environment
-              where these individual strengths can flourish, where curiosity is encouraged,
-              and where students are inspired to dream big and work hard to achieve their goals.
-
-              <br /><br />
-
-              Our experienced and dedicated faculty members work tirelessly to provide a
-              learning experience that goes beyond textbooks. We emphasize hands-on learning,
-              collaborative projects, and real-world applications of knowledge.
+                  <p className="text-sm leading-7 text-slate-600 sm:text-base">
+                  Our goal is to create an environment where curiosity is
+                  encouraged, individual strengths can flourish, and students
+                  are inspired to dream big while working steadily toward their
+                  goals.
+                </p>
+              
             </p>
           </div>
         </div>
 
-        {/* Second Paragraph */}
-        <div className="mt-6">
-          <p className="text-gray-700 leading-7 text-justify">
-            Through various co-curricular activities, sports programs, and community service
-            initiatives, we ensure that our students grow into well-rounded individuals.
-
-            <br /><br />
-
-            I encourage all our students to be curious, creative, and courageous. Don’t be afraid
-            to ask questions and challenge yourselves. Success is not just about grades—it’s about
-            becoming the best version of yourself.
-
-            <br /><br />
-
-            With warm regards.
-          </p>
         </div>
-      </div>
     </div>
   );
 };

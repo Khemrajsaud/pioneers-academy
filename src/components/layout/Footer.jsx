@@ -40,13 +40,13 @@ const Footer = () => {
                 <h3 className="text-2xl font-black tracking-tight sm:text-3xl">
                   {t.footer.title}
                 </h3>
-                <p className="text-sm font-medium text-slate-500">
+                <p className="text-sm font-semibold text-black">
                   {t.footer.subtitle}
                 </p>
               </div>
             </div>
 
-            <p className="max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
+            <p className="max-w-xl text-sm leading-7 font-semibold text-black sm:text-base">
               {t.footer.intro}
             </p>
 
@@ -69,14 +69,15 @@ const Footer = () => {
 
           {/* Section 2 */}
           <section className="bg-slate-50 p-6 text-center sm:text-left">
-            <h4 className="text-sm font-black uppercase tracking-widest text-slate-900">
+            <h4 className="text-sm  font-bold underline underline-offset-4  uppercase tracking-widest text-slate-900">
               {t.footer.quickLinks}
             </h4>
             <ul className="mt-5 space-y-3 text-sm font-medium text-slate-600">
+
               {quickLinks.map((item) => (
                 <li key={item.to}>
                   <Link
-                    className="transition-colors duration-200 hover:text-blue-900 hover:underline"
+                    className="transition-colors text-black  duration-200 font-semibold hover:text-black hover:underline underline-offset-4"
                     to={item.to}
                   >
                     {item.label}
@@ -88,10 +89,10 @@ const Footer = () => {
 
           {/* Section 3 */}
           <section className="bg-slate-50 p-6 text-center sm:text-left">
-            <h4 className="text-sm font-black uppercase tracking-widest text-slate-900">
+            <h4 className="text-sm font-black underline underline-offset-4 uppercase tracking-widest text-slate-900">
               {t.footer.contactInfo}
             </h4>
-            <ul className="mt-5 space-y-4 text-sm leading-7 text-black">
+            <ul className="mt-5 space-y-4 text-sm font-semibold leading-7  text-black">
               <li>{t.footer.address}</li>
               <li>{t.footer.phone}</li>
               <li>{t.footer.email}</li>
@@ -102,8 +103,8 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-8 mx-4 sm:mx-10 flex flex-col gap-3 text-sm text-black sm:flex-row sm:items-center sm:justify-between">
           <span className="font-medium">{t.footer.copyright}</span>
-          {/* <span className="font-medium">{t.footer.designedBy}</span> */}
-          <a className="font-medium hover:underline" href="https://www.niijotech.com/">
+        
+          <a className="font-semibold underline underline-offset-4" href="https://www.niijotech.com/">
             {t.footer.designedBy}
           </a>
         </div>

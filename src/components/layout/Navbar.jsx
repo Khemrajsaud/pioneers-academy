@@ -195,7 +195,7 @@ const Navbar = () => {
           <div className="hidden items-center gap-1 text-(--text) lg:flex xl:gap-2">
             <Link
               to="/"
-              className="px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+              className="px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
             >
               {t.nav.home}
             </Link>
@@ -203,7 +203,7 @@ const Navbar = () => {
             <div className="relative" ref={aboutRef}>
               <button
                 onClick={() => setAboutOpen((value) => !value)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+                className="flex items-center gap-1 px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
               >
                 {t.nav.about}
                 <ChevronDown
@@ -234,7 +234,7 @@ const Navbar = () => {
             <div className="relative" ref={academicsRef}>
               <button
                 onClick={() => setAcademicsOpen((value) => !value)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+                className="flex items-center gap-1 px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
               >
                 {t.nav.academics}
                 <ChevronDown
@@ -264,7 +264,7 @@ const Navbar = () => {
 
             <Link
               to="/facilities"
-              className="px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+              className="px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
             >
               {t.nav.facilities}
             </Link>
@@ -272,7 +272,7 @@ const Navbar = () => {
             <div className="relative" ref={resourcesRef}>
               <button
                 onClick={() => setResourcesOpen((value) => !value)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold transition-colors hover:text-(--primary)"
+                className="flex items-center gap-1 px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
               >
                 {t.nav.resources}
                 <ChevronDown
@@ -302,7 +302,7 @@ const Navbar = () => {
 
             <Link
               to="/contact"
-              className="rounded-full bg-(--primary) px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+              className="rounded-full bg-(--primary) px-4 py-2.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
             >
               Inquiry Open
             </Link>

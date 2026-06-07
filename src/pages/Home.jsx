@@ -135,43 +135,36 @@ const Home = () => {
     <div className="bg-slate-50 text-slate-900">
       <section className="bg-linear-to-b from-sky-50 via-white to-slate-50 pb-6 pt-4">
         <div className=" w-full ">
-      
+          <div className="relative overflow-hidden h-[70vh] sm:h-[80vh] lg:h-screen">
+            {/* Image */}
+            <img
+              src={homepage}
+              alt="homepage"
+              className="w-full h-full object-cover"
+            />
 
-<div className="relative overflow-hidden h-[70vh] sm:h-[80vh] lg:h-screen">
-  
-  {/* Image */}
-  <img
-    src={homepage}
-    alt="homepage"
-    className="w-full h-full object-cover"
-  />
+            {/* Blue Overlay */}
+            <div className="absolute inset-0 bg-blue-950/50 z-10"></div>
 
-  {/* Blue Overlay */}
-  <div className="absolute inset-0 bg-blue-950/50 z-10"></div>
+            {/* Content */}
+            <div className="absolute inset-0 z-20 flex items-end md:items-center pb-14 md:pb-0">
+              <div className="max-w-4xl px-4 sm:px-8 md:px-16">
+                {/* Small Heading */}
+                <p className="text-yellow-400 text-sm sm:text-lg md:text-xl font-bold mb-3 md:mb-4">
+                  Nurturing Young Minds, Building Bright Futures
+                </p>
 
-  {/* Content */}
-  <div className="absolute inset-0 z-20 flex items-end md:items-center pb-14 md:pb-0">
-    
-    <div className="max-w-4xl px-4 sm:px-8 md:px-16">
-      
-      {/* Small Heading */}
-      <p className="text-yellow-400 text-sm sm:text-lg md:text-xl font-bold mb-3 md:mb-4">
-        Learn Today. Lead Tomorrow
-      </p>
-
-      {/* Main Heading */}
-      <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight max-w-3xl">
+                {/* Main Heading */}
+                {/* <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight max-w-3xl">
         Empowering students with quality education,
         creativity, and leadership.
-      </h1>
-
-    </div>
-
-  </div>
-
-</div>
-
-          
+      </h1> */}
+                <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight max-w-3xl">
+                  Choose Your Path. Shape Your Future
+                </h1>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -314,11 +307,10 @@ const Home = () => {
                   Principal Message
                 </h3>
                 <p className="text-sm leading-7 text-slate-600 sm:text-base">
-                  It is with great pride and joy that I welcome you to Pioneers
-                  Academy. As an institution dedicated to excellence in
-                  education, we are committed to nurturing academic brilliance,
-                  strong character, critical thinking, and compassionate
-                  citizenship.
+                  At Pioneers' Academy, we believe every student has the
+                  potential to excel We provide a supportive environment that
+                  nurtures curiosity, creativity and character, preparing our
+                  students for a successful future
                 </p>
                 <p className="text-sm leading-7 text-slate-600 sm:text-base">
                   Our goal is to create an environment where curiosity is

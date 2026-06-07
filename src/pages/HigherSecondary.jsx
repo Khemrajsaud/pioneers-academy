@@ -1,197 +1,178 @@
 import React from "react";
-import image from "../assets/images/gallary4.jpeg";
+import {
+  FaAtom,
+  FaBalanceScale,
+  FaHotel,
+  FaCheckCircle,
+  FaLaptopCode,
+} from "react-icons/fa";
 
-const faculties = [
-  {
-    faculty: "Management",
-    color: "bg-blue-900",
-    classes: [
-      {
-        className: "Class 11",
-        subjects: [
-          "English",
-          "Nepali",
-          "Accountancy",
-          "Business Studies",
-          "Economics",
-          "Hotel Management / Computer Science",
-          "Marketing",
-        ],
-      },
-      {
-        className: "Class 12",
-        subjects: [
-          "English",
-          "Nepali",
-          "Accountancy",
-          "Business Studies",
-          "Economics",
-          "Hotel Management / Computer Science",
-          "Marketing",
-        ],
-      },
-    ],
-  },
+import bannerImage from "../assets/images/gallary4.jpeg";
 
-  {
-    faculty: "Science",
-    color: "bg-green-700",
-    classes: [
-      {
-        className: "Class 11",
-        subjects: [
-          "English",
-          "Nepali",
-          "Physics",
-          "Chemistry",
-          "Mathematics",
-          "Biology / Computer Science",
-        ],
-      },
-      {
-        className: "Class 12",
-        subjects: [
-          "English",
-          "Nepali",
-          "Physics",
-          "Chemistry",
-          "Mathematics",
-          "Biology / Computer Science",
-        ],
-      },
-    ],
-  },
-
-  {
-    faculty: "Law",
-    color: "bg-purple-700",
-    classes: [
-      {
-        className: "Class 11",
-        subjects: [
-          "English",
-          "Nepali",
-          "Legal Studies",
-          "Political Science",
-          "Sociology",
-          "Mass Communication",
-        ],
-      },
-      {
-        className: "Class 12",
-        subjects: [
-          "English",
-          "Nepali",
-          "Legal Studies",
-          "Political Science",
-          "Sociology",
-          "Mass Communication",
-        ],
-      },
-    ],
-  },
-];
+// Course Images
+import scienceImg from "../assets/images/science.jpg";
+import managementImg from "../assets/images/management.jpg";
+import hotelImg from "../assets/images/hotel.jpg";
+import lawImg from "../assets/images/law.jpg";
 
 const HigherSecondary = () => {
+  const faculties = [
+    {
+      title: "SCIENCE",
+      icon: <FaAtom />,
+      color: "text-blue-700",
+      border: "border-blue-500",
+      iconBg: "bg-blue-700",
+      image: scienceImg,
+      subjects: [
+        "Physics",
+        "Chemistry",
+        "Biology",
+        "Mathematics",
+        "Computer Science",
+      ],
+    },
+    {
+      title: "MANAGEMENT",
+      icon: <FaLaptopCode />,
+      color: "text-indigo-700",
+      border: "border-indigo-500",
+      iconBg: "bg-indigo-700",
+      image: managementImg,
+      subjects: [
+        "Accountancy",
+        "Business Studies",
+        "Computer Science",
+        "Economics",
+        "Finance",
+      ],
+    },
+    {
+      title: "HOTEL MANAGEMENT",
+      icon: <FaHotel />,
+      color: "text-orange-600",
+      border: "border-orange-400",
+      iconBg: "bg-orange-500",
+      image: hotelImg,
+      subjects: [
+        "Tourism & Mountaineering",
+        "Hotel Management",
+        "Business Studies",
+      ],
+    },
+    {
+      title: "LAW",
+      icon: <FaBalanceScale />,
+      color: "text-green-700",
+      border: "border-green-500",
+      iconBg: "bg-green-600",
+      image: lawImg,
+      subjects: [
+        "Constitutional Law",
+        "Procedural Law",
+        "Jurisprudence & Legal Theories",
+      ],
+    },
+  ];
+
   return (
     <div className="bg-gray-50 min-h-screen">
-      
       {/* Header */}
-      <div className="bg-blue-900 py-6 text-center">
-        <h1 className="text-white text-2xl md:text-3xl font-bold">
+      <div className="bg-blue-900 py-8">
+        <h1 className="text-center text-white text-3xl md:text-4xl font-bold">
           Higher Secondary (+2)
         </h1>
       </div>
 
-      {/* Top Section */}
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        
-        <div className="flex flex-col md:flex-row gap-8 items-center">
-          
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Top Section */}
+        <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Image */}
-          <div className="md:w-1/2">
+          <div>
             <img
-              src={image}
+              src={bannerImage}
               alt="Higher Secondary"
-              className="w-full h-[320px] object-cover rounded-2xl shadow-lg"
+              className="w-full h-[400px] object-cover rounded-2xl shadow-lg"
             />
           </div>
 
-          {/* Intro */}
-          <div className="md:w-1/2">
-            <p className="text-gray-700 leading-7">
-              The Higher Secondary (+2) program provides students with
-              specialized education in Management, Science, and Law streams.
-              Our curriculum is designed to develop academic excellence,
-              practical skills, leadership qualities, and career readiness.
+          {/* Description */}
+          <div>
+            <h2 className="text-3xl font-bold text-blue-900 mb-5">
+              Higher Secondary Education
+            </h2>
 
-              <br /><br />
+            <p className="text-gray-700 leading-8">
+              Our Higher Secondary (+2) program provides students with
+              comprehensive academic education and practical skills needed for
+              future success. Students can choose from Science, Management,
+              Hotel Management, and Law streams according to their interests and
+              career goals.
+            </p>
 
-              Students are guided by experienced faculty members with access
-              to modern classrooms, laboratories, and learning resources to
-              prepare them for university education and professional success.
+            <p className="text-gray-700 leading-8 mt-4">
+              With experienced faculty members, modern classrooms, laboratories,
+              and extracurricular opportunities, we ensure a balanced learning
+              environment that prepares students for university education and
+              professional careers.
             </p>
           </div>
         </div>
 
-        {/* Faculties */}
-        <div className="mt-14">
-          <h2 className="text-3xl font-bold text-center text-blue-900 mb-10">
-            Faculties & Subjects
-          </h2>
+        {/* Course Structure */}
+        <div className="mt-20">
+          <div className="flex justify-center mb-12">
+            <div className="bg-blue-900 px-12 py-3 rounded-full">
+              <h2 className="text-white text-2xl md:text-3xl font-bold">
+                COURSE STRUCTURE
+              </h2>
+            </div>
+          </div>
 
-          {/* Faculty Sections */}
-          <div className="space-y-12">
-            {faculties.map((facultyItem, index) => (
-              <div key={index}>
-                
-                {/* Faculty Title */}
-                <div
-                  className={`${facultyItem.color} text-white py-3 rounded-2xl text-center mb-6`}
-                >
-                  <h3 className="text-2xl font-bold">
-                    {facultyItem.faculty} Faculty
-                  </h3>
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {faculties.map((faculty, index) => (
+              <div
+                key={index}
+                className={`bg-white border-2 ${faculty.border} rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300`}
+              >
+                {/* Icon */}
+                <div className="flex justify-center mt-6">
+                  <div
+                    className={`${faculty.iconBg} w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl`}
+                  >
+                    {faculty.icon}
+                  </div>
                 </div>
 
-                {/* Class Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {facultyItem.classes.map((cls, i) => (
-                    <div
-                      key={i}
-                      className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-6 border border-gray-100"
-                    >
-                      {/* Class Header */}
-                      <div
-                        className={`${facultyItem.color} text-white text-center py-3 rounded-xl mb-5`}
-                      >
-                        <h4 className="text-xl font-semibold">
-                          {cls.className}
-                        </h4>
-                      </div>
+                {/* Title */}
+                <h3
+                  className={`text-center font-bold text-xl mt-4 px-3 ${faculty.color}`}
+                >
+                  {faculty.title}
+                </h3>
 
-                      {/* Subjects */}
-                      <ul className="space-y-3">
-                        {cls.subjects.map((subject, j) => (
-                          <li
-                            key={j}
-                            className="flex items-center gap-3 text-gray-700"
-                          >
-                            <span
-                              className={`w-2 h-2 rounded-full ${facultyItem.color}`}
-                            ></span>
-
-                            {subject}
-                          </li>
-                        ))}
-                      </ul>
+                {/* Subjects */}
+                <div className="px-5 py-5 min-h-[180px]">
+                  {faculty.subjects.map((subject, i) => (
+                    <div key={i} className="flex items-start gap-2 mb-3">
+                      <FaCheckCircle className="text-green-500 mt-1 text-sm" />
+                      <span className="text-gray-700 text-sm">
+                        {subject}
+                      </span>
                     </div>
                   ))}
                 </div>
+
+                {/* Bottom Image */}
+                <img
+                  src={faculty.image}
+                  alt={faculty.title}
+                  className="w-full h-40 object-cover"
+                />
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </div>

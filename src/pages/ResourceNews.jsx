@@ -7,9 +7,6 @@ import { motion } from "framer-motion";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api/news`;
 
-/**
- * ResourceNews component for displaying a list of news articles and school updates
- */
 const ResourceNews = () => {
   const navigate = useNavigate();
   const { t, language } = useLanguage();
