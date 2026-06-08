@@ -1,19 +1,12 @@
-// import React from 'react'
-
-// const Primary = () => {
-//   return (
-//     <div>
-//       hrtyrt
-//     </div>
-//   )
-// }
-
-// export default Primary
-
-
-
 
 import React from "react";
+
+import creativeactivities from "../assets/images/creativeactivities.jpg";
+import physicalactivities from "../assets/images/physicalactivities.jpg";
+import qualityeducation from "../assets/images/qualityeducation.jpg";
+import smartlearning from "../assets/images/smartlearning.jpg";
+import friendlyenvironment from "../assets/images/friendlyenvironment.jpg";
+import personalitydevelopment from "../assets/images/personaldevelopment.jpg";
 
 const Primary = () => {
   return (
@@ -42,7 +35,8 @@ const Primary = () => {
 
           {/* CARD 1 */}
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
-            <div className="text-4xl mb-3">📚</div>
+          
+            <img src={qualityeducation} alt="Quality Education" className="w-full h-40 object-cover rounded-md mb-4" />
             <h3 className="font-bold text-lg text-blue-900 mb-2">
               Quality Education
             </h3>
@@ -53,7 +47,8 @@ const Primary = () => {
 
           {/* CARD 2 */}
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
-            <div className="text-4xl mb-3">🎨</div>
+            
+              <img src={creativeactivities} alt="Creative Activities" className="w-full h-40 object-cover rounded-md mb-4" />
             <h3 className="font-bold text-lg text-blue-900 mb-2">
               Creative Activities
             </h3>
@@ -64,7 +59,7 @@ const Primary = () => {
 
           {/* CARD 3 */}
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
-            <div className="text-4xl mb-3">🧠</div>
+           <img src={smartlearning} alt="Smart Learning" className="w-full h-40 object-cover rounded-md mb-4" />
             <h3 className="font-bold text-lg text-blue-900 mb-2">
               Smart Learning
             </h3>
@@ -75,7 +70,7 @@ const Primary = () => {
 
           {/* CARD 4 */}
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
-            <div className="text-4xl mb-3">🤝</div>
+            <img src={friendlyenvironment} alt="Friendly Environment" className="w-full h-40 object-cover rounded-md mb-4" />
             <h3 className="font-bold text-lg text-blue-900 mb-2">
               Friendly Environment
             </h3>
@@ -86,7 +81,7 @@ const Primary = () => {
 
           {/* CARD 5 */}
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
-            <div className="text-4xl mb-3">🏃</div>
+            <img src={physicalactivities} alt="Physical Activities" className="w-full h-40 object-contain rounded-md mb-4" />
             <h3 className="font-bold text-lg text-blue-900 mb-2">
               Physical Activities
             </h3>
@@ -97,7 +92,7 @@ const Primary = () => {
 
           {/* CARD 6 */}
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition text-center">
-            <div className="text-4xl mb-3">🌟</div>
+            <img src={personalitydevelopment} alt="Personality Development" className="w-full h-40 object-cover rounded-md mb-4" />
             <h3 className="font-bold text-lg text-blue-900 mb-2">
               Personality Development
             </h3>
