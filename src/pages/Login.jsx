@@ -1,22 +1,25 @@
+
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
-
+import { isAdminAuthenticated, setAdminAuthenticated } from "../utils/adminAuth";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
-const API_URL = `${API_BASE}/api/login`;
 
 const Login = () => {
   const navigate = useNavigate();
 
+  // 1. Move all Hooks to the very top of the component
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
   const [loading, setLoading] = useState(false);
+
+  // 2. Conditional returns must happen AFTER all Hook declarations
+  if (isAdminAuthenticated()) {
+    return <Navigate to="/admin/dashboard" replace />;
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -31,21 +34,22 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const response = await API.post(
-        "/admin/login",
-        formData
+      const response = await axios.post(
+        `${API_BASE}/api/admin/login`,
+        formData,
+        { withCredentials: true }
       );
 
       if (response.data.success) {
-        navigate("/dashboard");
+        setAdminAuthenticated();
+        // Fixed route to match your top redirect path
+        navigate("/admin/dashboard"); 
       }
-
     } catch (error) {
       alert(
         error.response?.data?.message ||
         "Login failed"
       );
-
     } finally {
       setLoading(false);
     }
@@ -82,13 +86,9 @@ const Login = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 disabled:bg-blue-400"
         >
-          {
-            loading
-              ? "Logging in..."
-              : "Login"
-          }
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
