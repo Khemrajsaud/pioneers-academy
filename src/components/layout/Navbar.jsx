@@ -126,11 +126,11 @@ const Navbar = () => {
             <div key={item} className="flex items-center gap-12 px-6">
               {/* Contact Info */}
               <a
-                href="mailto:contact@pioneers.edu.np"
+                href="mailto:pioneerskailali@gmail.com"
                 className="flex items-center gap-2 hover:text-orange-400 transition"
               >
                 <IoMailOutline />
-                <span>contact@pioneers.edu.np</span>
+                <span>pioneerskailali@gmail.com</span>
               </a>
 
               <a
@@ -138,7 +138,7 @@ const Navbar = () => {
                 className="flex items-center gap-2 hover:text-orange-400 transition"
               >
                 <IoCallOutline />
-                <span>+977-91-540488</span>
+                <span>+091-540488</span>
               </a>
 
               <div className="flex items-center gap-2">
@@ -149,7 +149,7 @@ const Navbar = () => {
               {/* Social Icons */}
               <div className="flex items-center gap-4 border-l border-blue-400 pl-6">
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/pioneers.academy.lamki.kailali"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-orange-400 transition"

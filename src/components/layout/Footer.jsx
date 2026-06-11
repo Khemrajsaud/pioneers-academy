@@ -18,10 +18,12 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: MdFacebook, label: "Facebook" },
-    { icon: IoLogoInstagram, label: "Instagram" },
-    { icon: FaYoutube, label: "YouTube" },
+    { icon: MdFacebook, label: "Facebook", href: "https://www.facebook.com/pioneers.academy.lamki.kailali" },
+    { icon: IoLogoInstagram, label: "Instagram", href: "https://www.instagram.com" },
+    { icon: FaYoutube, label: "YouTube", href: "https://www.youtube.com" },
   ];
+
+
 
   return (
     <footer className="mt-16 border-t border-slate-200 bg-linear-to-b from-white via-slate-50 to-sky-50 text-slate-900">
@@ -56,7 +58,9 @@ const Footer = () => {
                 return (
                   <a
                     key={item.label}
-                    href="#"
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={item.label}
                     className="inline-flex rounded-md h-8 w-8 items-center justify-center bg-white text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-500 hover:bg-blue-900 hover:text-white"
                   >

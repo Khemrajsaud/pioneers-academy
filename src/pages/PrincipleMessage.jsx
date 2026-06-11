@@ -26,7 +26,7 @@ const PrincipleMessage = () => {
 
             {/* Name + Designation */}
             <h2 className="mt-4 font-bold text-lg text-gray-800">
-              Mr. Ram Kumar Sharma
+              Mr. Chakra Prasad Neupane
             </h2>
             <p className="text-sm text-gray-600">
               Principal
