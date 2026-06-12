@@ -15,9 +15,9 @@ import gallary2 from "../assets/images/gallary2.jpeg";
 import gallary3 from "../assets/images/gallary3.jpeg";
 import gallary4 from "../assets/images/gallary4.jpeg";
 
-import primary from "../assets/images/primary.jpeg";
-import secondary from "../assets/images/secondary.jpeg";
-import highlevel from "../assets/images/higher-secondary.jpeg";
+import primary from "../assets/images/primary.png";
+import secondary from "../assets/images/secondaryimg.jpg";
+import highlevel from "../assets/images/higher.png";
 import principal from "../assets/images/principle.jpeg";
 import {
   ArrowRight,
@@ -354,8 +354,6 @@ const Home = () => {
         >
           <div className="absolute right-6 top-6 h-20 w-20 rounded-full bg-sky-100 blur-2xl" />
 
-        
-
           <div className="grid items-center gap-8 md:grid-cols-[320px_1fr]">
             {/* Principal Image */}
             <motion.div
@@ -387,12 +385,12 @@ const Home = () => {
                 At Pioneers' Academy, we believe every student has the potential
                 to excel. We provide a supportive environment that nurtures
                 curiosity, creativity, and character, preparing our students for
-                a successful future. Our goal is to create an environment where curiosity is
-                encouraged, individual strengths can flourish, and students are
-                inspired to dream big while working steadily toward their goals.
+                a successful future. Our goal is to create an environment where
+                curiosity is encouraged, individual strengths can flourish, and
+                students are inspired to dream big while working steadily toward
+                their goals.
               </p>
 
-             
               <p className="hidden sm:block text-sm leading-7 text-balance text-slate-600 md:text-base">
                 We are committed to fostering academic excellence, personal
                 growth, and a lifelong love of learning. Through dedicated
@@ -519,8 +517,7 @@ const Home = () => {
         </motion.section>
 
         <div className=" py-6">
-          
-           <SectionHeading eyebrow="Facility" title="Our Facilities" />
+          <SectionHeading eyebrow="Facility" title="Our Facilities" />
         </div>
 
         {/* Facilities Grid */}
