@@ -7,6 +7,7 @@ import digitalclassroom from "../assets/images/digitalclassroom.jpg";
 import seminarhall from "../assets/images/seminarhall.jpg";
 import sports from "../assets/images/activities.jpeg";
 import trainingkitchen from "../assets/images/traningkitchen.jpg";
+import transportation from "../assets/images/transpotation.jpg";
 
 const Facilities = () => {
   const facilities = [
@@ -40,6 +41,12 @@ const Facilities = () => {
         "Well-managed kitchen facility for practical learning and training.",
       image: trainingkitchen,
     },
+    {
+      name: "Transportation",
+      description:
+        "Reliable and safe transportation services for students.",
+      image: transportation,
+    }
   ];
 
   return (

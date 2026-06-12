@@ -195,7 +195,7 @@ const Navbar = () => {
           <div className="hidden items-center gap-1 text-(--text) lg:flex xl:gap-2">
             <Link
               to="/"
-              className="px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
+              className="px-3 py-2 text-lg font-bold transition-colors hover:text-(--primary)"
             >
               {t.nav.home}
             </Link>
@@ -203,7 +203,7 @@ const Navbar = () => {
             <div className="relative" ref={aboutRef}>
               <button
                 onClick={() => setAboutOpen((value) => !value)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
+                className="flex items-center gap-1 px-3 py-2 text-lg font-bold transition-colors hover:text-(--primary)"
               >
                 {t.nav.about}
                 <ChevronDown
@@ -222,7 +222,7 @@ const Navbar = () => {
                       key={item.to}
                       to={item.to}
                       onClick={handleLinkClick}
-                      className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white"
+                      className="block px-4 py-3 text-lg transition-colors hover:bg-blue-500 hover:text-white"
                     >
                       {item.label}
                     </Link>
@@ -234,7 +234,7 @@ const Navbar = () => {
             <div className="relative" ref={academicsRef}>
               <button
                 onClick={() => setAcademicsOpen((value) => !value)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
+                className="flex items-center gap-1 px-3 py-2 text-lg font-bold transition-colors hover:text-(--primary)"
               >
                 {t.nav.academics}
                 <ChevronDown
@@ -253,7 +253,7 @@ const Navbar = () => {
                       key={item.label}
                       to={item.to}
                       onClick={handleLinkClick}
-                      className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white"
+                      className="block px-4 py-3 text-lg transition-colors hover:bg-blue-500 hover:text-white"
                     >
                       {item.label}
                     </Link>
@@ -264,7 +264,7 @@ const Navbar = () => {
 
             <Link
               to="/facilities"
-              className="px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
+              className="px-3 py-2 text-lg font-bold transition-colors hover:text-(--primary)"
             >
               {t.nav.facilities}
             </Link>
@@ -272,7 +272,7 @@ const Navbar = () => {
             <div className="relative" ref={resourcesRef}>
               <button
                 onClick={() => setResourcesOpen((value) => !value)}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-bold transition-colors hover:text-(--primary)"
+                className="flex items-center gap-1 px-3 py-2 text-lg font-bold transition-colors hover:text-(--primary)"
               >
                 {t.nav.resources}
                 <ChevronDown
@@ -291,7 +291,7 @@ const Navbar = () => {
                       key={item.to}
                       to={item.to}
                       onClick={handleLinkClick}
-                      className="block px-4 py-3 text-sm transition-colors hover:bg-blue-500 hover:text-white"
+                      className="block px-4 py-3 text-lg transition-colors hover:bg-blue-500 hover:text-white"
                     >
                       {item.label}
                     </Link>
@@ -302,7 +302,7 @@ const Navbar = () => {
 
             <Link
               to="/contact"
-              className="rounded-full bg-(--primary) px-4 py-2.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
+              className="rounded-full bg-(--primary) px-4 py-2.5 text-lg font-bold text-white transition-transform hover:-translate-y-0.5"
             >
               Inquiry Open
             </Link>
@@ -351,7 +351,7 @@ const Navbar = () => {
             <div ref={mobileAboutRef} className="rounded-xl">
               <button
                 onClick={() => setAboutOpen((value) => !value)}
-                className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)"
+                className="flex w-full items-center justify-between rounded-xl p-3 text-lg font-bold hover:bg-(--bg-alt)"
               >
                 {t.nav.about}
                 <ChevronDown
@@ -382,7 +382,7 @@ const Navbar = () => {
             <div ref={mobileAcademicsRef} className="rounded-xl">
               <button
                 onClick={() => setAcademicsOpen((value) => !value)}
-                className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)"
+                className="flex w-full items-center justify-between rounded-xl p-3 text-lg font-bold hover:bg-(--bg-alt)"
               >
                 {t.nav.academics}
                 <ChevronDown
@@ -421,7 +421,7 @@ const Navbar = () => {
             <div ref={mobileResourcesRef} className="rounded-xl">
               <button
                 onClick={() => setResourcesOpen((value) => !value)}
-                className="flex w-full items-center justify-between rounded-xl p-3 text-sm font-bold hover:bg-(--bg-alt)"
+                className="flex w-full items-center justify-between rounded-xl p-3 text-lg font-bold hover:bg-(--bg-alt)"
               >
                 {t.nav.resources}
                 <ChevronDown
@@ -452,7 +452,7 @@ const Navbar = () => {
             <Link
               to="/contact"
               onClick={handleLinkClick}
-              className="rounded-xl bg-(--primary) p-3 text-sm font-bold text-white"
+              className="rounded-xl bg-(--primary) p-3 text-lg font-bold text-white"
             >
               Inquiry Open
             </Link>
@@ -460,7 +460,7 @@ const Navbar = () => {
             <div className="mt-2 border-t border-(--border) pt-4">
               <button
                 onClick={toggleLanguage}
-                className="flex w-full items-center justify-center gap-3 rounded-xl border border-(--border) bg-(--card) p-4 text-sm font-black uppercase tracking-tight shadow-sm transition-transform active:scale-95"
+                className="flex w-full items-center justify-center gap-3 rounded-xl border border-(--border) bg-(--card) p-4 text-lg font-black uppercase tracking-tight shadow-sm transition-transform active:scale-95"
               >
                 <img
                   src={language === "ne" ? Nepal : English}

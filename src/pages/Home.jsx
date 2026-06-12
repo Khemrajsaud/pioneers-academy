@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "motion/react";
+
+import { CheckCircle } from "lucide-react";
+
+import laboratories from "../assets/images/personaldevelopment.jpg";
+import digitalclassroom from "../assets/images/digitalclassroom.jpg";
+import seminarhall from "../assets/images/seminarhall.jpg";
 import homepage from "../assets/images/school-homepage.jpeg";
 
 import gallary1 from "../assets/images/gallary1.jpeg";
@@ -45,6 +51,27 @@ const revealItem = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
+
+const facilities = [
+  {
+    name: "Well-equipped Laboratories",
+    description:
+      "Modern science and computer laboratories for practical learning and innovation.",
+    image: laboratories,
+  },
+  {
+    name: "Digital Classrooms",
+    description:
+      "Smart classrooms with digital teaching tools for interactive learning.",
+    image: digitalclassroom,
+  },
+  {
+    name: "Conference & Seminar Hall",
+    description:
+      "Spacious hall for seminars, workshops, presentations, and events.",
+    image: seminarhall,
+  },
+];
 
 const academyLevels = [
   {
@@ -133,7 +160,7 @@ const Home = () => {
 
   return (
     <div className="bg-slate-50 text-slate-900">
-      <section className="bg-linear-to-b from-sky-50 via-white to-slate-50 pb-6 pt-4">
+      <section className="bg-linear-to-b from-sky-50 via-white to-slate-50 pb-6">
         <div className=" w-full ">
           <div className="relative overflow-hidden h-[70vh] sm:h-[80vh] lg:h-screen">
             {/* Image */}
@@ -154,11 +181,6 @@ const Home = () => {
                   Nurturing Young Minds, Building Bright Futures
                 </p>
 
-                {/* Main Heading */}
-                {/* <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight max-w-3xl">
-        Empowering students with quality education,
-        creativity, and leadership.
-      </h1> */}
                 <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight max-w-3xl">
                   Choose Your Path. Shape Your Future
                 </h1>
@@ -209,7 +231,7 @@ const Home = () => {
               description="Established in 1999 AD (2056 BS), Pioneers’ Academy, Kailali is a reputed private educational institution in Lamkichuha-1, Lamki, Kailali. We focus on quality education, character building, and a learning environment that helps students grow with confidence."
             />
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="hidden gap-3 sm:grid sm:grid-cols-3">
               {[
                 "Supportive faculty",
                 "Modern facilities",
@@ -281,8 +303,10 @@ const Home = () => {
           </div>
         </motion.section>
 
+        {/*         
+
         <motion.section
-          className="mt-16 grid gap-8 lg:grid-cols-2 lg:items-start"
+          className="mt-16 mb-20 grid gap-8 lg:grid-cols-2 lg:items-start"
           variants={revealSection}
           initial="hidden"
           whileInView="show"
@@ -322,82 +346,140 @@ const Home = () => {
             </div>
           </motion.div>
 
-          {/* News */}
+        </motion.section> */}
 
-          <motion.div variants={revealItem}>
-            <SectionHeading
-              eyebrow="News & Articles"
-              title="Fresh updates from the academy"
-              description="Catch the latest activities, announcements, and academic updates from the school."
-            />
+        <motion.div
+          variants={revealItem}
+          className="relative overflow-hidden rounded-3xl border border-slate-200 my-20 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <div className="absolute right-6 top-6 h-20 w-20 rounded-full bg-sky-100 blur-2xl" />
 
-            {homeNews.length === 0 && newsLoading && newsData.length === 0 ? (
-              <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-slate-200 bg-white py-16 shadow-sm">
-                <Loader2 className="h-10 w-10 animate-spin text-sky-700" />
-                <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">
-                  Loading news
-                </p>
-              </div>
-            ) : (
-              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                {(homeNews.length ? homeNews : newsData).map((item) => {
-                  const imageSrc = item.image_url || item.image;
+        
 
-                  return (
-                    <motion.article
-                      key={item.id}
-                      variants={revealItem}
-                      whileHover={{ y: -6 }}
-                      className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
-                    >
-                      <div className="relative h-48 overflow-hidden">
-                        {imageSrc ? (
-                          <img
-                            src={imageSrc}
-                            alt={item.title}
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center bg-slate-100 text-slate-400">
-                            <Image size={40} />
-                          </div>
-                        )}
-                      </div>
+          <div className="grid items-center gap-8 md:grid-cols-[320px_1fr]">
+            {/* Principal Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <img
+                src={principal}
+                alt={t.principal.message}
+                className="h-64 w-full rounded-2xl object-cover shadow-md md:h-80"
+              />
+            </motion.div>
 
-                      <div className="space-y-4 p-5">
-                        <h3 className="line-clamp-2 text-lg font-black leading-tight text-slate-900 transition-colors group-hover:text-sky-700">
-                          {item.title}
-                        </h3>
+            {/* Principal Message */}
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-2xl font-black tracking-tight text-slate-900 md:text-3xl">
+                Principal Message
+              </h3>
 
-                        <p className="line-clamp-3 text-sm leading-7 text-slate-600">
-                          {getPreviewText(item.description)}
-                        </p>
+              <p className="text-sm leading-7 text-balance text-slate-600 md:text-base">
+                At Pioneers' Academy, we believe every student has the potential
+                to excel. We provide a supportive environment that nurtures
+                curiosity, creativity, and character, preparing our students for
+                a successful future. Our goal is to create an environment where curiosity is
+                encouraged, individual strengths can flourish, and students are
+                inspired to dream big while working steadily toward their goals.
+              </p>
 
-                        <button
-                          onClick={() => navigate(`/news/${item.id}`)}
-                          className="inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition-transform hover:translate-x-1"
-                        >
-                          Read more
-                          <ArrowRight size={16} />
-                        </button>
-                      </div>
-                    </motion.article>
-                  );
-                })}
-              </div>
-            )}
+             
+              <p className="hidden sm:block text-sm leading-7 text-balance text-slate-600 md:text-base">
+                We are committed to fostering academic excellence, personal
+                growth, and a lifelong love of learning. Through dedicated
+                teaching, innovative learning experiences, and strong
+                partnerships with parents, we strive to empower our students to
+                become responsible, confident, and compassionate members of
+                society.
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
 
-            <div className="flex items-end mt-10">
-              <button
-                onClick={() => navigate("/resources/news")}
-                className="inline-flex mt-5 ml-auto gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-sm transition-transform hover:-translate-y-0.5"
-              >
-                View all
-                <ArrowRight size={16} />
-              </button>
+        {/* News */}
+
+        <motion.div variants={revealItem}>
+          <SectionHeading
+            eyebrow="News & Articles"
+            title="Fresh updates from the academy"
+            description="Catch the latest activities, announcements, and academic updates from the school."
+          />
+
+          {homeNews.length === 0 && newsLoading && newsData.length === 0 ? (
+            <div className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-slate-200 bg-white py-16 shadow-sm">
+              <Loader2 className="h-10 w-10 animate-spin text-sky-700" />
+              <p className="text-sm font-semibold uppercase tracking-widest text-slate-500">
+                Loading news
+              </p>
             </div>
-          </motion.div>
-        </motion.section>
+          ) : (
+            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {(homeNews.length ? homeNews : newsData).map((item) => {
+                const imageSrc = item.image_url || item.image;
+
+                return (
+                  <motion.article
+                    key={item.id}
+                    variants={revealItem}
+                    whileHover={{ y: -6 }}
+                    className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      {imageSrc ? (
+                        <img
+                          src={imageSrc}
+                          alt={item.title}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-slate-100 text-slate-400">
+                          <Image size={40} />
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="space-y-4 p-5">
+                      <h3 className="line-clamp-2 text-lg font-black leading-tight text-slate-900 transition-colors group-hover:text-sky-700">
+                        {item.title}
+                      </h3>
+
+                      <p className="line-clamp-3 text-sm leading-7 text-slate-600">
+                        {getPreviewText(item.description)}
+                      </p>
+
+                      <button
+                        onClick={() => navigate(`/news/${item.id}`)}
+                        className="inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition-transform hover:translate-x-1"
+                      >
+                        Read more
+                        <ArrowRight size={16} />
+                      </button>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="flex items-end mt-10">
+            <button
+              onClick={() => navigate("/resources/news")}
+              className="inline-flex mt-5 ml-auto gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-sm transition-transform hover:-translate-y-0.5"
+            >
+              View all
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        </motion.div>
 
         <motion.section
           className="mt-16"
@@ -435,6 +517,68 @@ const Home = () => {
             </button>
           </div>
         </motion.section>
+
+        <div className=" py-6">
+          <h1 className=" text-blue-900  text-xl font-semibold">
+            Our Facilities
+          </h1>
+        </div>
+
+        {/* Facilities Grid */}
+        <div className="  pb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {facilities.map((facility, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+              >
+                <img
+                  src={facility.image}
+                  alt={facility.name}
+                  className="w-full h-56 object-cover"
+                />
+
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    <h3 className="font-bold text-lg text-blue-900">
+                      {facility.name}
+                    </h3>
+                  </div>
+
+                  <p className="text-gray-600 text-sm leading-6">
+                    {facility.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className=" flex items-end">
+          <button
+            onClick={() => navigate("/resources/gallery")}
+            className="inline-flex mt-5 ml-auto gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-sm transition-transform hover:-translate-y-0.5"
+          >
+            View all
+            <ArrowRight size={16} />
+          </button>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="bg-blue-900 text-white py-12 mt-6">
+          <div className="max-w-5xl mx-auto text-center px-4">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              A Complete Learning Environment
+            </h2>
+
+            <p className="leading-7 text-gray-200">
+              Our facilities are designed to support academic excellence,
+              creativity, leadership, and holistic development, ensuring that
+              every student receives the best opportunities to learn and grow.
+            </p>
+          </div>
+        </div>
       </main>
     </div>
   );
