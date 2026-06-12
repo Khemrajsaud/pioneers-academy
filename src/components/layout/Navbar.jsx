@@ -344,7 +344,7 @@ const Navbar = () => {
 
         {isOpen && (
           <div className="absolute left-0 top-full flex w-full flex-col gap-1 border-b border-(--border) bg-(--bg) p-4 text-(--text) shadow-2xl animate-slideInDown lg:hidden">
-            <Link to="/" onClick={handleLinkClick} className={menuItemClass}>
+            <Link to="/" className= "rounded-xl p-3 text-lg font-bold hover:bg-(--bg-alt)" onClick={handleLinkClick}>
               {t.nav.home}
             </Link>
 
@@ -413,7 +413,7 @@ const Navbar = () => {
             <Link
               to="/facilities"
               onClick={handleLinkClick}
-              className={menuItemClass}
+              className="rounded-xl p-3 text-lg font-bold hover:bg-(--bg-alt)"
             >
               {t.nav.facilities}
             </Link>

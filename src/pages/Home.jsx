@@ -519,9 +519,8 @@ const Home = () => {
         </motion.section>
 
         <div className=" py-6">
-          <h1 className=" text-blue-900  text-xl font-semibold">
-            Our Facilities
-          </h1>
+          
+           <SectionHeading eyebrow="Facility" title="Our Facilities" />
         </div>
 
         {/* Facilities Grid */}
