@@ -228,7 +228,8 @@ const Home = () => {
             <SectionHeading
               eyebrow="About the Academy"
               title="School Profile"
-              description="Established in 1999 AD (2056 BS), Pioneers’ Academy, Kailali is a reputed private educational institution in Lamkichuha-1, Lamki, Kailali. We focus on quality education, character building, and a learning environment that helps students grow with confidence."
+              //description="Established in 1999 AD (2056 BS), Pioneers’ Academy, Kailali is a reputed private educational institution in Lamkichuha-1, Lamki, Kailali. We focus on quality education, character building, and a learning environment that helps students grow with confidence."
+              description="Pioneers Academy is the No. 1 School and +2 College in Lamki Chuha, dedicated to providing quality education, academic excellence, and holistic development.We focus on quality education, character building, and a learning environment that helps students grow with confidence."
             />
 
             <div className="hidden gap-3 sm:grid sm:grid-cols-3">
@@ -302,51 +303,6 @@ const Home = () => {
             })}
           </div>
         </motion.section>
-
-        {/*         
-
-        <motion.section
-          className="mt-16 mb-20 grid gap-8 lg:grid-cols-2 lg:items-start"
-          variants={revealSection}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <motion.div
-            variants={revealItem}
-            className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
-          >
-            <div className="absolute right-6 top-6 h-20 w-20 rounded-full bg-sky-100 blur-2xl" />
-            <div className="relative mb-5 inline-flex items-center gap-2 rounded-full bg-sky-50 px-4 py-2 text-xs font-black uppercase tracking-widest text-sky-700">
-              Principal Message
-            </div>
-            <div className="grid gap-5 sm:grid-cols-2 sm:items-start">
-              <img
-                src={principal}
-                alt={t.principal.message}
-                className="h-56 w-full rounded-2xl object-cover shadow-md sm:h-72"
-              />
-              <div className="space-y-4">
-                <h3 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
-                  Principal Message
-                </h3>
-                <p className="text-sm leading-7 text-slate-600 sm:text-base">
-                  At Pioneers' Academy, we believe every student has the
-                  potential to excel We provide a supportive environment that
-                  nurtures curiosity, creativity and character, preparing our
-                  students for a successful future
-                </p>
-                <p className="text-sm leading-7 text-slate-600 sm:text-base">
-                  Our goal is to create an environment where curiosity is
-                  encouraged, individual strengths can flourish, and students
-                  are inspired to dream big while working steadily toward their
-                  goals.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-        </motion.section> */}
 
         <motion.div
           variants={revealItem}
