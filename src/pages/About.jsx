@@ -1,4 +1,3 @@
-
 import React from "react";
 import home from "../assets/images/aboutpage.jpeg";
 
@@ -17,7 +16,7 @@ const About = () => {
   ];
 
   const differenc = [
-     "Student-Centred Learning",
+    "Student-Centred Learning",
     "Focus on Life Skills & Values",
     "Use of Technology in Education",
     "Continuous Parent-Teacher Interaction",
@@ -58,12 +57,17 @@ const About = () => {
             </p>
 
             <p className="mt-4">
-              Established in 1999 AD (2056 BS), Pioneers' Academy is a reputed
+              {/* Established in 1999 AD (2056 BS), Pioneers' Academy is a reputed
               private educational institution located in Lamkichuha
               Municipality–1, Lamki, Kailali, Nepal. With over two decades of
               excellence in education, we have earned the trust of parents and
               the community as one of the region’s leading educational
-              institutions.
+              institutions. */}
+              Pioneers Academy is the No. 1 School and +2 College in Lamki
+              Chuha, dedicated to providing quality education, academic
+              excellence, and holistic development.We focus on quality
+              education, character building, and a learning environment that
+              helps students grow with confidence.
             </p>
           </div>
         </div>
@@ -154,8 +158,6 @@ const About = () => {
             is encouraged to discover their potential, pursue their passions,
             and become responsible global citizens.
           </p>
-
-      
         </div>
 
         {/* Statistics */}
